@@ -5,10 +5,10 @@ interface Props {
   children?: ReactNode;
 }
 
-const Container = ({ className, children }: Props) => {
+const Container: React.FC<Props> = ({ className, children }) => {
   return (
     <div
-      className={`max-w-full p-[0.5rem] md:p-0 md:max-w-[800px] lg:max-w-[960px] mx-auto ${className}`}>
+      className={`max-w-full md:p-0 md:max-w-[800px] lg:max-w-[960px] mx-auto ${className}`}>
       {children}
     </div>
   );
