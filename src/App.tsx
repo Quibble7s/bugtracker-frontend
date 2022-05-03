@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from './components/Layout';
+import { Container } from './Components/Layout';
 
 function App() {
   return (
