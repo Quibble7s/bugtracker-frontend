@@ -14,4 +14,4 @@ const Container = ({ className, children }: Props) => {
   );
 };
 
-export default Container;
+export { Container };
