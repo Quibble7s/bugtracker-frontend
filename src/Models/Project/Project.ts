@@ -1,4 +1,4 @@
-import { TaskState, ProjectRole, BugPriority } from '.';
+import { TaskState, ProjectRole, BugPriority } from '../';
 
 export interface Task {
   id: string;

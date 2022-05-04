@@ -1,7 +1,7 @@
-export type { Project, Member, MemberUser, Bug, Task } from './Project';
-export type { User } from './User';
+export type { Project, Member, MemberUser, Bug, Task } from './Project/Project';
+export type { User } from './User/User';
 export type { SignInParams } from './Auth';
-export { UserRole } from './UserRole';
-export { TaskState } from './TaskState';
-export { BugPriority } from './BugPriority';
-export { ProjectRole } from './ProjectRole';
+export { UserRole } from './User/UserRole';
+export { TaskState } from './Project/TaskState';
+export { BugPriority } from './Project/BugPriority';
+export { ProjectRole } from './Project/ProjectRole';
