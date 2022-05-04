@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react';
-import { Container } from './Components/Layout';
-import { useAuth } from './Hooks';
+import { Route, Routes } from 'react-router-dom';
+import { HomePage } from './Pages/HomePage';
 
 function App() {
-  const { user } = useAuth();
-  console.log(user);
-
   return (
-    <div>
-      <Container>Hello World</Container>
-    </div>
+    <>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+      </Routes>
+    </>
   );
 }
 
