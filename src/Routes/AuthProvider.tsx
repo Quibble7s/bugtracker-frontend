@@ -14,7 +14,7 @@ interface AuthUser {
 }
 
 interface AuthContextType {
-  user: AuthUser;
+  user: User;
   signIn: (params: SignInParams) => Promise<void>;
   signOut: VoidFunction;
 }
@@ -22,30 +22,40 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType>(null!);
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<AuthUser>(null!);
+  const [user, setUser] = useState<User>(null!);
 
   const token: string | null = localStorage.getItem('token');
+  const authenticated: boolean =
+    localStorage.getItem('authenticated') === 'true' ? true : false;
 
   const fetchUser = useCallback(async () => {
+    let userData: User = null!;
     await fetch(`${BASE_URL}/api/v1/user/me`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
       .then(async (res) => {
-        const data: AuthUser = await res.json();
-        setUser(data);
+        const data: User = await res.json();
+        localStorage.setItem('authenticated', 'true');
+        userData = data;
       })
       .catch((err) => {
+        localStorage.setItem('authenticated', 'false');
         localStorage.setItem('token', '');
+        userData = null!;
       });
-  }, [token, BASE_URL]);
+    return userData;
+  }, [token]);
 
   useEffect(() => {
-    if (token && token.length > 0) {
-      fetchUser();
+    const setUserAsync = async () => {
+      setUser(await fetchUser());
+    };
+    if (authenticated) {
+      setUserAsync();
     }
-  }, [token]);
+  }, [authenticated, fetchUser]);
 
   const signIn = async (params: SignInParams) => {
     await fetch(`${BASE_URL}/api/v1/auth/login`, {
@@ -57,15 +67,18 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     })
       .then(async (res) => {
         const data: AuthUser = await res.json();
+        localStorage.setItem('authenticated', 'true');
         localStorage.setItem('token', data.token);
-        setUser(data);
+        setUser(data.user);
       })
       .catch((err) => {
+        localStorage.setItem('authenticated', 'false');
         localStorage.setItem('token', '');
       });
   };
 
   const signOut = () => {
+    localStorage.setItem('authenticated', 'false');
     localStorage.setItem('token', '');
     setUser(null!);
   };
