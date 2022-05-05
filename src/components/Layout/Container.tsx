@@ -17,11 +17,11 @@ interface Props {
  * @param children The node to render inside the container.
  * @returns An instance of the Container Component
  */
-export const Container = ({ className, children }: Props) => {
+export const Container = ({ className = '', children }: Props) => {
   return (
     <div
       data-testid='container'
-      className={`max-w-full md:p-0 md:max-w-[800px] lg:max-w-[960px] mx-auto ${className}`}>
+      className={`max-w-full md:p-0 md:max-w-[768px] lg:max-w-[1024px] mx-auto ${className}`}>
       {children}
     </div>
   );
