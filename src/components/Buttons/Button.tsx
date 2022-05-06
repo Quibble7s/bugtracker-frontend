@@ -12,7 +12,7 @@ export const Button = ({ theme, onClick, children }: Props) => {
   return (
     <button
       onClick={onClick}
-      className={`p-[12px] rounded-md transition-colors duration-200 ${Themes[theme]}`}>
+      className={`p-[10px] rounded-md transition-colors duration-200 ${Themes[theme]}`}>
       <PS>{children}</PS>
     </button>
   );
