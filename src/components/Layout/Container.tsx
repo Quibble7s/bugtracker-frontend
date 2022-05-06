@@ -27,7 +27,7 @@ export const Container = ({ className = '', id = '', children }: Props) => {
     <div
       id={id}
       data-testid='container'
-      className={`w-full px-1 md:px-0 md:max-w-[760px] lg:max-w-[1012px] mx-auto ${className}`}>
+      className={`w-full px-1 md:px-4 md:max-w-[760px] lg:max-w-[1280px] mx-auto ${className}`}>
       {children}
     </div>
   );
