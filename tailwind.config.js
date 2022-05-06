@@ -6,6 +6,9 @@ module.exports = {
         open: ['"Open Sans"', 'sans-serif'],
         mulish: ['Mulish', 'sans-serif'],
       },
+      colors: {
+        primary: '#ff7844',
+      },
     },
   },
   plugins: [],

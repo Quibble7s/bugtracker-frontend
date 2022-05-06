@@ -1,6 +1,6 @@
 export const Themes = {
   primary:
-    'bg-[#ff7844] border border-[#ff7844] text-white hover:bg-[#ff7844]/20 hover:text-[#ff7844]',
+    'bg-primary border border-primary text-white hover:bg-primary/20 hover:text-primary',
   secondary:
     'bg-blue-400/20 border border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white',
   success:
