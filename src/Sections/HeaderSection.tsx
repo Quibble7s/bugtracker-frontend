@@ -19,7 +19,7 @@ export const HeaderSection = () => {
           </Link>
           <NavigationLinks className='hidden lg:flex' />
           <MobileMenu />
-          <LoginOrRegisterSection className='hidden lg:flex flex-row gap-3' />
+          <LoginOrRegisterSection className='hidden lg:flex flex-row gap-3 items-center' />
         </Container>
       </nav>
     </header>
