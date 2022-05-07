@@ -1,5 +1,11 @@
+import { HeaderSection } from 'src/Sections';
+
 const HomePage = () => {
-  return <div>Home Page</div>;
+  return (
+    <>
+      <HeaderSection />
+    </>
+  );
 };
 
 export { HomePage };
