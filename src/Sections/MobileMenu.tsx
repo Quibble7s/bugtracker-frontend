@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavigationLinks } from 'src/Components/Navigation';
-import { LoginOrRegisterSection } from '.';
+import { LoginOrRegisterButtons } from '.';
 
 type ActiveState = 'active' | 'disabled';
 
@@ -43,7 +43,7 @@ export const MobileMenu = () => {
       <div
         className={`absolute w-full -z-10 ${containerTheme[active]} left-0 mt-8 transition-all ease-in-out`}>
         <NavigationLinks className='flex-col justify-start gap-8' />
-        <LoginOrRegisterSection className='flex flex-row justify-center items-center gap-3 mt-4 lg:hidden' />
+        <LoginOrRegisterButtons className='flex flex-row justify-center items-center gap-3 mt-4 lg:hidden' />
       </div>
     </div>
   );

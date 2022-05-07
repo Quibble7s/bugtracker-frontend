@@ -1,7 +1,7 @@
 import { Button } from 'src/Components/Buttons';
 import { PXS } from 'src/Components/Typography';
 
-export const LoginOrRegisterSection = ({
+export const LoginOrRegisterButtons = ({
   className,
 }: {
   className?: string;

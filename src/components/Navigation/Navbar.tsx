@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Container } from '../Layout';
 import { Image } from '../Image';
 import { NavigationLinks } from '.';
-import { LoginOrRegisterSection, MobileMenu } from 'src/Sections';
+import { LoginOrRegisterButtons, MobileMenu } from 'src/Sections';
 
 export const Navbar = () => {
   return (
@@ -17,8 +17,8 @@ export const Navbar = () => {
           />
         </Link>
         <NavigationLinks className='hidden lg:flex' />
+        <LoginOrRegisterButtons className='hidden lg:flex flex-row gap-3 items-center' />
         <MobileMenu />
-        <LoginOrRegisterSection className='hidden lg:flex flex-row gap-3 items-center' />
       </Container>
     </nav>
   );
