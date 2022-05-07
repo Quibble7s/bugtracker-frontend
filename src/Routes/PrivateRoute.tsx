@@ -1,7 +1,7 @@
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from 'src/Hooks';
 
-export const RequiereAuth = ({ children }: { children: JSX.Element }) => {
+export const PrivateRoute = ({ children }: { children: JSX.Element }) => {
   const auth = useAuth();
   const currentLocation = useLocation().pathname;
 

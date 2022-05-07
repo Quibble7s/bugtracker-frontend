@@ -1,2 +1,2 @@
 export { AuthContext, AuthProvider } from './AuthProvider';
-export { RequiereAuth } from './RequiereAuth';
+export { PrivateRoute } from './PrivateRoute';
