@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { AuthProvider } from './Routes';
+import { AuthProvider } from './Providers';
 
 ReactDOM.render(
   <React.StrictMode>
