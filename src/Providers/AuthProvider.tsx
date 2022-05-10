@@ -7,7 +7,7 @@ import {
 } from 'react';
 
 import { BASE_URL } from 'src/Constants';
-import { SignInParams, User } from 'src/Models';
+import { RegisterParams, SignInParams, User } from 'src/Models';
 
 //Types
 interface AuthUser {
@@ -26,6 +26,10 @@ interface AuthContextType {
   user: User;
   signIn: (params: SignInParams, callBack?: () => void) => Promise<void>;
   signOut: (callback?: ({ message, status }: callBackParams) => void) => void;
+  register: (
+    params: RegisterParams,
+    callBack?: ({ message, status }: callBackParams) => void,
+  ) => Promise<void>;
 }
 
 //Context
@@ -153,7 +157,47 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(null!);
   };
 
-  const value = { user, signIn, signOut };
+  const register = async (
+    params: RegisterParams,
+    callBack?: ({ message, status }: callBackParams) => void,
+  ) => {
+    try {
+      const res = await fetch(`${BASE_URL}/api/v1/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params),
+      });
+
+      if (res.status === 400) {
+        if (callBack) {
+          callBack({
+            message: `User "${params.email}" already exist.`,
+            status: res.status,
+          });
+        }
+        return;
+      }
+
+      const data: AuthUser = await res.json();
+      localStorage.setItem('authenticated', 'true');
+      localStorage.setItem('token', data.token);
+      if (callBack) {
+        callBack({ message: 'Success.', status: 200 });
+      }
+      setUser(data.user);
+    } catch (error) {
+      if (callBack) {
+        callBack({
+          message: 'Server error.',
+          status: 500,
+        });
+      }
+    }
+  };
+
+  const value = { user, signIn, signOut, register };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
