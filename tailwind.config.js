@@ -1,5 +1,5 @@
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: ['./src/**/*.{js,jsx,ts,tsx}', './public/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       fontFamily: {
@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         primary: '#ff7844',
         themeBlack: '#19191B',
+        'light-blue': 'rgb(248,254,255)',
       },
     },
   },
