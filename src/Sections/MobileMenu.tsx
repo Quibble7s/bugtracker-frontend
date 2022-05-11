@@ -9,7 +9,7 @@ type ActiveState = 'active' | 'disabled';
 export const MobileMenu = () => {
   const location = useLocation();
   const [active, setActive] = useState<ActiveState>('disabled');
-  const show = true;
+  const show = !location.pathname.includes('/auth');
 
   const containerTheme = {
     active: 'top-[55%] opacity-100',
