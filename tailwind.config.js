@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         primary: '#ff7844',
         themeBlack: '#19191B',
+        themeGray: '#696871',
         'light-blue': 'rgb(248,254,255)',
       },
     },

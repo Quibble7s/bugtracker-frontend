@@ -1,3 +1,9 @@
 export { LoginOrRegisterButtons } from './LoginOrRegisterButtons';
 export { MobileMenu } from './MobileMenu';
 export { HeaderSection } from './HeaderSection';
+export { RegisterForm } from './RegisterForm';
+export { AuthForm } from './AuthForm';
+export { LoginForm } from './LoginForm';
+export { AuthSection } from './AuthSection';
+export { DropDownMenu } from './DropDownMenu';
+export { NavDropDown } from './NavDropDown';

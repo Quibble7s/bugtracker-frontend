@@ -11,7 +11,7 @@ interface Props {
 export const NavigationLink = ({ to, children }: Props) => {
   return (
     <Link to={to}>
-      <PS className='text-gray-400 hover:text-themeBlack transition-colors duration-500 relative navlink'>
+      <PS className='text-themeGray hover:text-themeBlack transition-colors duration-500 relative navlink'>
         {children}
       </PS>
     </Link>

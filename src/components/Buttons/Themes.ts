@@ -1,12 +1,12 @@
 export const Themes = {
   primary:
-    'bg-primary border border-primary text-white hover:bg-primary/20 hover:text-primary',
+    'bg-primary border border-primary text-light-blue hover:bg-primary/20 hover:text-primary',
   secondary:
-    'bg-blue-400/20 border border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white',
+    'hover:bg-blue-400/20 border border-blue-400 hover:text-blue-400 bg-blue-400 text-light-blue',
   success:
-    'bg-green-500/20 border border-green-500 text-green-500 hover:bg-green-500 hover:text-white',
+    'hover:bg-green-500/20 border border-green-500 hover:text-green-500 bg-green-500 text-light-blue',
   warning:
-    'bg-yellow-200/10 border border-yellow-300 text-yellow-300 hover:bg-yellow-300 hover:text-white',
+    'hover:bg-yellow-200/10 border border-yellow-300 hover:text-yellow-300 bg-yellow-300 text-light-blue',
   error:
-    'bg-red-500/20 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white',
+    'hover:bg-red-500/20 border border-red-500 hover:text-red-500 bg-red-500 text-light-blue',
 };

@@ -4,8 +4,8 @@ import { PS } from '../Typography';
 
 interface Props {
   theme: ButtonTheme;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
   children: ReactNode;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   type?: 'button' | 'reset' | 'submit';
   className?: string;
 }

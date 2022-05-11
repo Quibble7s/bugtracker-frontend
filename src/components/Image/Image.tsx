@@ -37,6 +37,7 @@ export const Image = ({
 }: Props) => {
   return (
     <img
+      loading='lazy'
       className={className}
       style={{ objectFit: objectFit }}
       src={src}

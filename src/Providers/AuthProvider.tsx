@@ -24,7 +24,7 @@ interface callBackParams {
 
 interface AuthContextType {
   user: User;
-  signIn: (params: SignInParams, callBack?: () => void) => Promise<void>;
+  logIn: (params: SignInParams, callBack?: () => void) => Promise<void>;
   signOut: (callback?: ({ message, status }: callBackParams) => void) => void;
   register: (
     params: RegisterParams,
@@ -112,7 +112,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [authenticated, fetchUser]);
 
-  const signIn = async (
+  const logIn = async (
     params: SignInParams,
     callback?: ({ message, status }: callBackParams) => void,
   ) => {
@@ -197,7 +197,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const value = { user, signIn, signOut, register };
+  const value = { user, logIn, signOut, register };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
