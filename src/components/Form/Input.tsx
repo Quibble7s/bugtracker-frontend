@@ -1,3 +1,5 @@
+import { useForm } from 'src/Hooks';
+
 interface Props {
   id: string;
   name: string;
@@ -17,12 +19,15 @@ export const Input = ({
   placeholder = '',
   requiered = false,
 }: Props) => {
+  const { onChangeHandler, onInvalidHandler } = useForm();
   return (
     <>
       <label className='hidden capitalize' htmlFor={id}>
         {placeholder}
       </label>
       <input
+        onChange={onChangeHandler}
+        onInvalid={onInvalidHandler}
         className={`outline-none border border-blue-400/30 rounded-md p-2 mt-4 font-mulish tex-[16px] 
         transition-all duration-200 hover:border-blue-400/50 focus:border-blue-400 bg-light-blue
         ${className}`}

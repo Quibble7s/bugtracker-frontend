@@ -24,7 +24,10 @@ interface callBackParams {
 
 interface AuthContextType {
   user: User;
-  logIn: (params: SignInParams, callBack?: () => void) => Promise<void>;
+  logIn: (
+    params: SignInParams,
+    callBack?: ({ message, status }: callBackParams) => void,
+  ) => Promise<void>;
   signOut: (callback?: ({ message, status }: callBackParams) => void) => void;
   register: (
     params: RegisterParams,
@@ -34,9 +37,10 @@ interface AuthContextType {
 
 //Context
 const AuthContext = createContext<AuthContextType>(null!);
+AuthContext.displayName = 'Auth';
 
 //Provider
-const AuthProvider = ({ children }: { children: ReactNode }) => {
+const Auth = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User>(null!);
 
   const token: string | null = localStorage.getItem('token');
@@ -201,4 +205,4 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-export { AuthProvider, AuthContext };
+export { Auth, AuthContext };
