@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'src/Components/Buttons';
-import { Form, Input } from 'src/Components/Form';
+import { Input } from 'src/Components/Form';
 import { H4, PXS } from 'src/Components/Typography';
 import { useAuth } from 'src/Hooks';
 import { AuthForm } from './AuthForm';
