@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
 import { Image } from 'src/Components/Image';
 import { Container } from 'src/Components/Layout';
-import { PS, PXS } from 'src/Components/Typography';
+import { NavigationLink } from 'src/Components/Navigation';
+import { PXS } from 'src/Components/Typography';
 import { NavLinks } from 'src/Constants';
 
 export const Footer = () => {
@@ -15,10 +15,8 @@ export const Footer = () => {
               <Image src='/static/images/logo.svg' width={140} height={30} />
             </div>
             <div className='flex flex-row gap-4'>
-              {NavLinks.map((link, index) => (
-                <PS className='text-themeGray'>
-                  <Link to={link.to}>{link.label}</Link>
-                </PS>
+              {NavLinks.map((link) => (
+                <NavigationLink to={link.to}>{link.label}</NavigationLink>
               ))}
             </div>
           </div>
