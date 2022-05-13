@@ -3,4 +3,6 @@ export type ButtonTheme =
   | 'secondary'
   | 'success'
   | 'warning'
-  | 'error';
+  | 'error'
+  | 'light'
+  | 'dark';
