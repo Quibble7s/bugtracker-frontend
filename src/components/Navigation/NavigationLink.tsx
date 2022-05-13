@@ -9,8 +9,19 @@ interface Props {
 }
 
 export const NavigationLink = ({ to, children }: Props) => {
+  const onClickHandler = () => {
+    const element: HTMLElement | null = document.getElementById(
+      to.replace('#', ''),
+    );
+    if (element !== null) {
+      const offset = 72;
+      window.scrollTo({ top: element.offsetTop - offset });
+      return;
+    }
+    window.scrollTo({ top: 0 });
+  };
   return (
-    <Link to={to}>
+    <Link onClick={onClickHandler} to={to}>
       <PS className='text-themeGray hover:text-themeBlack transition-colors duration-500 relative navlink'>
         {children}
       </PS>
