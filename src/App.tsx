@@ -22,9 +22,11 @@ function App() {
 
   return (
     <>
-      <header>
-        <Navbar />
-      </header>
+      <section>
+        <header>
+          <Navbar />
+        </header>
+      </section>
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route
