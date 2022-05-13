@@ -3,7 +3,7 @@ import { Container } from 'src/Components/Layout';
 
 export const FeaturesSection = () => {
   return (
-    <section className='mt-32'>
+    <section className='mt-64'>
       <Container id='features' className='flex flex-col gap-32'>
         <FeatureCard
           title='Focus on teamwork'
