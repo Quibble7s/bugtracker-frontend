@@ -1,3 +1,5 @@
+import { SyntheticEvent } from 'react';
+
 interface Props {
   /**
    * The source of the image.
@@ -25,6 +27,10 @@ interface Props {
    * @default 'fill'
    */
   objectFit?: 'contain' | 'cover' | 'fill' | 'scale-down' | 'none';
+  /**
+   * Fires when the image is done loading.
+   */
+  onLoad?: (e: SyntheticEvent<HTMLImageElement, Event>) => void;
 }
 
 export const Image = ({
@@ -34,10 +40,12 @@ export const Image = ({
   alt,
   className = '',
   objectFit = 'fill',
+  onLoad,
 }: Props) => {
   return (
     <img
       loading='lazy'
+      onLoad={onLoad}
       className={className}
       style={{ objectFit: objectFit }}
       src={src}
