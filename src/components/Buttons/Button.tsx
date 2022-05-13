@@ -22,7 +22,7 @@ export const Button = ({
       type={type}
       onClick={onClick}
       className={`p-[10px] rounded-md transition-colors duration-200 ${Themes[theme]} ${className}`}>
-      <PS>{children}</PS>
+      <PS className='!font-normal'>{children}</PS>
     </button>
   );
 };

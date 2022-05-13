@@ -7,3 +7,4 @@ export { LoginForm } from './LoginForm';
 export { AuthSection } from './AuthSection';
 export { DropDownMenu } from './DropDownMenu';
 export { NavDropDown } from './NavDropDown';
+export { CompaniesSection } from './CompaniesSection';
