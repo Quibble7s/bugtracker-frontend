@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { NavigationLinks } from 'src/Components/Navigation';
-import { LoginOrRegisterButtons } from '.';
-import { DropDownMenu } from './DropDownMenu';
+import { LoginOrRegisterButtons, DropDownMenu } from '../';
 
 type ActiveState = 'active' | 'disabled';
 

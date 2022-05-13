@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { DropDown } from 'src/Components/Layout';
 import { useAuth } from 'src/Hooks';
-import { DropDownMenu } from '.';
+import { DropDownMenu } from '..';
 
 type DropDownState = 'active' | 'disabled';
 
