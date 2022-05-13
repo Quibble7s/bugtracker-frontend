@@ -1,4 +1,9 @@
-import { CompaniesSection, FeaturesSection, HeaderSection } from 'src/Sections';
+import {
+  CompaniesSection,
+  FeaturesSection,
+  HeaderSection,
+  PricingSection,
+} from 'src/Sections';
 
 const HomePage = () => {
   return (
@@ -6,6 +11,7 @@ const HomePage = () => {
       <HeaderSection />
       <CompaniesSection />
       <FeaturesSection />
+      <PricingSection />
     </>
   );
 };

@@ -9,3 +9,5 @@ export { DropDownMenu } from './Navigation/DropDownMenu';
 export { NavDropDown } from './Navigation/NavDropDown';
 export { CompaniesSection } from './HomePage/CompaniesSection';
 export { FeaturesSection } from './HomePage/FeaturesSection';
+export { PricingSection } from './HomePage/PricingSection';
+export { PricingSelection } from './HomePage/PricingSelection';

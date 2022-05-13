@@ -8,9 +8,9 @@ export const H4 = ({
   className?: string;
 }) => {
   return (
-    <h2
+    <h4
       className={`text-[24px] font-bold tracking-[-0.75px] leading-[20px] font-open ${className}`}>
       {children}
-    </h2>
+    </h4>
   );
 };
