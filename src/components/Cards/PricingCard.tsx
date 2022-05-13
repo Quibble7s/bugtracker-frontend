@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { PricingCardThemes } from 'src/Constants';
 import { useAuth } from 'src/Hooks';
 import { Button } from '../Buttons';
@@ -19,6 +20,7 @@ export const PricingCard = ({
   selectedPricing,
 }: Props) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   return (
     <div
       className={`p-8 text-center rounded-md ${PricingCardThemes.background[theme]}`}>
@@ -36,8 +38,11 @@ export const PricingCard = ({
         ))}
       </div>
       <Button
+        onClick={() => {
+          navigate('/auth/register', { replace: false });
+        }}
         disabled={user !== null}
-        className='w-full mt-16 disabled:hover:!bg-themeGray disabled:hover:!text-light-blue disabled:cursor-not-allowed'
+        className='w-full mt-16 disabled:hover:!bg-themeGray hover:disabled:!border-themeGray disabled:hover:!text-light-blue disabled:cursor-not-allowed'
         theme={PricingCardThemes.button[theme]}>
         Get started
       </Button>
