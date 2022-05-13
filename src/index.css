@@ -6,7 +6,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  scroll-margin-top: 2rem;
   scroll-behavior: smooth;
 }
 
@@ -14,6 +13,8 @@ body {
   overflow-x: hidden;
   background-color: rgb(248, 254, 255);
 }
+
+/*##################### GLOBAL ANIMATIONS #####################*/
 
 @keyframes fade-in {
   0% {
@@ -66,3 +67,4 @@ body {
 .pop-in {
   animation: pop-in 100ms ease-out forwards;
 }
+/*##################### #####################*/
