@@ -12,7 +12,7 @@ export const MobileMenu = () => {
 
   const containerTheme = {
     active: 'top-[55%] opacity-100',
-    disabled: 'top-[50%] opacity-0',
+    disabled: 'top-[50%] opacity-0 pointer-events-none',
   };
 
   const firstChildTheme = {
