@@ -1,6 +1,6 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from 'src/Components/Buttons';
-import { PXS } from 'src/Components/Typography';
+import { PS, PXS } from 'src/Components/Typography';
 import { useAuth } from 'src/Hooks';
 
 export const LoginOrRegisterButtons = ({
@@ -16,13 +16,9 @@ export const LoginOrRegisterButtons = ({
     <>
       {show && user === null && (
         <div className={`${className}`}>
-          <Button
-            onClick={() => {
-              navigate('/auth/login', { replace: false });
-            }}
-            theme='secondary'>
-            Log in
-          </Button>
+          <Link to='/auth/login'>
+            <PS className='text-blue-400 hover:text-blue-400/70'>Log in</PS>
+          </Link>
           <PXS className='text-themeGray'>Or</PXS>
           <Button
             onClick={() => {
