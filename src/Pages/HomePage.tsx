@@ -1,6 +1,7 @@
 import {
   CompaniesSection,
   FeaturesSection,
+  Footer,
   HeaderSection,
   PricingSection,
 } from 'src/Sections';
@@ -12,6 +13,7 @@ const HomePage = () => {
       <CompaniesSection />
       <FeaturesSection />
       <PricingSection />
+      <Footer />
     </>
   );
 };
