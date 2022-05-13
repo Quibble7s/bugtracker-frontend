@@ -9,7 +9,7 @@ export const H3 = ({
 }) => {
   return (
     <h2
-      className={`text-[50px] font-bold tracking-[-1.56px] leading-[46px] font-open ${className}`}>
+      className={`text-[32px] md:text-[42px] lg:text-[50px] font-bold tracking-[-1.56px] font-open ${className}`}>
       {children}
     </h2>
   );

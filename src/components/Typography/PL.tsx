@@ -9,7 +9,7 @@ export const PL = ({
 }) => {
   return (
     <p
-      className={`font-normal font-open text-[20px] leading-[22px] tracking-[-0.65px] ${className}`}>
+      className={`font-normal font-open text-[16px] md:text-[18px] lg:text-[20px] tracking-[-0.65px] ${className}`}>
       {children}
     </p>
   );
