@@ -1,15 +1,25 @@
-import { Link } from 'react-router-dom';
-import { Button } from 'src/Components/Buttons';
+import { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { LoadingButton } from 'src/Components/Buttons';
 import { Input } from 'src/Components/Form';
 import { H4, PXS } from 'src/Components/Typography';
 import { useAuth } from 'src/Hooks';
 import { AuthForm } from './AuthForm';
 
 export const LoginForm = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const auth = useAuth();
+  const navigate = useNavigate();
+  const locationState: any = useLocation().state;
+  const prevLocation: string = locationState?.from || '/';
+
   const onSubmitHandler = async (data: any) => {
     const params = { email: data.email, password: data.password };
-    await auth.logIn(params, () => {});
+    setIsLoading(true);
+    await auth.logIn(params, () => {
+      setIsLoading(false);
+      navigate(prevLocation, { replace: true });
+    });
   };
   return (
     <AuthForm onSubmitHandler={onSubmitHandler}>
@@ -38,12 +48,13 @@ export const LoginForm = () => {
         </Link>
         .
       </PXS>
-      <Button
+      <LoadingButton
         type='submit'
         className='w-fit min-w-[100px] mx-auto'
-        theme='secondary'>
-        Login
-      </Button>
+        theme='secondary'
+        isLoading={isLoading}>
+        Log in
+      </LoadingButton>
     </AuthForm>
   );
 };

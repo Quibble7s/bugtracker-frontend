@@ -1,11 +1,13 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button } from 'src/Components/Buttons';
+import { LoadingButton } from 'src/Components/Buttons';
 import { Input } from 'src/Components/Form';
 import { H4, PXS } from 'src/Components/Typography';
 import { useAuth } from 'src/Hooks';
 import { AuthForm } from './AuthForm';
 
 export const RegisterForm = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const auth = useAuth();
 
@@ -17,9 +19,13 @@ export const RegisterForm = () => {
     };
 
     await auth.register(params, ({ message, status }) => {
+      setIsLoading(true);
       if (status === 200) {
         navigate('/dashboard', { replace: true });
+        setIsLoading(false);
+        return;
       }
+      setIsLoading(false);
     });
   };
 
@@ -59,9 +65,13 @@ export const RegisterForm = () => {
         </Link>
         .
       </PXS>
-      <Button type='submit' className='w-fit mx-auto' theme='secondary'>
-        Create account
-      </Button>
+      <LoadingButton
+        type='submit'
+        className='w-fit min-w-[100px] mx-auto'
+        theme='secondary'
+        isLoading={isLoading}>
+        Log in
+      </LoadingButton>
     </AuthForm>
   );
 };
