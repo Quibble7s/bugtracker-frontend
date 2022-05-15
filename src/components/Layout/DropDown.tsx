@@ -13,7 +13,7 @@ export const DropDown = ({
 
   const dropDownThemes = {
     active: 'top-[150%] opacity-100',
-    disabled: 'top-[130%] opacity-0',
+    disabled: 'top-[130%] opacity-0 pointer-events-none',
   };
 
   return (
