@@ -129,6 +129,16 @@ const Auth = ({ children }: { children: ReactNode }) => {
         body: JSON.stringify(params),
       });
       //Invalid email or password..
+      if (res.status === 400) {
+        if (callback) {
+          callback({
+            message: (await res.json()).title,
+            status: res.status,
+          });
+        }
+        return;
+      }
+      //
       if (res.status === 401) {
         if (callback) {
           callback({
