@@ -10,6 +10,7 @@ import {
   DashboardPage,
   NotFoundPage,
 } from './Pages';
+import { Alert } from './Components/Layout';
 
 function App() {
   const auth = useAuth();
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <>
+      <Alert />
       <section>
         <header>
           <Navbar />

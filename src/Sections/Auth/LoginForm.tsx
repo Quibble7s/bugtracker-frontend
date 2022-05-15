@@ -3,12 +3,13 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { LoadingButton } from 'src/Components/Buttons';
 import { Input } from 'src/Components/Form';
 import { H4, PXS } from 'src/Components/Typography';
-import { useAuth } from 'src/Hooks';
+import { useAlert, useAuth } from 'src/Hooks';
 import { AuthForm } from './AuthForm';
 
 export const LoginForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const auth = useAuth();
+  const { alert } = useAlert();
   const navigate = useNavigate();
   const locationState: any = useLocation().state;
   const prevLocation: string = locationState?.from || '/';
@@ -16,9 +17,14 @@ export const LoginForm = () => {
   const onSubmitHandler = async (data: any) => {
     const params = { email: data.email, password: data.password };
     setIsLoading(true);
-    await auth.logIn(params, () => {
+    await auth.logIn(params, ({ message, status }) => {
       setIsLoading(false);
-      navigate(prevLocation, { replace: true });
+      if (status === 200) {
+        alert(message, 'success', 2.5);
+        navigate(prevLocation, { replace: true });
+        return;
+      }
+      alert(message, 'error', 2.5);
     });
   };
   return (

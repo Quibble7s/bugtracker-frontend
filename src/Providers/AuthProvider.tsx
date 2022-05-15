@@ -7,6 +7,7 @@ import {
 } from 'react';
 
 import { BASE_URL } from 'src/Constants';
+import { useAlert } from 'src/Hooks';
 import { RegisterParams, SignInParams, User } from 'src/Models';
 
 //Types
@@ -41,6 +42,7 @@ AuthContext.displayName = 'Auth';
 
 //Provider
 const Auth = ({ children }: { children: ReactNode }) => {
+  const { alert } = useAlert();
   const [user, setUser] = useState<User>(null!);
 
   const token: string | null = localStorage.getItem('token');
@@ -155,7 +157,7 @@ const Auth = ({ children }: { children: ReactNode }) => {
         localStorage.setItem('token', data.token);
         setUser(data.user);
         if (callback) {
-          callback({ message: 'Success.', status: 200 });
+          callback({ message: 'Login successful!', status: 200 });
         }
       }
     } catch {
@@ -168,6 +170,7 @@ const Auth = ({ children }: { children: ReactNode }) => {
   const signOut = () => {
     localStorage.setItem('authenticated', 'false');
     localStorage.setItem('token', '');
+    alert('Log out successful.', 'error', 2.5);
     setUser(null!);
   };
 
@@ -198,7 +201,7 @@ const Auth = ({ children }: { children: ReactNode }) => {
       localStorage.setItem('authenticated', 'true');
       localStorage.setItem('token', data.token);
       if (callBack) {
-        callBack({ message: 'Success.', status: 200 });
+        callBack({ message: 'Successfuly registered.', status: 200 });
       }
       setUser(data.user);
     } catch (error) {
