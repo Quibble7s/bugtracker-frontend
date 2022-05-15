@@ -31,7 +31,7 @@ export const Pricing: Price[] = [
         yearlyDiscountPercentage,
       )}/year`,
     },
-    features: ['200 Projects', 'Unlimited Members', 'Premium Support'],
+    features: ['50 Projects', 'Unlimited Members', 'Premium Support'],
     theme: 'dark',
   },
   {
