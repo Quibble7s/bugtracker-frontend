@@ -49,7 +49,7 @@ export const MobileMenu = () => {
           </div>
           <div
             className={`absolute w-full bg-light-blue p-4 ${containerTheme[active]} left-0 mt-8 transition-all ease-in-out`}>
-            <NavigationLinks className='flex-col justify-start gap-8' />
+            <NavigationLinks className='flex-col justify-start gap-6' />
             <LoginOrRegisterButtons className='flex flex-row justify-center items-center gap-3 mt-4 lg:hidden' />
             <DropDownMenu className='flex flex-col justify-center items-center gap-6 mt-6' />
           </div>

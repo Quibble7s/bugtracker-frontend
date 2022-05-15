@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { DropDown } from 'src/Components/Layout';
+import { PS } from 'src/Components/Typography';
 import { useAuth } from 'src/Hooks';
 import { DropDownMenu } from '..';
 
@@ -19,8 +20,13 @@ export const NavDropDown = () => {
         <div
           onClick={onClickHandler}
           role='button'
-          className='hidden w-[38px] h-[38px] rounded-[50%] border border-primary cursor-pointer relative lg:block'>
-          <img src='/static/images/defaultProfilePicture.svg' alt=' ' />
+          className='hidden cursor-pointer relative flex-row gap-2 items-center lg:flex'>
+          <img
+            className='max-w-[16px] max-h-[16px]'
+            src='/static/images/defaultProfilePicture.svg'
+            alt=' '
+          />
+          <PS className='text-themeGray'>{user.userName}</PS>
           <DropDown state={dropDownState}>
             <DropDownMenu className='flex flex-col justify-center items-center gap-6' />
           </DropDown>

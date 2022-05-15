@@ -1,5 +1,5 @@
-import { Button } from 'src/Components/Buttons';
 import { NavigationLink } from 'src/Components/Navigation';
+import { PS } from 'src/Components/Typography';
 import { useAuth } from 'src/Hooks';
 
 export const DropDownMenu = ({ className }: { className?: string }) => {
@@ -11,14 +11,12 @@ export const DropDownMenu = ({ className }: { className?: string }) => {
         <div className={`${className}`}>
           <NavigationLink to='/dashboard'>Dashboard</NavigationLink>
           <NavigationLink to='/profile'>Profile</NavigationLink>
-          <Button
+          <div
             onClick={async () => {
               await signOut();
-            }}
-            className='mt-4'
-            theme='error'>
-            Logout
-          </Button>
+            }}>
+            <PS className='text-red-500'>Logout</PS>
+          </div>
         </div>
       )}
     </>

@@ -19,8 +19,8 @@ export const DropDown = ({
   return (
     <div
       ref={dropDownRef}
-      className={`absolute min-w-[150px] bg-light-blue shadow-md -translate-x-[75%] 
-      p-2 flex flex-col items-center gap-4 origin-top-right transition-all duration-200
+      className={`absolute min-w-[120px] bg-light-blue shadow-md left-0 
+      p-4 flex flex-col items-center gap-2 origin-top-right transition-all duration-200
       ${dropDownThemes[state]} ${className}`}>
       {children}
     </div>
