@@ -17,8 +17,8 @@ export const FeaturesSection = () => {
           title='Divide problems in small tasks'
           theme='right'
           imageSrc='/static/images/task.svg'>
-          Solve complex problems by break it down into smaller tasks that you
-          can accomplish over time.
+          Solve complex problems by breaking them down into smaller tasks that
+          you can accomplish over time.
         </FeatureCard>
       </Container>
     </section>
