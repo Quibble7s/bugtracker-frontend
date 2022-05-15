@@ -16,7 +16,9 @@ export const Footer = () => {
             </div>
             <div className='flex flex-col items-center gap-4 lg:flex-row'>
               {NavLinks.map((link) => (
-                <NavigationLink to={link.to}>{link.label}</NavigationLink>
+                <NavigationLink key={`footer-${link.label}`} to={link.to}>
+                  {link.label}
+                </NavigationLink>
               ))}
             </div>
           </div>
