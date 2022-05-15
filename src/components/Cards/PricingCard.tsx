@@ -42,7 +42,7 @@ export const PricingCard = ({
           navigate('/auth/register', { replace: false });
         }}
         disabled={user !== null}
-        className='w-full mt-16 disabled:hover:!bg-themeGray hover:disabled:!border-themeGray disabled:hover:!text-light-blue disabled:cursor-not-allowed'
+        className='w-full mt-16 disabled:cursor-not-allowed'
         theme={PricingCardThemes.button[theme]}>
         Get started
       </Button>
