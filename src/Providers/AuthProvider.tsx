@@ -128,7 +128,7 @@ const Auth = ({ children }: { children: ReactNode }) => {
         },
         body: JSON.stringify(params),
       });
-      //Invalid email or password..
+      //Invalid parameters.
       if (res.status === 400) {
         if (callback) {
           callback({
@@ -138,7 +138,7 @@ const Auth = ({ children }: { children: ReactNode }) => {
         }
         return;
       }
-      //
+      //Invalid email or password.
       if (res.status === 401) {
         if (callback) {
           callback({
@@ -150,13 +150,13 @@ const Auth = ({ children }: { children: ReactNode }) => {
       }
       //User logged in correctly.
       if (res.status === 200) {
-        if (callback) {
-          callback({ message: 'Success.', status: 200 });
-        }
         const data: AuthUser = await res.json();
         localStorage.setItem('authenticated', 'true');
         localStorage.setItem('token', data.token);
         setUser(data.user);
+        if (callback) {
+          callback({ message: 'Success.', status: 200 });
+        }
       }
     } catch {
       if (callback) {
