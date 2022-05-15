@@ -4,6 +4,7 @@ import {
   FormEvent,
   InvalidEvent,
   ReactNode,
+  useState,
 } from 'react';
 
 interface Props {
@@ -27,7 +28,7 @@ export const FormProvider = ({
   onSubmit,
   onInvalid,
 }: Props) => {
-  let data: any = {};
+  const [data, setData] = useState({});
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const type = e.target.type;
@@ -36,7 +37,7 @@ export const FormProvider = ({
       type === 'checkbox' || type === 'radio'
         ? e.target.checked
         : e.target.value;
-    data = { ...data, [id]: value };
+    setData({ ...data, [id]: value });
   };
 
   const onInvalidHandler = (e: InvalidEvent<HTMLInputElement>) => {
