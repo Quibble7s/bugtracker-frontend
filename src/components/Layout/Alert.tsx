@@ -4,7 +4,7 @@ import { PS } from '../Typography';
 export const Alert = () => {
   const { alertRef, alertTextRef } = useAlert();
   return (
-    <div className='fixed w-full h-screen'>
+    <div className='fixed w-full h-screen pointer-events-none z-[1000]'>
       <div className='w-full h-screen relative'>
         <div
           ref={alertRef}
