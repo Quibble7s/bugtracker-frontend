@@ -28,7 +28,7 @@ export const Input = ({
       <input
         onChange={onChangeHandler}
         onInvalid={onInvalidHandler}
-        className={`outline-none border border-blue-400/30 rounded-md p-2 font-mulish tex-[16px] 
+        className={`outline-none border border-blue-400/30 rounded-md p-[13px] font-mulish tex-[16px] 
         transition-all duration-200 hover:border-blue-400/50 focus:border-blue-400 bg-light-blue
         ${className}`}
         placeholder={`${placeholder}${requiered ? '*' : ''}`}
