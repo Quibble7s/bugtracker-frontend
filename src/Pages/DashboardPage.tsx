@@ -19,7 +19,7 @@ export const DashboardPage = () => {
     <main className='w-full min-h-screen'>
       <Container className='pt-20 min-h-screen'>
         <div className='w-full grid grid-cols-1 md:grid-cols-2 items-center justify-between'>
-          <div className='mb-4 md:mb-0'>
+          <div className='mb-8 md:mb-0'>
             <Form
               className='grid grid-cols-2 gap-8 items-center'
               onSubmit={(data) => {
