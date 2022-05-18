@@ -10,15 +10,15 @@ export const FeaturesSection = () => {
           theme='left'
           imageSrc='/static/images/teamwork.svg'>
           The tools we provide facilitate teamwork. The administrators and
-          moderators of the team are responsible for adding the problems and
-          tasks that individuals will work on.
+          moderators of the team are responsible for adding the issues and tasks
+          that individuals will work on.
         </FeatureCard>
         <FeatureCard
-          title='Divide problems in small tasks'
+          title='Divide issues into smaller tasks'
           theme='right'
           imageSrc='/static/images/task.svg'>
-          Solve complex problems by breaking them down into smaller tasks that
-          you can accomplish over time.
+          Solve complex issues by breaking them down into smaller tasks that you
+          can accomplish over time.
         </FeatureCard>
       </Container>
     </section>

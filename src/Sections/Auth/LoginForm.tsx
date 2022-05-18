@@ -50,7 +50,7 @@ export const LoginForm = () => {
         <Link
           className='underline transition-colors duration-200 hover:text-blue-400'
           to='/auth/register'>
-          Sign in
+          Sign up
         </Link>
         .
       </PXS>

@@ -73,7 +73,7 @@ export const RegisterForm = () => {
         className='w-fit min-w-[100px] mx-auto'
         theme='secondary'
         isLoading={isLoading}>
-        Sign in
+        Sign up
       </LoadingButton>
     </AuthForm>
   );
