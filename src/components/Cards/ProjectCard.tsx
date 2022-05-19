@@ -16,6 +16,9 @@ export const ProjectCard = ({ project }: { project: Project }) => {
             text={member.user.userName}
             className='ml-[-10px]'>
             <Image
+              onLoad={(e) => {
+                e.currentTarget.classList.add('fade-in');
+              }}
               className='relative rounded-[100%] bg-themeLightGray'
               width={24}
               height={24}
