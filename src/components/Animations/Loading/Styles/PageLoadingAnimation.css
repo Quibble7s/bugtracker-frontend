@@ -1,4 +1,4 @@
-@keyframes anim {
+@keyframes loading-ball {
   75%,
   100% {
     transform: scale(2);
@@ -18,11 +18,11 @@
 }
 
 .loading-ball:nth-of-type(1) {
-  animation: anim 600ms ease-out infinite;
+  animation: loading-ball 750ms ease-out infinite;
 }
 .loading-ball:nth-of-type(2) {
-  animation: anim 600ms 300ms ease-out infinite;
+  animation: loading-ball 750ms 250ms ease-out infinite;
 }
 .loading-ball:nth-of-type(3) {
-  animation: anim 600ms ease-out infinite;
+  animation: loading-ball 750ms 500ms ease-out infinite;
 }
