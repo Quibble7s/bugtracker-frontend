@@ -27,7 +27,7 @@ export const LoadingButton = ({
       theme={theme}
       onClick={onClick}
       type={type}
-      className={`disabled:cursor-not-allowed !transition-all !duration-300 ${className}`}
+      className={`disabled:cursor-not-allowed !transition-all !duration-300 min-h-[52px] ${className}`}
       disabled={disabled || isLoading}>
       {isLoading ? <ActionLoadingAnimation /> : children}
     </Button>
