@@ -21,7 +21,7 @@ export const PricingSection = () => {
         <div className='grid grid-cols-1 items-center lg:grid-cols-2'>
           <div>
             <H3 className='text-center lg:text-left'>
-              Get the right plan for your organization
+              Choose the right plan for your organization
             </H3>
           </div>
           <div className='mx-auto mt-8 lg:mx-0 lg:mt-0 lg:ml-auto'>

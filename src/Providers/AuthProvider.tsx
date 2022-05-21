@@ -34,6 +34,7 @@ interface AuthContextType {
     params: RegisterParams,
     callBack?: ({ message, status }: callBackParams) => void,
   ) => Promise<void>;
+  updateLocalUser: (callback: (currentUser: User) => User) => void;
 }
 
 //Context
@@ -214,7 +215,11 @@ const Auth = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const value = { user, logIn, signOut, register };
+  const updateLocalUser = (callback: (currentUser: User) => User) => {
+    setUser(callback(user));
+  };
+
+  const value = { user, logIn, signOut, register, updateLocalUser };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
