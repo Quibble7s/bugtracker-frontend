@@ -13,3 +13,4 @@ export { PricingSection } from './HomePage/PricingSection';
 export { PricingSelection } from './HomePage/PricingSelection';
 export { Footer } from './HomePage/Footer';
 export { JoinProjectModal } from './DashboardPage/JoinProjectModal';
+export { CreateProjectModal } from './DashboardPage/CreateProjectModal';

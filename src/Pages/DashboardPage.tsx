@@ -7,11 +7,12 @@ import { Container } from 'src/Components/Layout';
 import { H3 } from 'src/Components/Typography';
 import { GetProjects } from 'src/Lib';
 import { Project } from 'src/Models';
-import { JoinProjectModal } from 'src/Sections';
+import { CreateProjectModal, JoinProjectModal } from 'src/Sections';
 
 export const DashboardPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isJoinOpen, setIsJoinOpen] = useState<boolean>(false);
+  const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
@@ -46,6 +47,10 @@ export const DashboardPage = () => {
           setIsJoinOpen={setIsJoinOpen}
           setProjects={setProjects}
         />
+        <CreateProjectModal
+          isOpen={isCreateOpen}
+          onClose={() => setIsCreateOpen(false)}
+        />
         <div className='w-full grid grid-cols-1 md:grid-cols-2 items-center justify-between'>
           <div className='mb-8 md:mb-0'>
             <Form
@@ -68,7 +73,9 @@ export const DashboardPage = () => {
             <Button onClick={() => setIsJoinOpen(true)} theme='secondary'>
               Join project
             </Button>
-            <Button theme='success'>+ Create project</Button>
+            <Button onClick={() => setIsCreateOpen(true)} theme='success'>
+              + Create project
+            </Button>
           </div>
         </div>
         {!isLoading ? (
