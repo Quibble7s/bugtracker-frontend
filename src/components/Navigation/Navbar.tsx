@@ -15,7 +15,9 @@ export const Navbar = () => {
   };
 
   return (
-    <nav ref={navRef} className={`w-full left-0 top-0 z-10 ${themes[state]}`}>
+    <nav
+      ref={navRef}
+      className={`w-full left-0 top-0 z-10 shadow-sm ${themes[state]}`}>
       <Container className='flex flex-row justify-between items-center'>
         <Link to='/'>
           <Image
