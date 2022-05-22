@@ -17,7 +17,7 @@ export const LoginOrRegisterButtons = ({
       {show && user === null && (
         <div className={`${className}`}>
           <Link to='/auth/login'>
-            <PS className='text-blue-400 hover:text-blue-400/70'>Log in</PS>
+            <PS className='text-secondary hover:text-secondary/70'>Login</PS>
           </Link>
           <PXS className='text-themeGray'>Or</PXS>
           <Button

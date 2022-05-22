@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import { PricingCardThemes } from 'src/Constants';
+import { PricingCardThemes, yearlyDiscountPercentage } from 'src/Constants';
 import { useAuth } from 'src/Hooks';
 import { Button } from '../Buttons';
-import { H3, PXS } from '../Typography';
+import { H3, PS, PXS } from '../Typography';
 
 interface Props {
   title: string;
@@ -25,8 +25,13 @@ export const PricingCard = ({
     <div
       className={`p-8 text-center rounded-md ${PricingCardThemes.background[theme]}`}>
       <PXS className={`${PricingCardThemes.title[theme]}`}>{title}</PXS>
-      <H3 className={`${PricingCardThemes.text[theme]}`}>
+      <H3 className={`${PricingCardThemes.text[theme]} relative`}>
         {price[selectedPricing]}
+        {selectedPricing === 'yearly' && price[selectedPricing] !== 'Free' && (
+          <PS className='absolute top-0 right-0 -translate-y-1/2 bg-green-400 text-light-blue p-2 rounded-md'>
+            {yearlyDiscountPercentage}% OFF
+          </PS>
+        )}
       </H3>
       <div className='mt-8'>
         {features.map((feature) => (

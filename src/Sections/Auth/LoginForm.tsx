@@ -48,7 +48,7 @@ export const LoginForm = () => {
       <PXS className='text-center text-themeGray mix-blend-multiply'>
         Don't have an account?...{' '}
         <Link
-          className='underline transition-colors duration-200 hover:text-blue-400'
+          className='underline transition-colors duration-200 hover:text-secondary'
           to='/auth/register'>
           Sign up
         </Link>
@@ -59,7 +59,7 @@ export const LoginForm = () => {
         className='w-fit min-w-[100px] mx-auto'
         theme='secondary'
         isLoading={isLoading}>
-        Log in
+        Login
       </LoadingButton>
     </AuthForm>
   );

@@ -5,7 +5,7 @@ interface Price {
   theme: 'light' | 'dark';
 }
 
-const yearlyDiscountPercentage = 10;
+export const yearlyDiscountPercentage = 10;
 const premiumPrice = 29;
 const enterprisePrice = 49;
 

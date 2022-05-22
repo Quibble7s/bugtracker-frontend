@@ -62,9 +62,9 @@ export const RegisterForm = () => {
       <PXS className='text-center text-themeGray mix-blend-multiply'>
         Already have an account?...{' '}
         <Link
-          className='underline transition-colors duration-200 hover:text-blue-400'
+          className='underline transition-colors duration-200 hover:text-secondary'
           to='/auth/login'>
-          Log in
+          Login
         </Link>
         .
       </PXS>

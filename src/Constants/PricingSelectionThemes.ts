@@ -13,9 +13,9 @@ export const textMonthlyTheme: Themes = {
 };
 export const yearlyTheme: Themes = {
   monthly: 'bg-transparent',
-  yearly: 'bg-blue-400',
+  yearly: 'bg-secondary',
 };
 export const monthlyTheme: Themes = {
-  monthly: 'bg-blue-400',
+  monthly: 'bg-secondary',
   yearly: 'bg-transparent',
 };

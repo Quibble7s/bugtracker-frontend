@@ -5,7 +5,7 @@ import { CompanyImages } from 'src/Constants';
 
 export const CompaniesSection = () => {
   return (
-    <section className='mt-64 lg:mt-0'>
+    <section className='mt-64'>
       <Container id='companies'>
         <H4 className='text-themeGray/20 text-center'>trusted by</H4>
         <div className='w-full flex flex-row gap-8 justify-between items-center lg:gap-0'>
