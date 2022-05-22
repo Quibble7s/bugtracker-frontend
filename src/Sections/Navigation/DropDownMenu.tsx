@@ -12,6 +12,8 @@ export const DropDownMenu = ({ className }: { className?: string }) => {
           <NavigationLink to='/dashboard'>Dashboard</NavigationLink>
           <NavigationLink to='/profile'>Profile</NavigationLink>
           <div
+            role='button'
+            className='cursor-pointer'
             onClick={async () => {
               await signOut();
             }}>

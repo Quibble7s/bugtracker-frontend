@@ -22,6 +22,7 @@ export const JoinProjectModal = ({
 }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { alert } = useAlert();
+
   //Handles the submit event of the form
   const onSubmitHandler = async (data: any) => {
     const splitData: string[] = data.join.trim().split('/');
@@ -38,6 +39,7 @@ export const JoinProjectModal = ({
     });
     setIsLoading(false);
   };
+
   return (
     <Modal onClose={() => setIsJoinOpen(false)} isOpen={isOpen}>
       <H3 className='text-center mb-8'>Join a project</H3>
