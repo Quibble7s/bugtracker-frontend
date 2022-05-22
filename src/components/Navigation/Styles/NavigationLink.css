@@ -14,5 +14,5 @@
 }
 
 .navlink:hover::after {
-  background: rgb(59, 130, 246);
+  background: #5454d4;
 }
