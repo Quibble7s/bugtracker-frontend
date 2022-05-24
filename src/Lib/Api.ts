@@ -1,8 +1,49 @@
 import { BASE_URL } from 'src/Constants';
 import { Project } from 'src/Models';
 
+type ErrorResponse = { message: string; status: number };
+
 const GetToken = (): string | null => {
   return localStorage.getItem('token');
+};
+
+export const CreateProject = async (params: {
+  name: string;
+  description: string;
+}): Promise<{ project: Project | null; message: string; status: number }> => {
+  const token = GetToken();
+  const response = await fetch(`${BASE_URL}/api/v1/project/create`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(params),
+  });
+  //Project created successfuly
+  if (response.status === 201) {
+    const project = await response.json();
+    return {
+      project,
+      message: 'Project created successfuly.',
+      status: response.status,
+    };
+  }
+  //User not found
+  if (response.status === 204) {
+    const errorData: ErrorResponse = await response.json();
+    return {
+      project: null,
+      message: errorData.message,
+      status: errorData.status,
+    };
+  }
+  //Any other error
+  return {
+    project: null,
+    message: (await response.json()).title,
+    status: response.status,
+  };
 };
 
 export const GetProjects = async (): Promise<Project[]> => {

@@ -49,6 +49,8 @@ export const DashboardPage = () => {
         />
         <CreateProjectModal
           isOpen={isCreateOpen}
+          projects={projects}
+          setProjects={setProjects}
           onClose={() => setIsCreateOpen(false)}
         />
         <div className='w-full grid grid-cols-1 md:grid-cols-2 items-center justify-between'>
