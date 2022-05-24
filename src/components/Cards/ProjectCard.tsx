@@ -47,10 +47,10 @@ export const ProjectCard = ({ project }: { project: Project }) => {
   return (
     <div
       className='w-full p-4 bg-themeLightGray rounded-md border cursor-pointer
-    flex flex-col justify-between min-h-[360px] max-h-[360px] overflow-y-auto'>
+    flex flex-col justify-between min-h-[360px] max-h-[360px]'>
       <div>
         <H4 className='text-center text-themeBlack'>{project.name}</H4>
-        <PXS className='mt-8 text-justify text-themeGray'>
+        <PXS className='mt-8 text-justify text-themeGray min-h-[220px] max-h-[220px] overflow-y-auto'>
           {project.description}
         </PXS>
       </div>
