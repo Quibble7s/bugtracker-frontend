@@ -9,6 +9,7 @@ import {
   RegisterPage,
   DashboardPage,
   NotFoundPage,
+  JoinProjectPage,
 } from './Pages';
 import { Alert } from './Components/Layout';
 
@@ -36,6 +37,14 @@ function App() {
           element={
             <PrivateRoute>
               <DashboardPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/join/:id'
+          element={
+            <PrivateRoute>
+              <JoinProjectPage />
             </PrivateRoute>
           }
         />

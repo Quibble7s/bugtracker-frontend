@@ -3,3 +3,4 @@ export { LoginPage } from './LoginPage';
 export { RegisterPage } from './RegisterPage';
 export { NotFoundPage } from './NotFoundPage';
 export { DashboardPage } from './DashboardPage';
+export { JoinProjectPage } from './JoinProjectPage';
