@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button, LoadingButton } from 'src/Components/Buttons';
 import { Form, Input } from 'src/Components/Form';
+import { Image } from 'src/Components/Image';
 import { Modal } from 'src/Components/Layout';
 import { H3 } from 'src/Components/Typography';
 import { useAlert } from 'src/Hooks';
@@ -45,7 +46,18 @@ export const CreateProjectModal = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <H3 className='text-center mb-8'>Create a project</H3>
-      <Form className='grid grid-cols-3 gap-8' onSubmit={onSubmitHandler}>
+      <Image
+        className='my-8 max-w-full md:max-w-[300px] lg:max-w-[400px] opacity-0 mx-auto'
+        onLoad={(e) => {
+          e.currentTarget.classList.add('fade-in');
+        }}
+        width={512}
+        height={512}
+        src='/static/images/create.svg'
+      />
+      <Form
+        className='grid grid-cols-1 md:grid-cols-3 gap-8'
+        onSubmit={onSubmitHandler}>
         <Input id='name' name='name' placeholder='Project name' requiered />
         <Input
           id='description'

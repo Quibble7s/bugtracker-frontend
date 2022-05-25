@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button, LoadingButton } from 'src/Components/Buttons';
 import { Form, Input } from 'src/Components/Form';
+import { Image } from 'src/Components/Image';
 import { Modal } from 'src/Components/Layout';
 import { H3, PXS } from 'src/Components/Typography';
 import { useAlert } from 'src/Hooks';
@@ -33,6 +34,7 @@ export const JoinProjectModal = ({
       if (status === 204) {
         alert(message, 'success', 2.5);
         setProjects([...projects, await GetProject(projectID)]);
+        setIsJoinOpen(false);
         return;
       }
       alert(message, 'error', 2.5);
@@ -43,6 +45,15 @@ export const JoinProjectModal = ({
   return (
     <Modal onClose={() => setIsJoinOpen(false)} isOpen={isOpen}>
       <H3 className='text-center mb-8'>Join a project</H3>
+      <Image
+        className='my-8 max-w-full md:max-w-[300px] lg:max-w-[400px] opacity-0 mx-auto'
+        onLoad={(e) => {
+          e.currentTarget.classList.add('fade-in');
+        }}
+        width={512}
+        height={512}
+        src='/static/images/join.svg'
+      />
       <Form
         onSubmit={onSubmitHandler}
         className='grid grid-cols-1 md:grid-cols-6 gap-8'>

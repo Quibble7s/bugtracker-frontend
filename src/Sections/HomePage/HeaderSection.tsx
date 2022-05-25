@@ -46,7 +46,7 @@ export const HeaderSection = () => {
               onLoad={(e) => {
                 e.currentTarget.classList.add('fade-in');
               }}
-              className='mx-auto opacity-0 mt-4 lg:mt-0 lg:mx-0 lg:ml-auto'
+              className='mx-auto opacity-0 mt-8 lg:mt-0 lg:mx-0 lg:ml-auto'
               width={512}
               height={512}
               src='/static/images/hero.svg'
