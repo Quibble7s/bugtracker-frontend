@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { ProjectCardLoadingAnimation } from 'src/Components/Animations';
 import { Button } from 'src/Components/Buttons';
 import { ProjectCard } from 'src/Components/Cards';
@@ -13,6 +13,7 @@ export const DashboardPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isJoinOpen, setIsJoinOpen] = useState<boolean>(false);
   const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>('');
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
@@ -27,9 +28,17 @@ export const DashboardPage = () => {
   const getProjectCards = () => {
     return projects.length > 0 ? (
       <div className='w-full mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
+        {projects
+          .filter((project) => {
+            if (search === '' || search === undefined) return true;
+            return (
+              project.name.includes(search) ||
+              project.description.includes(search)
+            );
+          })
+          .map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
       </div>
     ) : (
       <div className='absolute pointer-events-none top-0 right-0 bottom-0 left-0 flex flex-row items-center justify-center'>
@@ -57,8 +66,11 @@ export const DashboardPage = () => {
           <div className='mb-8 md:mb-0'>
             <Form
               className='grid grid-cols-2 gap-8 items-center'
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                setSearch(e.currentTarget.value);
+              }}
               onSubmit={(data) => {
-                console.log(data.search);
+                setSearch(data.search);
               }}>
               <Input
                 placeholder='search...'
@@ -66,9 +78,6 @@ export const DashboardPage = () => {
                 name='search'
                 type='text'
               />
-              <Button className='md:w-fit' type='submit' theme='primary'>
-                Search
-              </Button>
             </Form>
           </div>
           <div className='flex flex-col gap-8 md:justify-end md:flex-row'>

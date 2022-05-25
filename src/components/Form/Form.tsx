@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
 import { FormProvider } from 'src/Providers';
 
 interface Props {
@@ -6,11 +6,13 @@ interface Props {
   children: ReactNode;
   onSubmit: ({ ...data }: any) => void;
   onInvalid?: ({ id, value }: { id: string; value: string | boolean }) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Form = ({
   onSubmit,
   onInvalid,
+  onChange,
   children,
   className = '',
 }: Props) => {
@@ -18,7 +20,8 @@ export const Form = ({
     <FormProvider
       className={className}
       onSubmit={onSubmit}
-      onInvalid={onInvalid}>
+      onInvalid={onInvalid}
+      onChange={onChange}>
       {children}
     </FormProvider>
   );

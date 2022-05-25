@@ -12,6 +12,7 @@ interface Props {
   children: ReactNode;
   onSubmit: ({ ...data }: any) => void;
   onInvalid?: ({ id, value }: { id: string; value: string | boolean }) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface FromContextType {
@@ -27,10 +28,14 @@ export const FormProvider = ({
   children,
   onSubmit,
   onInvalid,
+  onChange,
 }: Props) => {
   const [data, setData] = useState({});
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (onChange !== undefined) {
+      onChange(e);
+    }
     const type = e.target.type;
     const id = e.target.id;
     const value =
