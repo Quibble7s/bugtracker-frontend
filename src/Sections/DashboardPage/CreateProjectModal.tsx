@@ -47,7 +47,7 @@ export const CreateProjectModal = ({
     <Modal isOpen={isOpen} onClose={onClose}>
       <H3 className='text-center mb-8'>Create a project</H3>
       <Image
-        className='my-8 max-w-full md:max-w-[300px] lg:max-w-[400px] opacity-0 mx-auto'
+        className='my-8 max-w-[250px] max-h-[250px] md:max-w-[300px] md:max-h-[300px] lg:max-w-[400px] lg:max-h-[400px] opacity-0 mx-auto'
         onLoad={(e) => {
           e.currentTarget.classList.add('fade-in');
         }}
