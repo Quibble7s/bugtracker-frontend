@@ -1,1 +1,7 @@
-export { GetProjects, GetProject, JoinProject, CreateProject } from './Api';
+export {
+  GetProjects,
+  GetProject,
+  JoinProject,
+  CreateProject,
+  LeaveProject,
+} from './Api';

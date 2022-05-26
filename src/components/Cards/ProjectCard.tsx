@@ -1,53 +1,65 @@
+import { useState } from 'react';
+import { useAlert, useGetProjectMembers } from 'src/Hooks';
 import { Project } from 'src/Models';
-import { Image } from '../Image';
-import { Tooltip } from '../Layout';
+import { ConfirmLeaveProjectModal } from 'src/Sections';
+import { Button } from '../Buttons';
+import { ThreeDotsDropDown } from '../Layout';
 import { H4, PXS } from '../Typography';
 
-export const ProjectCard = ({ project }: { project: Project }) => {
-  const getMembers = () => {
-    const maxAvatars = 5;
-    const elements = [];
-    for (let i = 0; i < project.members.length; i++) {
-      const member = project.members[i];
-      if (i < maxAvatars) {
-        elements.push(
-          <Tooltip
-            key={member.user.userName}
-            text={member.user.userName}
-            className='ml-[-10px]'>
-            <Image
-              onLoad={(e) => {
-                e.currentTarget.classList.add('fade-in');
-              }}
-              className='relative rounded-[100%] bg-themeLightGray'
-              width={24}
-              height={24}
-              src='/static/images/defaultProfilePicture.svg'
-            />
-          </Tooltip>,
-        );
-        continue;
-      }
-      break;
-    }
-    if (project.members.length > maxAvatars) {
-      elements.push(
-        <Tooltip text={`And ${project.members.length - maxAvatars} more...`}>
-          <PXS
-            className='w-[24px] h-[24px] flex flex-row items-center justify-center 
-            text-[10px] bg-themeGray text-themeLightGray text-center rounded-[100%]'>
-            +{project.members.length - maxAvatars}
-          </PXS>
-        </Tooltip>,
-      );
-    }
-    return elements;
-  };
+export const ProjectCard = ({
+  project,
+  projects,
+  setProjects,
+}: {
+  project: Project;
+  projects: Project[];
+  setProjects: (value: React.SetStateAction<Project[]>) => void;
+}) => {
+  const [isLeaveProjectModalOpen, setIsLeaveProjectModalOpen] =
+    useState<boolean>(false);
+  const getMembers = useGetProjectMembers(project);
+  const { alert } = useAlert();
+  const copyToClipboard = () => {
+    //Get the link and include the port and http protocol if enviroment is development.
+    const isDevelopment = process.env.NODE_ENV === 'development';
 
+    const hostName = window.location.hostname;
+    const port = window.location.port;
+    const protocol = `${isDevelopment ? 'http' : 'https'}`;
+    const fullHost = `${hostName}${isDevelopment ? `:${port}` : ''}`;
+
+    const link = `${protocol}://${fullHost}/join/${project.id}`;
+
+    navigator.clipboard.writeText(link);
+
+    alert('Invite link copied to clipboard!', 'success', 2.5);
+  };
+  const handleOnClose = () => {
+    setIsLeaveProjectModalOpen(false);
+  };
   return (
     <div
-      className='w-full p-4 bg-themeLightGray rounded-md border cursor-pointer
-    flex flex-col justify-between min-h-[360px] max-h-[360px]'>
+      className='w-full p-4 bg-themeLightGray rounded-md border
+      flex flex-col justify-between min-h-[360px] max-h-[360px] relative'>
+      <div className='absolute top-[16px] right-[16px]'>
+        <ThreeDotsDropDown className='!min-w-[160px] gap-4'>
+          <Button onClick={copyToClipboard} theme='success'>
+            Get invite link
+          </Button>
+          <Button
+            theme='error'
+            onClick={() => setIsLeaveProjectModalOpen(true)}>
+            Leave project
+          </Button>
+          <ConfirmLeaveProjectModal
+            isOpen={isLeaveProjectModalOpen}
+            onClose={handleOnClose}
+            projectID={project.id}
+            projects={projects}
+            setProjects={setProjects}
+          />
+        </ThreeDotsDropDown>
+      </div>
       <div>
         <H4 className='text-center text-themeBlack'>{project.name}</H4>
         <PXS className='mt-8 text-justify text-themeGray min-h-[220px] max-h-[220px] overflow-y-auto'>

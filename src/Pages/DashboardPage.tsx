@@ -37,7 +37,12 @@ export const DashboardPage = () => {
             );
           })
           .map((project) => (
-            <ProjectCard key={project.id} project={project} />
+            <ProjectCard
+              setProjects={setProjects}
+              key={project.id}
+              projects={projects}
+              project={project}
+            />
           ))}
       </div>
     ) : (
@@ -65,7 +70,7 @@ export const DashboardPage = () => {
         <div className='w-full grid grid-cols-1 md:grid-cols-2 items-center justify-between'>
           <div className='mb-8 md:mb-0'>
             <Form
-              className='grid grid-cols-2 gap-8 items-center'
+              className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center'
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 setSearch(e.currentTarget.value);
               }}

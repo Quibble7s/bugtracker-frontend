@@ -117,3 +117,34 @@ export const JoinProject = async (
     callBack({ message: "Couldn't reach the server.", status: 500 });
   }
 };
+
+export const LeaveProject = async (
+  projectID: string,
+  callBack: ({ message, status }: { message: string; status: number }) => void,
+) => {
+  const token = GetToken();
+  try {
+    const response = await fetch(
+      `${BASE_URL}/api/v1/project/${projectID}/leave`,
+      {
+        method: 'PUT',
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    //Project deleted successfuly
+    if (response.status === 204) {
+      callBack({ message: 'You left the project successfuly.', status: 204 });
+      return;
+    }
+    //User project or member not found.
+    if (response.status === 204) {
+      const error: ErrorResponse = await response.json();
+      callBack({ message: error.message, status: error.status });
+    }
+    //Any other error
+  } catch {
+    callBack({ message: "Couldn't reach the server.", status: 500 });
+  }
+};
