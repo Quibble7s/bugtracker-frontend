@@ -9,6 +9,6 @@ export const Themes = {
     'hover:bg-yellow-200/80 border border-yellow-300 bg-yellow-300 text-light-blue',
   error: 'hover:bg-red-500/80 border border-red-500 bg-red-500 text-light-blue',
   light:
-    'hover:bg-light-blue/80 border border-light-blue hover:text-secondary/80 bg-light-blue text-secondary',
+    'hover:bg-light-blue/80 border border-secondary hover:text-secondary/80 bg-light-blue text-secondary',
   dark: 'bg-primaryDark border border-primaryDark text-light-blue hover:bg-primaryDark/90',
 };

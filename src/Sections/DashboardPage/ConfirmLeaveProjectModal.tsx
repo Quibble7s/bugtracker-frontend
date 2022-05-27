@@ -41,7 +41,7 @@ export const ConfirmLeaveProjectModal = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <H3 className='text-center mb-8'>
-        ¿Are u sure you want to leave this project?
+        ¿Are you sure you want to leave this project?
       </H3>
       <Image
         src='/static/images/delete.svg'
@@ -49,7 +49,7 @@ export const ConfirmLeaveProjectModal = ({
         width={512}
         height={512}
       />
-      <PS className='bg-red-500/20 text-red-500 text-center p-4 mb-16 w-max mx-auto rounded-md border border-red-500'>
+      <PS className='bg-red-500/20 text-red-500 text-center p-4 mb-16 mx-auto rounded-md border border-red-500 lg:w-max'>
         ¡Warning: If you're the project administrator the project will be
         deleted and all other members will leave the project aswell!
       </PS>
