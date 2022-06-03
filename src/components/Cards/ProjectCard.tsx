@@ -46,7 +46,7 @@ export const ProjectCard = ({
   return (
     <div
       onClick={handleOnClick}
-      className='w-full p-4 bg-themeLightGray rounded-md border
+      className='w-full p-4 bg-themeLightGray rounded-md border cursor-pointer
       flex flex-col justify-between min-h-[360px] max-h-[360px] relative'>
       <div className='absolute top-[16px] right-[16px] overflow-x-visible'>
         <ThreeDotsDropDown className='!min-w-[160px] gap-4'>
@@ -69,7 +69,7 @@ export const ProjectCard = ({
       </div>
       <div>
         <H4 className='text-center text-themeBlack'>{project.name}</H4>
-        <PXS className='mt-8 text-justify text-themeGray min-h-[220px] max-h-[220px] overflow-y-auto'>
+        <PXS className='mt-8 text-justify text-themeGray min-h-[20px] max-h-[200px] overflow-y-auto'>
           {project.description}
         </PXS>
       </div>
@@ -77,7 +77,6 @@ export const ProjectCard = ({
         <div className='flex flex-row items-center justify-center ml-[10px]'>
           {getMembers()}
         </div>
-        <PXS>Active issues ({project.bugs.length})</PXS>
       </div>
     </div>
   );

@@ -148,3 +148,52 @@ export const LeaveProject = async (
     callBack({ message: "Couldn't reach the server.", status: 500 });
   }
 };
+
+export const UpdateTask = async (
+  {
+    taskID,
+    issueID,
+    projectID,
+    description,
+    state,
+  }: {
+    taskID: string;
+    issueID: string;
+    projectID: string;
+    description?: string;
+    state?: 'pending' | 'inProgress' | 'completed';
+  },
+  callBack: ({ message, status }: { message: string; status: number }) => void,
+) => {
+  const token = GetToken();
+  try {
+    const response = await fetch(
+      `${BASE_URL}/api/v1/task/${taskID}/project/${projectID}/bug/${issueID}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ description, state }),
+      },
+    );
+    //Successfuly updated task
+    if (response.status === 204) {
+      callBack({ message: 'Updated task.', status: 204 });
+      return;
+    }
+    if (response.status === 404) {
+      const error: ErrorResponse = await response.json();
+      callBack({ message: error.message, status: error.status });
+      return;
+    }
+    //any other error
+    callBack({
+      message: (await response.json()).title,
+      status: response.status,
+    });
+  } catch (error) {
+    callBack({ message: "Coudn't reach the server.", status: 500 });
+  }
+};

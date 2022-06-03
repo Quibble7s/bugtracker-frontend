@@ -7,11 +7,26 @@
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  scrollbar-color: #19191b transparent;
+  scrollbar-width: thin;
 }
 
 body {
   overflow-x: hidden;
   background-color: rgb(248, 254, 255);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: #19191b;
 }
 
 /*##################### GLOBAL ANIMATIONS #####################*/
@@ -65,6 +80,6 @@ body {
 }
 
 .pop-in {
-  animation: pop-in 100ms ease-out forwards;
+  animation: pop-in 200ms ease-out forwards;
 }
 /*##################### #####################*/
