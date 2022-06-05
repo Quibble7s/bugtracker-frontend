@@ -15,7 +15,7 @@ export const ThreeDotsDropDown = ({
         e.stopPropagation();
         setIsActive(isActive === 'disabled' ? 'active' : 'disabled');
       }}
-      className='relative min-w-[32px] flex flex-col gap-[4px] items-center z-[100] cursor-pointer'>
+      className='relative min-w-[32px] flex flex-col gap-[4px] items-center z-[5] cursor-pointer'>
       <div className='bg-themeGray w-[5px] h-[5px] rounded-[100%]' />
       <div className='bg-themeGray w-[5px] h-[5px] rounded-[100%]' />
       <div className='bg-themeGray w-[5px] h-[5px] rounded-[100%]' />

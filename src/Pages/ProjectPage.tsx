@@ -55,18 +55,14 @@ export const ProjectPage = () => {
                 <header className='grid grid-cols-1 md:grid-cols-2'>
                   <div>
                     <H3 className='text-center md:text-left'>{project.name}</H3>
-                    <H4 className='text-center md:text-left text-themeGray'>
-                      Active issues:{' '}
-                      {`${getActiveIssueCount()}/${project.bugs.length}`}
-                    </H4>
                   </div>
                   <div className='flex flex-row justify-end'>
                     <Button className='h-min' theme='success'>
-                      +Create issue
+                      + Create issue
                     </Button>
                   </div>
                 </header>
-                <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8 gap-8'>
+                <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-8 gap-8'>
                   {project.bugs.map((bug) => (
                     <IssueCard bug={bug} />
                   ))}

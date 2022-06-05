@@ -21,12 +21,13 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: transparent;
+  border-radius: 4px;
+  background-color: rgb(232, 234, 235);
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 4px;
-  background: #19191b;
+  background: rgb(208, 210, 211);
 }
 
 /*##################### GLOBAL ANIMATIONS #####################*/
