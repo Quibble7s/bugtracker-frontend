@@ -28,6 +28,7 @@ export const CreateIssueModal = ({ isOpen, onClose }: Props) => {
       if (status === 201) {
         alert(message, 'success', 2.5);
         setProject({ ...project, bugs: [...project.bugs, issue] });
+        onClose();
         return;
       }
       alert(message, 'error', 2.5);
