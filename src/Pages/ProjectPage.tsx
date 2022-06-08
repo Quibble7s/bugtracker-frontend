@@ -4,13 +4,17 @@ import { Button } from 'src/Components/Buttons';
 import { IssueCard } from 'src/Components/Cards';
 import { Container } from 'src/Components/Layout';
 import { H3, H4 } from 'src/Components/Typography';
-import { GetProject } from 'src/Lib';
+import { useAuth } from 'src/Hooks';
+import { GetProject, userIsProjectAdmin } from 'src/Lib';
 import { Bug, Project, TaskState } from 'src/Models';
 import { ProjectProvider } from 'src/Providers';
+import { CreateIssueModal } from 'src/Sections';
 
 export const ProjectPage = () => {
+  const [createIssueOpen, setCreateIssueOpen] = useState<boolean>(false);
   const [project, setProject] = useState<Project>(null!);
   const params = useParams();
+  const { user } = useAuth();
 
   const isIssueActive = (bug: Bug): boolean => {
     for (let i = 0; i < bug.tasks.length; i++) {
@@ -47,6 +51,10 @@ export const ProjectPage = () => {
 
   return (
     <ProjectProvider.Provider value={providerValues}>
+      <CreateIssueModal
+        isOpen={createIssueOpen}
+        onClose={() => setCreateIssueOpen(false)}
+      />
       <main className='w-full min-h-screen'>
         <Container className='pt-20 relative min-h-screen'>
           {project !== null ? (
@@ -57,9 +65,14 @@ export const ProjectPage = () => {
                     <H3 className='text-center md:text-left'>{project.name}</H3>
                   </div>
                   <div className='flex flex-row justify-end'>
-                    <Button className='h-min' theme='success'>
-                      + Create issue
-                    </Button>
+                    {userIsProjectAdmin(user, project) && (
+                      <Button
+                        onClick={() => setCreateIssueOpen(true)}
+                        className='h-min'
+                        theme='success'>
+                        + Create issue
+                      </Button>
+                    )}
                   </div>
                 </header>
                 <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-8 gap-8'>

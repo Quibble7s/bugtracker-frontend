@@ -1,5 +1,5 @@
 import { BASE_URL } from 'src/Constants';
-import { Project } from 'src/Models';
+import { Bug, BugPriority, Project } from 'src/Models';
 
 type ErrorResponse = { message: string; status: number };
 
@@ -133,34 +133,95 @@ export const LeaveProject = async (
         },
       },
     );
-    //Project deleted successfuly
+    //Left project successfuly
     if (response.status === 204) {
       callBack({ message: 'You left the project successfuly.', status: 204 });
       return;
     }
     //User project or member not found.
-    if (response.status === 204) {
+    if (response.status === 404) {
       const error: ErrorResponse = await response.json();
       callBack({ message: error.message, status: error.status });
     }
     //Any other error
+    callBack({
+      message: (await response.json()).title,
+      status: response.status,
+    });
   } catch {
     callBack({ message: "Couldn't reach the server.", status: 500 });
   }
 };
 
-export const UpdateTask = async (
+export const CreateIssue = async (
+  projectID: string,
+  {
+    description,
+    name,
+    priority,
+  }: { description: string; name: string; priority: BugPriority },
+  callBack: ({
+    message,
+    status,
+    issue,
+  }: {
+    message: string;
+    status: number;
+    issue: Bug;
+  }) => void,
+): Promise<void> => {
+  const token = GetToken();
+  try {
+    const response = await fetch(
+      `${BASE_URL}/api/v1/bug/project/${projectID}/create`,
+      {
+        method: 'POST',
+        headers: {
+          authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ description, name, priority }),
+      },
+    );
+    //Created successfuly.
+    if (response.status === 201) {
+      const bug: Bug = await response.json();
+      callBack({
+        message: 'Issue created successfuly.',
+        status: 201,
+        issue: bug,
+      });
+    }
+    //Not found error.
+    if (response.status === 404) {
+      const error: ErrorResponse = await response.json();
+      callBack({ message: error.message, status: error.status, issue: null! });
+    }
+    //Any other error.
+    callBack({
+      message: (await response.json()).title,
+      status: response.status,
+      issue: null!,
+    });
+  } catch {
+    callBack({
+      message: "Couldn't reach the server.",
+      status: 500,
+      issue: null!,
+    });
+  }
+};
+
+export const UpdateTaskState = async (
   {
     taskID,
     issueID,
     projectID,
-    description,
     state,
   }: {
     taskID: string;
     issueID: string;
     projectID: string;
-    description?: string;
     state?: 'pending' | 'inProgress' | 'completed';
   },
   callBack: ({ message, status }: { message: string; status: number }) => void,
@@ -168,14 +229,61 @@ export const UpdateTask = async (
   const token = GetToken();
   try {
     const response = await fetch(
-      `${BASE_URL}/api/v1/task/${taskID}/project/${projectID}/bug/${issueID}`,
+      `${BASE_URL}/api/v1/task/${taskID}/project/${projectID}/bug/${issueID}/state`,
       {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ description, state }),
+        body: JSON.stringify({ state }),
+      },
+    );
+    //Successfuly updated task
+    if (response.status === 204) {
+      callBack({ message: 'Updated task.', status: 204 });
+      return;
+    }
+    if (response.status === 404) {
+      const error: ErrorResponse = await response.json();
+      callBack({ message: error.message, status: error.status });
+      return;
+    }
+    //any other error
+    callBack({
+      message: (await response.json()).title,
+      status: response.status,
+    });
+  } catch (error) {
+    callBack({ message: "Coudn't reach the server.", status: 500 });
+  }
+};
+
+export const UpdateTaskDescription = async (
+  {
+    taskID,
+    issueID,
+    projectID,
+    description,
+  }: {
+    taskID: string;
+    issueID: string;
+    projectID: string;
+    description?: string;
+  },
+  callBack: ({ message, status }: { message: string; status: number }) => void,
+) => {
+  const token = GetToken();
+  try {
+    const response = await fetch(
+      `${BASE_URL}/api/v1/task/${taskID}/project/${projectID}/bug/${issueID}/description`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ description }),
       },
     );
     //Successfuly updated task

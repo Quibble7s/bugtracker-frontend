@@ -1,13 +1,17 @@
 import { useState } from 'react';
-import { InverseLerp, Lerp } from 'src/Lib';
+import { useAuth, useProject } from 'src/Hooks';
+import { InverseLerp, Lerp, userIsProjectAdmin } from 'src/Lib';
 import { Bug, Task, TaskState } from 'src/Models';
 import { IssueModal } from 'src/Sections';
 import { Image } from '../Image';
-import { Tooltip } from '../Layout';
+import { ThreeDotsDropDown, Tooltip } from '../Layout';
 import { PXS } from '../Typography';
+import './Styles/issuecard.css';
 
 export const IssueCard = ({ bug }: { bug: Bug }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { user } = useAuth();
+  const { project } = useProject();
 
   const theme = {
     normal: 'bg-green-500',
@@ -74,8 +78,17 @@ export const IssueCard = ({ bug }: { bug: Bug }) => {
         onClick={() => {
           setIsModalOpen(true);
         }}
-        className='w-full min-h-[250px] max-h-[250px] bg-themeLightGray rounded-md overflow-y-auto p-4 cursor-pointer'>
-        <div className='bg-light-blue w-full h-full rounded-md border-b border-themeGray/25 grid grid-rows-6 p-4'>
+        className='w-full min-h-[250px] max-h-[250px] bg-themeLightGray rounded-md overflow-y-auto p-4 cursor-pointer issue-container'>
+        <div className='bg-light-blue w-full h-full rounded-md border-b border-themeGray/25 grid grid-rows-6 p-4 relative'>
+          {userIsProjectAdmin(user, project) && (
+            <div className='absolute right-[4px] top-[16px] opacity-0 transition-opacity duration-200 issue-drop'>
+              <ThreeDotsDropDown className='min-w-[140px]'>
+                <PXS className='p-2 border border-red-500 bg-red-500/20 text-red-500 rounded-md'>
+                  Delete issue.
+                </PXS>
+              </ThreeDotsDropDown>
+            </div>
+          )}
           <div className='row-span-4'></div>
           <div className='row-span-2 flex flex-col justify-between'>
             <div>

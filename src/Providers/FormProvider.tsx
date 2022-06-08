@@ -13,10 +13,14 @@ interface Props {
   onSubmit: ({ ...data }: any) => void;
   onInvalid?: ({ id, value }: { id: string; value: string | boolean }) => void;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSelectChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
+  onTextAreaChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 interface FromContextType {
   onChangeHandler: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSelectChangeHandler: (e: ChangeEvent<HTMLSelectElement>) => void;
+  onTextAreaChangeHandler?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   onInvalidHandler: (e: InvalidEvent<HTMLInputElement>) => void;
 }
 
@@ -29,6 +33,8 @@ export const FormProvider = ({
   onSubmit,
   onInvalid,
   onChange,
+  onSelectChange,
+  onTextAreaChange,
 }: Props) => {
   const [data, setData] = useState({});
 
@@ -42,6 +48,20 @@ export const FormProvider = ({
       type === 'checkbox' || type === 'radio'
         ? e.target.checked
         : e.target.value;
+    setData({ ...data, [id]: value });
+  };
+
+  const onSelectChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    if (onSelectChange !== undefined) onSelectChange(e);
+    const id = e.target.id;
+    const value = e.target.value;
+    setData({ ...data, [id]: value });
+  };
+
+  const onTextAreaChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    if (onTextAreaChange !== undefined) onTextAreaChange(e);
+    const id = e.target.id;
+    const value = e.target.value.replace('\n', '');
     setData({ ...data, [id]: value });
   };
 
@@ -62,7 +82,12 @@ export const FormProvider = ({
     onSubmit(data);
   };
 
-  const values = { onChangeHandler, onInvalidHandler };
+  const values = {
+    onChangeHandler,
+    onInvalidHandler,
+    onSelectChangeHandler,
+    onTextAreaChangeHandler,
+  };
 
   return (
     <form className={className} onSubmit={onSubmitHandler}>

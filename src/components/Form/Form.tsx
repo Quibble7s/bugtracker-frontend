@@ -7,12 +7,16 @@ interface Props {
   onSubmit: ({ ...data }: any) => void;
   onInvalid?: ({ id, value }: { id: string; value: string | boolean }) => void;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSelectChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
+  onTextAreaChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 export const Form = ({
   onSubmit,
   onInvalid,
   onChange,
+  onSelectChange,
+  onTextAreaChange,
   children,
   className = '',
 }: Props) => {
@@ -21,7 +25,9 @@ export const Form = ({
       className={className}
       onSubmit={onSubmit}
       onInvalid={onInvalid}
-      onChange={onChange}>
+      onChange={onChange}
+      onSelectChange={onSelectChange}
+      onTextAreaChange={onTextAreaChange}>
       {children}
     </FormProvider>
   );

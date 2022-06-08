@@ -26,7 +26,7 @@ export const DashboardPage = () => {
   }, []);
 
   const getProjectCards = () => {
-    return projects.length > 0 ? (
+    return projects?.length > 0 && projects !== null ? (
       <div className='w-full mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
         {projects
           .filter((project) => {

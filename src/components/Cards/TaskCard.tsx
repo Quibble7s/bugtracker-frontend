@@ -1,11 +1,13 @@
-import { useAlert, useProject } from 'src/Hooks';
-import { UpdateTask } from 'src/Lib';
-import { Bug, Task, TaskState } from 'src/Models';
+import { useAlert, useAuth, useProject } from 'src/Hooks';
+import { UpdateTaskState, userIsProjectAdmin } from 'src/Lib';
+import { Bug, Member, ProjectRole, Task, TaskState } from 'src/Models';
 import { Image } from '../Image';
 import { PXS } from '../Typography';
+import './Styles/taskcard.css';
 
 export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
   const { project, setProject } = useProject();
+  const { user } = useAuth();
   const { alert } = useAlert();
 
   const text = {
@@ -22,7 +24,7 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
 
   const handleOnChange = async (): Promise<void> => {
     const state = task.state === TaskState.completed ? 'pending' : 'completed';
-    await UpdateTask(
+    await UpdateTaskState(
       { taskID: task.id, projectID: project.id, issueID: issue.id, state },
       ({ message, status }) => {
         if (status === 204) {
@@ -56,7 +58,8 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
   return (
     <div
       className={`w-full bg-light-blue rounded-md items-center justify-between transition-colors duration-200 relative`}>
-      <div className={`rounded-md flex flex-row items-start gap-2`}>
+      <div
+        className={`rounded-md flex flex-row items-start gap-2 description-container`}>
         <button
           onClick={() => {
             handleOnChange();
@@ -70,6 +73,24 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
             }`}>
             {task.description}
           </PXS>
+          {userIsProjectAdmin(user, project) && (
+            <div className='flex flex-row items-center justify-center w-max gap-4 opacity-0 transition-opacity duration-200 buttons'>
+              <button>
+                <Image
+                  width={16}
+                  height={16}
+                  src='/static/images/checkmark-checked.svg'
+                />
+              </button>
+              <button>
+                <Image
+                  width={16}
+                  height={16}
+                  src='/static/images/checkmark-unchecked.svg'
+                />
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,0 +1,3 @@
+.issue-container:hover > div > .issue-drop {
+  opacity: 1;
+}
