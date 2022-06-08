@@ -2,6 +2,7 @@ import { useAlert, useAuth, useProject } from 'src/Hooks';
 import { UpdateTaskState, userIsProjectAdmin } from 'src/Lib';
 import { Bug, Member, ProjectRole, Task, TaskState } from 'src/Models';
 import { Image } from '../Image';
+import { Tooltip } from '../Layout';
 import { PXS } from '../Typography';
 import './Styles/taskcard.css';
 
@@ -60,12 +61,17 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
       className={`w-full bg-light-blue rounded-md items-center justify-between transition-colors duration-200 relative`}>
       <div
         className={`rounded-md flex flex-row items-start gap-2 description-container`}>
-        <button
-          onClick={() => {
-            handleOnChange();
-          }}>
-          <Image width={16} height={16} src={image[task.state]} />
-        </button>
+        <Tooltip
+          text={`Mark as ${
+            task.state === 'completed' ? 'pending.' : 'completed.'
+          }`}>
+          <button
+            onClick={() => {
+              handleOnChange();
+            }}>
+            <Image width={16} height={16} src={image[task.state]} />
+          </button>
+        </Tooltip>
         <div className='w-full'>
           <PXS
             className={`text-themeGray text-left max-w-[900px] ${
@@ -74,21 +80,21 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
             {task.description}
           </PXS>
           {userIsProjectAdmin(user, project) && (
-            <div className='flex flex-row items-center justify-center w-max gap-4 opacity-0 transition-opacity duration-200 buttons'>
-              <button>
-                <Image
-                  width={16}
-                  height={16}
-                  src='/static/images/checkmark-checked.svg'
-                />
-              </button>
-              <button>
-                <Image
-                  width={16}
-                  height={16}
-                  src='/static/images/checkmark-unchecked.svg'
-                />
-              </button>
+            <div className='flex flex-row items-center justify-center w-max gap-4 mt-2 opacity-0 transition-opacity duration-200 buttons'>
+              <Tooltip text='Edit'>
+                <button>
+                  <Image width={16} height={16} src='/static/images/edit.svg' />
+                </button>
+              </Tooltip>
+              <Tooltip text='Delete'>
+                <button>
+                  <Image
+                    width={16}
+                    height={16}
+                    src='/static/images/trash.svg'
+                  />
+                </button>
+              </Tooltip>
             </div>
           )}
         </div>

@@ -1,5 +1,6 @@
 import { Button } from 'src/Components/Buttons';
 import { Form, Input, Option, Select, TextArea } from 'src/Components/Form';
+import { Image } from 'src/Components/Image';
 import { Modal } from 'src/Components/Layout';
 import { H3 } from 'src/Components/Typography';
 import { useAlert, useProject } from 'src/Hooks';
@@ -37,10 +38,20 @@ export const CreateIssueModal = ({ isOpen, onClose }: Props) => {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <H3 className='text-themeBlack text-center'>Create an issue</H3>
+      <H3 className='text-themeBlack text-center'>Add an issue</H3>
       <div className='grid grid-cols-1 lg:grid-cols-2 mt-16'>
         <div>
-          <Form className='flex flex-col gap-8' onSubmit={onSubmitHandler}>
+          <Image
+            className='mb-8 mx-auto max-w-[200px] md:max-w-[350px] lg:max-w-[420px] lg:mb-0'
+            width={512}
+            height={512}
+            src='/static/images/create-2.svg'
+          />
+        </div>
+        <div>
+          <Form
+            className='flex flex-col gap-8 my-auto'
+            onSubmit={onSubmitHandler}>
             <Input
               className=''
               id='name'
@@ -67,7 +78,6 @@ export const CreateIssueModal = ({ isOpen, onClose }: Props) => {
             </Button>
           </Form>
         </div>
-        <div></div>
       </div>
     </Modal>
   );
