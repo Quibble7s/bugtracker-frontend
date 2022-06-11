@@ -18,6 +18,7 @@ export const Lerp = (min: number, max: number, step: number) => {
  * @returns The inverse of the interpolated value. Example: InverseLerp(0, 255, 255) == 1.
  */
 export const InverseLerp = (min: number, max: number, value: number) => {
+  value = Clamp(min, max, value);
   return Clamp01((value - min) / (max - min));
 };
 
