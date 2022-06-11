@@ -55,13 +55,13 @@ export const IssueCard = ({ bug }: { bug: Bug }) => {
   };
 
   const getProgressBarColor = () => {
-    const green = { r: 34, g: 197, b: 94 };
-    const red = { r: 239, g: 68, b: 68 };
+    const targetColor = { r: 34, g: 197, b: 94 };
+    const baseColor = { r: 239, g: 68, b: 68 };
 
     const step = InverseLerp(0, 100, getCompletedPercentage());
-    const r = Lerp(red.r, green.r, step);
-    const g = Lerp(red.g, green.g, step);
-    const b = Lerp(red.b, green.b, step);
+    const r = Lerp(baseColor.r, targetColor.r, step);
+    const g = Lerp(baseColor.g, targetColor.g, step);
+    const b = Lerp(baseColor.b, targetColor.b, step);
 
     return `rgb(${r},${g},${b})`;
   };
@@ -78,7 +78,7 @@ export const IssueCard = ({ bug }: { bug: Bug }) => {
         onClick={() => {
           setIsModalOpen(true);
         }}
-        className='w-full min-h-[250px] max-h-[250px] bg-themeLightGray rounded-md overflow-y-auto p-4 cursor-pointer issue-container'>
+        className='w-full min-h-[250px] max-h-[250px] bg-themeLightGray rounded-md overflow-y-auto p-4 cursor-pointer issue-container overflow-x-hidden'>
         <div className='bg-light-blue w-full h-full rounded-md border-b border-themeGray/25 grid grid-rows-6 p-4 relative'>
           {userIsProjectAdmin(user, project) && (
             <div className='absolute right-[4px] top-[16px] opacity-0 transition-opacity duration-200 issue-drop'>
