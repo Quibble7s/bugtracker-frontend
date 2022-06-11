@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Button } from 'src/Components/Buttons';
 import { TaskCard } from 'src/Components/Cards';
 import { Image } from 'src/Components/Image';
@@ -6,6 +7,7 @@ import { H4, PXS } from 'src/Components/Typography';
 import { useAuth, useProject } from 'src/Hooks';
 import { userIsProjectAdmin } from 'src/Lib';
 import { Bug } from 'src/Models';
+import { AddTaskFrom } from './AddTaskFrom';
 
 interface Props {
   isOpen: boolean;
@@ -14,6 +16,7 @@ interface Props {
 }
 
 export const IssueModal = ({ isOpen, onClose, bug }: Props) => {
+  const [isAddTaskActive, setIsAddTaskActive] = useState<boolean>(false);
   const { user } = useAuth();
   const { project } = useProject();
 
@@ -30,15 +33,22 @@ export const IssueModal = ({ isOpen, onClose, bug }: Props) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      onClose={() => {
+        onClose();
+        setIsAddTaskActive(false);
+      }}>
       <div className='flex flex-row gap-2'>
         <Image width={16} height={16} src='/static/images/title.svg' />
         <H4 className='text-themeGray'>{bug.name}</H4>
       </div>
       <div className='w-full mt-4'>
-        <Tooltip text={`${priority[bug.priority]}`}>
+        <Tooltip
+          className='min-w-[100px] max-w-[6.25%]'
+          text={`${priority[bug.priority]}`}>
           <span
-            className={`block w-[6.25%] min-h-[6px] rounded-xl ${
+            className={`block w-full min-h-[6px] rounded-xl ${
               theme[bug.priority]
             }`}
           />
@@ -57,8 +67,16 @@ export const IssueModal = ({ isOpen, onClose, bug }: Props) => {
         {bug.tasks.map((task) => (
           <TaskCard task={task} issue={bug} />
         ))}
-        {userIsProjectAdmin(user, project) && (
-          <Button className='w-max mt-2' theme='success'>
+        <AddTaskFrom
+          isActive={isAddTaskActive}
+          setIsActive={setIsAddTaskActive}
+          bug={bug}
+        />
+        {userIsProjectAdmin(user, project) && !isAddTaskActive && (
+          <Button
+            onClick={() => setIsAddTaskActive(true)}
+            className='w-max mt-2'
+            theme='success'>
             +Add task
           </Button>
         )}

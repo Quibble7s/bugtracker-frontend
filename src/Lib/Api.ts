@@ -1,5 +1,5 @@
 import { BASE_URL } from 'src/Constants';
-import { Bug, BugPriority, Project } from 'src/Models';
+import { Bug, BugPriority, Project, Task } from 'src/Models';
 
 type ErrorResponse = { message: string; status: number };
 
@@ -208,6 +208,61 @@ export const CreateIssue = async (
       message: "Couldn't reach the server.",
       status: 500,
       issue: null!,
+    });
+  }
+};
+
+export const CreateTask = async (
+  data: { description: string },
+  projectID: string,
+  bugID: string,
+  callBack: ({
+    message,
+    status,
+    task,
+  }: {
+    message: string;
+    status: number;
+    task: Task;
+  }) => void,
+): Promise<void> => {
+  const token = GetToken();
+  try {
+    const response = await fetch(
+      `${BASE_URL}/api/v1/task/project/${projectID}/bug/${bugID}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      },
+    );
+    //Successfuly created
+    if (response.status === 201) {
+      const createdTask: Task = await response.json();
+      callBack({
+        message: 'Task successfuly added.',
+        status: 201,
+        task: createdTask,
+      });
+      return;
+    }
+    //Any 404 error
+    if (response.status === 404) {
+      const error: ErrorResponse = await response.json();
+      callBack({ message: error.message, status: error.status, task: null! });
+      return;
+    }
+    //Any other error
+    const error = await response.json();
+    callBack({ message: error.title, status: response.status, task: null! });
+  } catch {
+    callBack({
+      message: "Coundn't reach the server.",
+      status: 500,
+      task: null!,
     });
   }
 };

@@ -1,12 +1,14 @@
+import { useState } from 'react';
 import { useAlert, useAuth, useProject } from 'src/Hooks';
 import { UpdateTaskState, userIsProjectAdmin } from 'src/Lib';
-import { Bug, Member, ProjectRole, Task, TaskState } from 'src/Models';
+import { Bug, Task, TaskState } from 'src/Models';
 import { Image } from '../Image';
-import { Tooltip } from '../Layout';
+import { ThreeDotsDropDown, Tooltip } from '../Layout';
 import { PXS } from '../Typography';
 import './Styles/taskcard.css';
 
 export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
+  const [status, setStatus] = useState<TaskState>(task.state);
   const { project, setProject } = useProject();
   const { user } = useAuth();
   const { alert } = useAlert();
@@ -25,11 +27,11 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
 
   const handleOnChange = async (): Promise<void> => {
     const state = task.state === TaskState.completed ? 'pending' : 'completed';
+    setStatus(TaskState[state]);
     await UpdateTaskState(
       { taskID: task.id, projectID: project.id, issueID: issue.id, state },
       ({ message, status }) => {
         if (status === 204) {
-          alert('Task state updated.', 'success', 2.5);
           updateProjectState(state);
           return;
         }
@@ -57,11 +59,11 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
   };
 
   return (
-    <div
-      className={`w-full bg-light-blue rounded-md items-center justify-between transition-colors duration-200 relative`}>
+    <div className={`w-full items-center justify-between`}>
       <div
         className={`rounded-md flex flex-row items-start gap-2 description-container`}>
         <Tooltip
+          className='mt-[6px]'
           text={`Mark as ${
             task.state === 'completed' ? 'pending.' : 'completed.'
           }`}>
@@ -69,34 +71,26 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
             onClick={() => {
               handleOnChange();
             }}>
-            <Image width={16} height={16} src={image[task.state]} />
+            <Image width={16} height={16} src={image[status]} />
           </button>
         </Tooltip>
-        <div className='w-full'>
+        <div className='w-full hover:bg-themeLightGray relative'>
           <PXS
-            className={`text-themeGray text-left max-w-[900px] ${
-              text[task.state]
-            }`}>
+            className={`text-themeGray text-left max-w-[900px] p-2 ${text[status]}`}>
             {task.description}
           </PXS>
-          {userIsProjectAdmin(user, project) && (
-            <div className='flex flex-row items-center justify-center w-max gap-4 mt-2 opacity-0 transition-opacity duration-200 buttons'>
-              <Tooltip text='Edit'>
-                <button>
-                  <Image width={16} height={16} src='/static/images/edit.svg' />
+          <div className='absolute right-[-8px] lg:right-0 top-[6px] opacity-0 buttons'>
+            {userIsProjectAdmin(user, project) && (
+              <ThreeDotsDropDown>
+                <button className='p-2 bg-green-500/20 border border-green-500 rounded-md w-full'>
+                  <PXS className='text-left text-green-500'>Edit</PXS>
                 </button>
-              </Tooltip>
-              <Tooltip text='Delete'>
-                <button>
-                  <Image
-                    width={16}
-                    height={16}
-                    src='/static/images/trash.svg'
-                  />
+                <button className='p-2 bg-red-500/20 border border-red-500 rounded-md w-full'>
+                  <PXS className='text-left text-red-500'>Delete</PXS>
                 </button>
-              </Tooltip>
-            </div>
-          )}
+              </ThreeDotsDropDown>
+            )}
+          </div>
         </div>
       </div>
     </div>
