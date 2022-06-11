@@ -6,6 +6,7 @@
  * @returns The interpolated value. Example: Lerp(0, 10, 0.5) == 5.
  */
 export const Lerp = (min: number, max: number, step: number) => {
+  step = Clamp01(step);
   return (1 - step) * min + step * max;
 };
 
