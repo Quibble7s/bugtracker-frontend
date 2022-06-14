@@ -50,6 +50,14 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
   };
 
   const handleOnEdit = async (data: any): Promise<void> => {
+    if (
+      data.description === task.description ||
+      data.description === '' ||
+      data.description === undefined
+    ) {
+      alert('You need to make a change.', 'error', 2.5);
+      return;
+    }
     setIsLoading(true);
     await UpdateTaskDescription(
       {
