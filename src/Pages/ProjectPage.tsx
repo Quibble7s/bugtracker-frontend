@@ -68,7 +68,7 @@ export const ProjectPage = () => {
                     {userIsProjectAdmin(user, project) && (
                       <Button
                         onClick={() => setCreateIssueOpen(true)}
-                        className='h-min'
+                        className='w-full h-min mt-8 md:mt-0 md:w-max'
                         theme='success'>
                         + Create issue
                       </Button>
