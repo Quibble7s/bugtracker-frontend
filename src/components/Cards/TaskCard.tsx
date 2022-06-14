@@ -97,6 +97,7 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
         className='w-full flex flex-col lg:flex-row lg:items-center gap-2'
         onSubmit={handleOnEdit}>
         <TextArea
+          defaultValue={task.description}
           className='w-[min(100%,900px)]'
           id='description'
           name='description'
