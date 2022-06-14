@@ -19,7 +19,7 @@ export const DropDown = ({
   return (
     <div
       ref={dropDownRef}
-      className={`absolute rounded-md min-w-[120px] max-w-[400px] bg-light-blue shadow-md right-0 
+      className={`absolute rounded-md min-w-max max-w-[400px] bg-light-blue shadow-md right-0 
       p-4 flex flex-col items-center gap-2 origin-top-right transition-all duration-200
       ${dropDownThemes[state]} ${className}`}>
       {children}
