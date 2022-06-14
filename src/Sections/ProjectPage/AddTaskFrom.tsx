@@ -59,7 +59,7 @@ export const AddTaskFrom = ({ isActive, setIsActive, bug }: Props) => {
         </div>
       ) : (
         <div>
-          <Button className='w-max' type='submit' theme='secondary'>
+          <Button className='w-max' type='submit' theme='success'>
             +
           </Button>
           <Button
