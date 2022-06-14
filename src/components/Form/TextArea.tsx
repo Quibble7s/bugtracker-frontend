@@ -6,6 +6,8 @@ interface Props {
   className?: string;
   placeholder?: string;
   requiered?: boolean;
+  value?: string;
+  defaultValue?: string;
 }
 
 export const TextArea = ({
@@ -14,10 +16,14 @@ export const TextArea = ({
   className = '',
   placeholder = '',
   requiered = false,
+  defaultValue = '',
+  value = '',
 }: Props) => {
   const { onTextAreaChangeHandler } = useForm();
   return (
     <textarea
+      defaultValue={defaultValue}
+      value={value}
       onChange={onTextAreaChangeHandler}
       className={`rounded-md border resize-none border-secondary/30 hover:border-secondary/50 focus:border-secondary 
       outline-none p-4 bg-light-blue ${className}`}

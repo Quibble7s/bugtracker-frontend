@@ -8,6 +8,8 @@ interface Props {
   className?: string;
   requiered?: boolean;
   placeholder?: string;
+  value?: string;
+  defaultValue?: string;
 }
 
 export const Input = ({
@@ -18,6 +20,8 @@ export const Input = ({
   className = '',
   placeholder = '',
   requiered = false,
+  defaultValue = '',
+  value = '',
 }: Props) => {
   const { onChangeHandler, onInvalidHandler } = useForm();
   return (
@@ -26,6 +30,8 @@ export const Input = ({
         {placeholder}
       </label>
       <input
+        defaultValue={defaultValue}
+        value={value}
         onChange={onChangeHandler}
         onInvalid={onInvalidHandler}
         className={`outline-none border border-secondary/30 rounded-md p-[13px] font-mulish tex-[16px] 
