@@ -54,7 +54,7 @@ export const AddTaskFrom = ({ isActive, setIsActive, bug }: Props) => {
         requiered
       />
       {isLoading ? (
-        <div className='bg-secondary p-4 rounded-md h-full'>
+        <div className='bg-secondary p-4 rounded-md h-full cursor-not-allowed'>
           <ActionLoadingAnimation />
         </div>
       ) : (
