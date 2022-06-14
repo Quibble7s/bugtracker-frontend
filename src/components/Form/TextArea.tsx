@@ -23,7 +23,7 @@ export const TextArea = ({
   return (
     <textarea
       defaultValue={defaultValue}
-      value={value ?? null!}
+      value={value ?? undefined!}
       onChange={onTextAreaChangeHandler}
       className={`rounded-md border resize-none border-secondary/30 hover:border-secondary/50 focus:border-secondary 
       outline-none p-4 bg-light-blue ${className}`}
