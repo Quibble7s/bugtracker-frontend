@@ -77,7 +77,7 @@ export const ProjectPage = () => {
                 </header>
                 <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-8 gap-8'>
                   {project.bugs.map((bug) => (
-                    <IssueCard bug={bug} />
+                    <IssueCard key={bug.id} bug={bug} />
                   ))}
                 </div>
               </div>

@@ -1,17 +1,20 @@
 import { useState } from 'react';
-import { useAuth, useProject } from 'src/Hooks';
-import { InverseLerp, Lerp, userIsProjectAdmin } from 'src/Lib';
+import { useAlert, useAuth, useProject } from 'src/Hooks';
+import { DeleteIssue, InverseLerp, Lerp, userIsProjectAdmin } from 'src/Lib';
 import { Bug, Task, TaskState } from 'src/Models';
 import { IssueModal } from 'src/Sections';
+import { Button } from '../Buttons';
 import { Image } from '../Image';
-import { ThreeDotsDropDown, Tooltip } from '../Layout';
-import { PXS } from '../Typography';
+import { Modal, ThreeDotsDropDown, Tooltip } from '../Layout';
+import { H3, PXS } from '../Typography';
 import './Styles/issuecard.css';
 
 export const IssueCard = ({ bug }: { bug: Bug }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const { alert } = useAlert();
   const { user } = useAuth();
-  const { project } = useProject();
+  const { project, setProject } = useProject();
 
   const theme = {
     normal: 'bg-green-500',
@@ -66,6 +69,21 @@ export const IssueCard = ({ bug }: { bug: Bug }) => {
     return `rgb(${r},${g},${b})`;
   };
 
+  const handleOnDelete = async () => {
+    await DeleteIssue(bug.id, project.id, ({ message, status }) => {
+      if (status === 204) {
+        alert(message, 'success', 2.5);
+        setProject({
+          ...project,
+          bugs: project.bugs.filter((b) => b.id !== bug.id),
+        });
+        return;
+      }
+      alert(message, 'error', 2.5);
+      return;
+    });
+  };
+
   return (
     <>
       <IssueModal
@@ -73,6 +91,26 @@ export const IssueCard = ({ bug }: { bug: Bug }) => {
         onClose={() => setIsModalOpen(false)}
         bug={bug}
       />
+      <Modal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}>
+        {' '}
+        <H3 className='text-center'>
+          ¿Are you sure you want to delete this issue?
+        </H3>
+        <Image
+          className='mx-auto mt-8'
+          width={512}
+          height={512}
+          src='/static/images/delete.svg'
+        />
+        <div className='grid gird-cols-1 md:grid-cols-2 gap-8 mt-8'>
+          <Button theme='light'>Cancel</Button>
+          <Button onClick={handleOnDelete} theme='error'>
+            Delete
+          </Button>
+        </div>
+      </Modal>
       <div
         role='button'
         onClick={() => {
@@ -83,9 +121,11 @@ export const IssueCard = ({ bug }: { bug: Bug }) => {
           {userIsProjectAdmin(user, project) && (
             <div className='absolute right-[4px] top-[16px] opacity-0 transition-opacity duration-200 issue-drop'>
               <ThreeDotsDropDown className='min-w-[140px]'>
-                <PXS className='p-2 border border-red-500 bg-red-500/20 text-red-500 rounded-md'>
-                  Delete issue
-                </PXS>
+                <button onClick={() => setIsDeleteModalOpen(true)}>
+                  <PXS className='p-2 border border-red-500 bg-red-500/20 text-red-500 rounded-md'>
+                    Delete issue
+                  </PXS>
+                </button>
               </ThreeDotsDropDown>
             </div>
           )}

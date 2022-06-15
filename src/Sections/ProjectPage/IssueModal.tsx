@@ -65,7 +65,7 @@ export const IssueModal = ({ isOpen, onClose, bug }: Props) => {
       </div>
       <div className='flex flex-col mt-4 gap-4'>
         {bug.tasks.map((task) => (
-          <TaskCard task={task} issue={bug} />
+          <TaskCard key={task.id} task={task} issue={bug} />
         ))}
         <AddTaskFrom
           isActive={isAddTaskActive}

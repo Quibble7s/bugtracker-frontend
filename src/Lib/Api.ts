@@ -212,6 +212,38 @@ export const CreateIssue = async (
   }
 };
 
+export const DeleteIssue = async (
+  issueID: string,
+  projectID: string,
+  callBack: ({ message, status }: { message: string; status: number }) => void,
+): Promise<void> => {
+  const token = GetToken();
+  try {
+    const response = await fetch(
+      `${BASE_URL}/api/v1/bug/${issueID}/project/${projectID}/delete`,
+      { method: 'DELETE', headers: { authorization: `Bearer ${token}` } },
+    );
+    //Issue deleted successfuly
+    if (response.status === 204) {
+      callBack({ message: 'Issue successfuly deleted.', status: 204 });
+      return;
+    }
+    //Any 404
+    if (response.status === 404) {
+      const error: ErrorResponse = await response.json();
+      callBack({ message: error.message, status: error.status });
+      return;
+    }
+    //Any other error
+    callBack({
+      message: (await response.json()).title,
+      status: response.status,
+    });
+  } catch {
+    callBack({ message: "Coudn't reach the server.", status: 500 });
+  }
+};
+
 export const CreateTask = async (
   data: { description: string },
   projectID: string,
