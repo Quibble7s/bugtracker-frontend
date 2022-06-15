@@ -84,7 +84,7 @@ export const IssueCard = ({ bug }: { bug: Bug }) => {
             <div className='absolute right-[4px] top-[16px] opacity-0 transition-opacity duration-200 issue-drop'>
               <ThreeDotsDropDown className='min-w-[140px]'>
                 <PXS className='p-2 border border-red-500 bg-red-500/20 text-red-500 rounded-md'>
-                  Delete issue.
+                  Delete issue
                 </PXS>
               </ThreeDotsDropDown>
             </div>
