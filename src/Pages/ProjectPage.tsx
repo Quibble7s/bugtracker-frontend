@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Button } from 'src/Components/Buttons';
 import { IssueCard } from 'src/Components/Cards';
 import { Container } from 'src/Components/Layout';
-import { H3, H4 } from 'src/Components/Typography';
+import { H3, PXS } from 'src/Components/Typography';
 import { useAuth } from 'src/Hooks';
 import { GetProject, userIsProjectAdmin } from 'src/Lib';
 import { Bug, Project, TaskState } from 'src/Models';
@@ -15,27 +15,6 @@ export const ProjectPage = () => {
   const [project, setProject] = useState<Project>(null!);
   const params = useParams();
   const { user } = useAuth();
-
-  const isIssueActive = (bug: Bug): boolean => {
-    for (let i = 0; i < bug.tasks.length; i++) {
-      const task = bug.tasks[i];
-      if (task.state !== TaskState.completed) {
-        return true;
-      }
-    }
-    return false;
-  };
-
-  const getActiveIssueCount = (): number => {
-    let activeCount: number = 0;
-    for (let i = 0; i < project.bugs.length; i++) {
-      const bug: Bug = project.bugs[i];
-      if (isIssueActive(bug)) {
-        activeCount++;
-      }
-    }
-    return activeCount;
-  };
 
   useEffect(() => {
     const getProject = async () => {
@@ -63,6 +42,9 @@ export const ProjectPage = () => {
                 <header className='grid grid-cols-1 md:grid-cols-2'>
                   <div>
                     <H3 className='text-center md:text-left'>{project.name}</H3>
+                    <PXS className='text-themeGray mt-4 max-h-[150px] overflow-y-auto'>
+                      {project.description}
+                    </PXS>
                   </div>
                   <div className='flex flex-row justify-end'>
                     {userIsProjectAdmin(user, project) && (
