@@ -21,7 +21,7 @@ export const Input = ({
   placeholder = '',
   requiered = false,
   defaultValue = '',
-  value = '',
+  value,
 }: Props) => {
   const { onChangeHandler, onInvalidHandler } = useForm();
   return (
