@@ -52,7 +52,7 @@ export const ProjectPage = () => {
                         onClick={() => setCreateIssueOpen(true)}
                         className='w-full h-min mt-8 md:mt-0 md:w-max'
                         theme='success'>
-                        + Create issue
+                        + Add issue
                       </Button>
                     )}
                   </div>
