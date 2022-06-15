@@ -360,3 +360,40 @@ export const UpdateTaskDescription = async (
     callBack({ message: "Coudn't reach the server.", status: 500 });
   }
 };
+
+export const DeleteTask = async (
+  {
+    taskID,
+    issueID,
+    projectID,
+  }: {
+    taskID: string;
+    issueID: string;
+    projectID: string;
+  },
+  callBack: ({ message, status }: { message: string; status: number }) => void,
+) => {
+  const token = GetToken();
+  try {
+    const response = await fetch(
+      `${BASE_URL}/api/v1/task/${taskID}/project/${projectID}/bug/${issueID}/delete`,
+      { method: 'DELETE', headers: { authorization: `Bearer ${token}` } },
+    );
+    //Successfuly deleted.
+    if (response.status === 204) {
+      callBack({ message: 'Task successfuly deleted.', status: 204 });
+      return;
+    }
+    //Any 404
+    if (response.status === 404) {
+      const error: ErrorResponse = await response.json();
+      callBack({ message: error.message, status: error.status });
+      return;
+    }
+    //Any other error
+    const error = await response.json();
+    callBack({ message: error.title, status: response.status });
+  } catch {
+    callBack({ message: "Couldn't reach the server.", status: 500 });
+  }
+};

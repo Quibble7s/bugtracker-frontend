@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAlert, useAuth, useProject } from 'src/Hooks';
 import {
+  DeleteTask,
   UpdateTaskDescription,
   UpdateTaskState,
   userIsProjectAdmin,
@@ -8,7 +9,7 @@ import {
 import { Bug, Task, TaskState } from 'src/Models';
 import { ActionLoadingAnimation } from '../Animations';
 import { Button } from '../Buttons';
-import { Form, Input, TextArea } from '../Form';
+import { Form, TextArea } from '../Form';
 import { Image } from '../Image';
 import { ThreeDotsDropDown, Tooltip } from '../Layout';
 import { PXS } from '../Typography';
@@ -42,6 +43,20 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
       ({ message, status }) => {
         if (status === 204) {
           updateTaskInProject('state', state);
+          return;
+        }
+        alert(message, 'error', 2.5);
+      },
+    );
+  };
+
+  const handleOnDelete = async (): Promise<void> => {
+    await DeleteTask(
+      { taskID: task.id, issueID: issue.id, projectID: project.id },
+      ({ message, status }) => {
+        if (status === 204) {
+          updateProjectWithoutDeletedTask();
+          alert(message, 'success', 2.5);
           return;
         }
         alert(message, 'error', 2.5);
@@ -97,7 +112,15 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
     setProject({ ...project, bugs: [...updatedIssues] });
   };
 
-  useEffect(() => {}, []);
+  const updateProjectWithoutDeletedTask = () => {
+    const updatedIssues: Bug[] = project.bugs.map((bug) => {
+      if (bug.id === issue.id) {
+        return { ...bug, tasks: bug.tasks.filter((tsk) => tsk.id !== task.id) };
+      }
+      return bug;
+    });
+    setProject({ ...project, bugs: updatedIssues });
+  };
 
   if (editMode) {
     return (
@@ -159,7 +182,9 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
                   className='p-2 bg-green-500/20 border border-green-500 rounded-md w-full'>
                   <PXS className='text-left text-green-500'>Edit</PXS>
                 </button>
-                <button className='p-2 bg-red-500/20 border border-red-500 rounded-md w-full'>
+                <button
+                  onClick={handleOnDelete}
+                  className='p-2 bg-red-500/20 border border-red-500 rounded-md w-full'>
                   <PXS className='text-left text-red-500'>Delete</PXS>
                 </button>
               </ThreeDotsDropDown>
