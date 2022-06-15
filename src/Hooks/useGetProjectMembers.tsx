@@ -32,7 +32,9 @@ export const useGetProjectMembers = (project: Project) => {
     }
     if (project.members.length > maxAvatars) {
       elements.push(
-        <Tooltip text={`And ${project.members.length - maxAvatars} more...`}>
+        <Tooltip
+          key={`members lenght`}
+          text={`And ${project.members.length - maxAvatars} more...`}>
           <PXS
             className='w-[24px] h-[24px] flex flex-row items-center justify-center 
             text-[10px] bg-themeGray text-themeLightGray text-center rounded-[100%]'>

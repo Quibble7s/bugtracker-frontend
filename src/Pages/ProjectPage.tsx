@@ -6,7 +6,7 @@ import { Container } from 'src/Components/Layout';
 import { H3, PXS } from 'src/Components/Typography';
 import { useAuth } from 'src/Hooks';
 import { GetProject, userIsProjectAdmin } from 'src/Lib';
-import { Bug, Project, TaskState } from 'src/Models';
+import { Project } from 'src/Models';
 import { ProjectProvider } from 'src/Providers';
 import { CreateIssueModal } from 'src/Sections';
 
@@ -57,7 +57,7 @@ export const ProjectPage = () => {
                     )}
                   </div>
                 </header>
-                <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-8 gap-8'>
+                <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8 gap-8'>
                   {project.bugs.map((bug) => (
                     <IssueCard key={bug.id} bug={bug} />
                   ))}
