@@ -122,7 +122,12 @@ export const IssueCard = ({ bug }: { bug: Bug }) => {
             <div className='absolute right-[4px] top-[16px] opacity-0 transition-opacity duration-200 issue-drop'>
               <ThreeDotsDropDown className='min-w-[140px]'>
                 <button onClick={() => setIsDeleteModalOpen(true)}>
-                  <PXS className='p-2 border border-red-500 bg-red-500/20 text-red-500 rounded-md'>
+                  <PXS className='p-2 border border-red-500 bg-red-500/20 text-red-500 rounded-md flex flex-row items-center gap-2'>
+                    <Image
+                      width={16}
+                      height={16}
+                      src='/static/images/trash.svg'
+                    />
                     Delete issue
                   </PXS>
                 </button>

@@ -28,7 +28,7 @@ export const NavDropDown = () => {
           />
           <PS className='text-themeGray'>{user.userName}</PS>
           <DropDown state={dropDownState}>
-            <DropDownMenu className='flex flex-col justify-center items-center gap-6' />
+            <DropDownMenu className='flex flex-col justify-center items-start gap-6' />
           </DropDown>
         </div>
       )}

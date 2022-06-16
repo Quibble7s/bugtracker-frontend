@@ -180,12 +180,26 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
                 <button
                   onClick={() => setEditMode(true)}
                   className='p-2 bg-green-500/20 border border-green-500 rounded-md w-full'>
-                  <PXS className='text-left text-green-500'>Edit</PXS>
+                  <PXS className='text-left text-green-500 flex flex-row items-center gap-2'>
+                    <Image
+                      width={16}
+                      height={16}
+                      src='/static/images/edit.svg'
+                    />
+                    Edit
+                  </PXS>
                 </button>
                 <button
                   onClick={handleOnDelete}
                   className='p-2 bg-red-500/20 border border-red-500 rounded-md w-full'>
-                  <PXS className='text-left text-red-500'>Delete</PXS>
+                  <PXS className='text-left text-red-500 flex flex-row items-center gap-2'>
+                    <Image
+                      width={16}
+                      height={16}
+                      src='/static/images/trash.svg'
+                    />
+                    Delete
+                  </PXS>
                 </button>
               </ThreeDotsDropDown>
             )}
