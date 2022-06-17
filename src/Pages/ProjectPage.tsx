@@ -42,7 +42,7 @@ export const ProjectPage = () => {
                 <header className='grid grid-cols-1 md:grid-cols-2'>
                   <div>
                     <H3 className='text-center md:text-left'>{project.name}</H3>
-                    <PXS className='text-themeGray mt-4 max-h-[150px] overflow-y-auto'>
+                    <PXS className='text-themeGray mt-4 min-h-[20px] max-h-[150px] overflow-y-auto'>
                       {project.description}
                     </PXS>
                   </div>
