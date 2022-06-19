@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ActionLoadingAnimation } from 'src/Components/Animations';
 import { Button } from 'src/Components/Buttons';
 import { Form, TextArea } from 'src/Components/Form';
@@ -17,6 +17,7 @@ export const AddTaskFrom = ({ isActive, setIsActive, bug }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { project, setProject } = useProject();
   const { alert } = useAlert();
+  const clearButtonRef = useRef<HTMLButtonElement>(null!);
 
   const onSubmitHandler = async (data: any) => {
     setIsLoading(true);
@@ -31,6 +32,7 @@ export const AddTaskFrom = ({ isActive, setIsActive, bug }: Props) => {
             return _bug;
           }),
         });
+        clearButtonRef.current?.click();
         setIsActive(false);
         alert(message, 'success', 2.5);
         return;
@@ -70,7 +72,10 @@ export const AddTaskFrom = ({ isActive, setIsActive, bug }: Props) => {
           </Button>
           <Button
             className='w-max ml-2'
-            onClick={() => setIsActive(false)}
+            onClick={() => {
+              clearButtonRef.current?.click();
+              setIsActive(false);
+            }}
             theme='error'>
             <Image
               width={16}
@@ -81,6 +86,7 @@ export const AddTaskFrom = ({ isActive, setIsActive, bug }: Props) => {
           </Button>
         </div>
       )}
+      <button ref={clearButtonRef} className='hidden' type='reset'></button>
     </Form>
   );
 };
