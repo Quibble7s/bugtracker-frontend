@@ -9,14 +9,6 @@ export const HeaderSection = () => {
       <header className='w-full relative'>
         <Container className='grid grid-cols-1 min-h-screen items-center lg:grid-cols-2 relative'>
           <div className='mt-32 relative lg:mt-0'>
-            <Image
-              width={500}
-              height={500}
-              src='/static/images/arrow-up.svg'
-              className='absolute opacity-10 -z-[1] left-1/2 bottom-0 -translate-x-1/2 max-w-[120px] max-h-[120px]
-              md:max-w-[250px] md:max-h-[250px]
-              lg:max-w-[280px] lg:max-h-[280px] lg:left-full lg:-translate-x-full'
-            />
             <article>
               <H1 className='text-center lg:text-left text-themeBlack'>
                 Increase your productivity
@@ -43,13 +35,11 @@ export const HeaderSection = () => {
           </div>
           <div>
             <Image
-              onLoad={(e) => {
-                e.currentTarget.classList.add('fade-in');
-              }}
               className='mx-auto opacity-0 mt-8 lg:mt-0 lg:mx-0 lg:ml-auto'
               width={512}
               height={512}
               src='/static/images/hero.svg'
+              alt=' '
             />
           </div>
         </Container>
