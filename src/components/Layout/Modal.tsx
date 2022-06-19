@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { Container } from '.';
 import { ReactNode, useEffect } from 'react';
 import { Button } from '../Buttons';
+import { Image } from '../Image';
 
 interface Props {
   isOpen: boolean;
@@ -18,8 +19,13 @@ export const Modal = ({ isOpen, onClose, children }: Props) => {
         flex flex-col items-center justify-center'>
         <Container className='max-h-screen overflow-y-auto overflow-x-hidden bg-light-blue p-8 rounded-md pop-in'>
           <div className='flex flex-row justify-end mb-16'>
-            <Button onClick={onClose} className='w-[52px]' theme='error'>
-              X
+            <Button onClick={onClose} className='p-2' theme='error'>
+              <Image
+                width={16}
+                height={16}
+                src='/static/images/cancel.svg'
+                alt='Edit'
+              />
             </Button>
           </div>
           {children}
