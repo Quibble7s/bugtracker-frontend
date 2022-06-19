@@ -1,4 +1,5 @@
-import { Button } from 'src/Components/Buttons';
+import { useState } from 'react';
+import { Button, LoadingButton } from 'src/Components/Buttons';
 import { Form, Input, Option, Select, TextArea } from 'src/Components/Form';
 import { Image } from 'src/Components/Image';
 import { Modal } from 'src/Components/Layout';
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export const CreateIssueModal = ({ isOpen, onClose }: Props) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { alert } = useAlert();
   const { project, setProject } = useProject();
   const defaultPriorityValue = 'select';
@@ -25,13 +27,16 @@ export const CreateIssueModal = ({ isOpen, onClose }: Props) => {
       alert('Please select a priority.', 'error', 2.5);
       return;
     }
+    setIsLoading(true);
     await CreateIssue(project.id, { ...data }, ({ message, status, issue }) => {
       if (status === 201) {
         alert(message, 'success', 2.5);
         setProject({ ...project, bugs: [...project.bugs, issue] });
         onClose();
+        setIsLoading(false);
         return;
       }
+      setIsLoading(false);
       alert(message, 'error', 2.5);
     });
   };
@@ -70,12 +75,15 @@ export const CreateIssueModal = ({ isOpen, onClose }: Props) => {
                 Select priority*
               </Option>
               <Option value='normal'>Low</Option>
-              <Option value='medium'>medium</Option>
+              <Option value='medium'>Medium</Option>
               <Option value='high'>High</Option>
             </Select>
-            <Button type='submit' className='' theme='secondary'>
+            <LoadingButton
+              isLoading={isLoading}
+              type='submit'
+              theme='secondary'>
               Create
-            </Button>
+            </LoadingButton>
           </Form>
         </div>
       </div>
