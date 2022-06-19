@@ -14,14 +14,14 @@ export const useGetProjectMembers = (project: Project) => {
           <Tooltip
             key={member.user.userName}
             text={member.user.userName}
-            className='ml-[-10px]'>
+            className='ml-[-8px]'>
             <Image
               onLoad={(e) => {
                 e.currentTarget.classList.add('fade-in');
               }}
-              className='relative rounded-[100%] bg-themeLightGray'
-              width={24}
-              height={24}
+              className='relative rounded-[100%] bg-light-blue'
+              width={16}
+              height={16}
               src='/static/images/defaultProfilePicture.svg'
             />
           </Tooltip>,
@@ -36,8 +36,8 @@ export const useGetProjectMembers = (project: Project) => {
           key={`members lenght`}
           text={`And ${project.members.length - maxAvatars} more...`}>
           <PXS
-            className='w-[24px] h-[24px] flex flex-row items-center justify-center 
-            text-[10px] bg-themeGray text-themeLightGray text-center rounded-[100%]'>
+            className='w-[16px] h-[16px] flex flex-row items-center justify-center 
+           text-[8px] bg-light-blue text-themeLightGray text-center rounded-[100%]'>
             +{project.members.length - maxAvatars}
           </PXS>
         </Tooltip>,

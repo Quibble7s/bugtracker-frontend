@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAlert, useGetProjectMembers } from 'src/Hooks';
-import { Project } from 'src/Models';
+import { Bug, Project, Task, TaskState } from 'src/Models';
 import { ConfirmLeaveProjectModal } from 'src/Sections';
 import { Button } from '../Buttons';
-import { ThreeDotsDropDown } from '../Layout';
+import { Image } from '../Image';
+import { ThreeDotsDropDown, Tooltip } from '../Layout';
 import { H4, PXS } from '../Typography';
 
 export const ProjectCard = ({
@@ -36,6 +37,21 @@ export const ProjectCard = ({
     alert('Invite link copied to clipboard!', 'success', 2.5);
   };
 
+  const getActiveIssueCount = (): number => {
+    let activeCount = 0;
+    for (let i = 0; i < project.bugs.length; i++) {
+      const bug: Bug = project.bugs[i];
+      for (let j = 0; j < bug.tasks.length; j++) {
+        const task: Task = bug.tasks[j];
+        if (task.state !== TaskState.completed) {
+          activeCount++;
+          break;
+        }
+      }
+    }
+    return project.bugs.length > 0 ? activeCount : 0;
+  };
+
   const handleOnClose = () => {
     setIsLeaveProjectModalOpen(false);
   };
@@ -46,36 +62,54 @@ export const ProjectCard = ({
   return (
     <div
       onClick={handleOnClick}
-      className='w-full p-4 bg-themeLightGray rounded-md border cursor-pointer
-      flex flex-col justify-between min-h-[360px] max-h-[360px] relative'>
-      <div className='absolute top-[16px] right-[16px] overflow-x-visible'>
-        <ThreeDotsDropDown className='!min-w-[160px] gap-4'>
-          <Button onClick={copyToClipboard} theme='success'>
-            Get invite link
-          </Button>
-          <Button
-            theme='error'
-            onClick={() => setIsLeaveProjectModalOpen(true)}>
-            Leave project
-          </Button>
-          <ConfirmLeaveProjectModal
-            isOpen={isLeaveProjectModalOpen}
-            onClose={handleOnClose}
-            projectID={project.id}
-            projects={projects}
-            setProjects={setProjects}
-          />
-        </ThreeDotsDropDown>
-      </div>
-      <div>
-        <H4 className='text-center text-themeBlack'>{project.name}</H4>
-        <PXS className='mt-8 text-justify text-themeGray min-h-[20px] max-h-[200px] overflow-y-auto'>
-          {project.description}
-        </PXS>
-      </div>
-      <div className='flex flex-row items-center justify-between mt-4'>
-        <div className='flex flex-row items-center justify-center ml-[10px]'>
-          {getMembers()}
+      className='w-full min-h-[300px] max-h-[300px] bg-themeLightGray rounded-md overflow-y-auto p-4 cursor-pointer issue-container overflow-x-hidden'>
+      <div className='bg-light-blue w-full h-full rounded-md border-b border-themeGray/25 grid grid-rows-6 p-4 relative overflow-y-auto'>
+        <div className='absolute top-[16px] right-0 overflow-x-visible'>
+          <ThreeDotsDropDown className='!min-w-[160px] gap-4'>
+            <Button onClick={copyToClipboard} theme='success'>
+              Get invite link
+            </Button>
+            <Button
+              theme='error'
+              onClick={() => setIsLeaveProjectModalOpen(true)}>
+              Leave project
+            </Button>
+            <ConfirmLeaveProjectModal
+              isOpen={isLeaveProjectModalOpen}
+              onClose={handleOnClose}
+              projectID={project.id}
+              projects={projects}
+              setProjects={setProjects}
+            />
+          </ThreeDotsDropDown>
+        </div>
+        <div className='row-span-4'></div>
+        <div className='flex flex-col justify-between row-span-2 gap-4'>
+          <div>
+            <H4 className='text-left text-themeGray font-normal'>
+              {project.name}
+            </H4>
+          </div>
+          <div className='flex flex-row items-center gap-2'>
+            <Tooltip text={project.description}>
+              <Image width={16} height={16} src='/static/images/details.svg' />
+            </Tooltip>
+            <Tooltip
+              className='flex flex-row items-center'
+              text={`${getActiveIssueCount()} active issue(s).`}>
+              <Image
+                width={16}
+                height={16}
+                src='/static/images/checkmark-checked.svg'
+              />
+              <PXS className='text-themeGray'>
+                {getActiveIssueCount()}/{project.bugs.length}
+              </PXS>
+            </Tooltip>
+            <div className='flex flex-row items-center justify-center ml-[8px]'>
+              {getMembers()}
+            </div>
+          </div>
         </div>
       </div>
     </div>

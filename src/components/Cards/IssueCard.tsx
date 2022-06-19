@@ -117,7 +117,7 @@ export const IssueCard = ({ bug }: { bug: Bug }) => {
           setIsModalOpen(true);
         }}
         className='w-full min-h-[250px] max-h-[250px] bg-themeLightGray rounded-md overflow-y-auto p-4 cursor-pointer issue-container overflow-x-hidden'>
-        <div className='bg-light-blue w-full h-full rounded-md border-b border-themeGray/25 grid grid-rows-6 p-4 relative'>
+        <div className='bg-light-blue w-full h-full rounded-md border-b border-themeGray/25 grid grid-rows-6 p-4 relative overflow-y-auto'>
           {userIsProjectAdmin(user, project) && (
             <div className='absolute right-[4px] top-[16px] opacity-0 transition-opacity duration-200 issue-drop'>
               <ThreeDotsDropDown className='min-w-[140px]'>
@@ -150,7 +150,7 @@ export const IssueCard = ({ bug }: { bug: Bug }) => {
             </div>
             <div className='w-full flex flex-row mt-2'>
               <div className='flex w-max flex-row items-center'>
-                <Tooltip text='Description.'>
+                <Tooltip text={bug.description}>
                   <Image
                     width={16}
                     height={16}
