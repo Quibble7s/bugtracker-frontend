@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ActionLoadingAnimation } from 'src/Components/Animations';
 import { Button } from 'src/Components/Buttons';
 import { Form, TextArea } from 'src/Components/Form';
+import { Image } from 'src/Components/Image';
 import { useAlert, useProject } from 'src/Hooks';
 import { CreateTask } from 'src/Lib';
 import { Bug } from 'src/Models';
@@ -60,13 +61,23 @@ export const AddTaskFrom = ({ isActive, setIsActive, bug }: Props) => {
       ) : (
         <div>
           <Button className='w-max' type='submit' theme='success'>
-            +
+            <Image
+              width={16}
+              height={16}
+              src='/static/images/checkmark.svg'
+              alt='Edit'
+            />
           </Button>
           <Button
             className='w-max ml-2'
             onClick={() => setIsActive(false)}
             theme='error'>
-            x
+            <Image
+              width={16}
+              height={16}
+              src='/static/images/cancel.svg'
+              alt='Edit'
+            />
           </Button>
         </div>
       )}

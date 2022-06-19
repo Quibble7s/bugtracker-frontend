@@ -142,10 +142,20 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
         ) : (
           <div className='flex flex-row gap-2'>
             <Button type='submit' theme='success'>
-              +
+              <Image
+                width={16}
+                height={16}
+                src='/static/images/checkmark.svg'
+                alt='Edit'
+              />
             </Button>
             <Button onClick={() => setEditMode(false)} theme='error'>
-              x
+              <Image
+                width={16}
+                height={16}
+                src='/static/images/cancel.svg'
+                alt='Edit'
+              />
             </Button>
           </div>
         )}
