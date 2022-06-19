@@ -37,7 +37,7 @@ export const AuthSection = ({
       <Container className='my-[40px] min-h-screen flex flex-col justify-center items-center lg:my-0'>
         <div className='grid grid-cols-1 lg:grid-cols-2'>
           <div>
-            <H1 className='text-center md:mt-0 fade-in lg:text-left'>
+            <H1 className='text-center mt-16 md:mt-0 fade-in lg:text-left'>
               {title}
             </H1>
             <H2 className='text-themeGray mix-blend-multiply font-normal mt-8 text-center fade-in lg:text-left'>
