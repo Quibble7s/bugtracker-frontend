@@ -33,7 +33,7 @@ export const LoginForm = () => {
       <Input
         id='email'
         name='email'
-        placeholder='email'
+        placeholder='Email'
         type='email'
         requiered
       />
@@ -41,7 +41,7 @@ export const LoginForm = () => {
         type='password'
         id='password'
         name='password'
-        placeholder='password'
+        placeholder='Password'
         minLenght={8}
         requiered
       />

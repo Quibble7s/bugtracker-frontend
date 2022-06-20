@@ -35,11 +35,11 @@ export const RegisterForm = () => {
   return (
     <AuthForm onSubmitHandler={onSubmitHandler}>
       <H4 className='text-center mb-4'>Create an account</H4>
-      <Input id='username' name='name' placeholder='username' requiered />
+      <Input id='username' name='name' placeholder='Username' requiered />
       <Input
         id='email'
         name='email'
-        placeholder='email'
+        placeholder='Email'
         type='email'
         requiered
       />
@@ -47,7 +47,7 @@ export const RegisterForm = () => {
         type='password'
         id='password'
         name='password'
-        placeholder='password'
+        placeholder='Password'
         minLenght={8}
         requiered
       />
@@ -55,7 +55,7 @@ export const RegisterForm = () => {
         type='password'
         id='confirm'
         name='confirm'
-        placeholder='confirm password'
+        placeholder='Confirm password'
         minLenght={8}
         requiered
       />
