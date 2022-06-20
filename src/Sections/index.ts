@@ -17,3 +17,4 @@ export { CreateProjectModal } from './DashboardPage/CreateProjectModal';
 export { ConfirmLeaveProjectModal } from './DashboardPage/ConfirmLeaveProjectModal';
 export { IssueModal } from './ProjectPage/IssueModal';
 export { CreateIssueModal } from './ProjectPage/CreateIssueModal';
+export { NoProjectsSection } from './DashboardPage/NoProjectsSection';

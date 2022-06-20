@@ -4,10 +4,13 @@ import { Button } from 'src/Components/Buttons';
 import { ProjectCard } from 'src/Components/Cards';
 import { Form, Input } from 'src/Components/Form';
 import { Container } from 'src/Components/Layout';
-import { H3 } from 'src/Components/Typography';
 import { GetProjects } from 'src/Lib';
 import { Project } from 'src/Models';
-import { CreateProjectModal, JoinProjectModal } from 'src/Sections';
+import {
+  CreateProjectModal,
+  JoinProjectModal,
+  NoProjectsSection,
+} from 'src/Sections';
 
 export const DashboardPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -26,29 +29,29 @@ export const DashboardPage = () => {
   }, []);
 
   const getProjectCards = () => {
-    return projects?.length > 0 && projects !== null ? (
+    const filteredProjects: Project[] = projects?.filter((project) => {
+      if (search === '' || search === undefined) return true;
+      return (
+        project.name.toLowerCase().includes(search.toLowerCase()) ||
+        project.description.toLowerCase().includes(search.toLowerCase())
+      );
+    });
+    return filteredProjects?.length > 0 && projects !== null ? (
       <div className='w-full mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-        {projects
-          .filter((project) => {
-            if (search === '' || search === undefined) return true;
-            return (
-              project.name.includes(search) ||
-              project.description.includes(search)
-            );
-          })
-          .map((project) => (
-            <ProjectCard
-              setProjects={setProjects}
-              key={project.id}
-              projects={projects}
-              project={project}
-            />
-          ))}
+        {filteredProjects.map((project) => (
+          <ProjectCard
+            setProjects={setProjects}
+            key={project.id}
+            projects={projects}
+            project={project}
+          />
+        ))}
       </div>
     ) : (
-      <div className='absolute pointer-events-none top-0 right-0 bottom-0 left-0 flex flex-row items-center justify-center'>
-        <H3>Nothing to show here...</H3>
-      </div>
+      <NoProjectsSection
+        onJoinOpen={() => setIsJoinOpen(true)}
+        onCreateOpen={() => setIsCreateOpen(true)}
+      />
     );
   };
 
