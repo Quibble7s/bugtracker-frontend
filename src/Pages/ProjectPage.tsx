@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { IssueCardLoadingAnimation } from 'src/Components/Animations';
 import { Button } from 'src/Components/Buttons';
 import { IssueCard } from 'src/Components/Cards';
 import { Container } from 'src/Components/Layout';
@@ -65,7 +66,16 @@ export const ProjectPage = () => {
               </div>
             </div>
           ) : (
-            <div>Loading...</div>
+            <div>
+              <div className='mx-auto lg:mx-0 w-[min(100%,768px)] min-h-[32px] md:min-h-[42px] lg:min-h-[50px] rounded-md field-loading'></div>
+              <div className='w-full md:w-[min(100%,250px)] min-h-[18px] rounded-md mt-4 field-loading'></div>
+              <div className='w-[min(80%,230px)] min-h-[18px] rounded-md mt-2 field-loading'></div>
+              <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8 gap-8'>
+                {[0, 1, 2].map((i) => (
+                  <IssueCardLoadingAnimation key={`issue-loading-${i}`} />
+                ))}
+              </div>
+            </div>
           )}
         </Container>
       </main>
