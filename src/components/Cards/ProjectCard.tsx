@@ -62,7 +62,7 @@ export const ProjectCard = ({
   return (
     <div
       onClick={handleOnClick}
-      className='w-full min-h-[300px] max-h-[300px] bg-themeLightGray rounded-md overflow-y-auto p-4 cursor-pointer issue-container overflow-x-hidden'>
+      className='w-full min-h-[250px] max-h-[250px] bg-themeLightGray rounded-md overflow-y-auto p-4 cursor-pointer issue-container overflow-x-hidden'>
       <div className='bg-light-blue w-full h-full rounded-md border-b border-themeGray/25 grid grid-rows-6 p-4 relative overflow-y-auto'>
         <div className='absolute top-[16px] right-0 overflow-x-visible'>
           <ThreeDotsDropDown className='!min-w-[160px] gap-4'>
