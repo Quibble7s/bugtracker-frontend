@@ -1,9 +1,11 @@
 import { ChangeEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ProjectCardLoadingAnimation } from 'src/Components/Animations';
 import { Button } from 'src/Components/Buttons';
 import { ProjectCard } from 'src/Components/Cards';
 import { Form, Input } from 'src/Components/Form';
 import { Container } from 'src/Components/Layout';
+import { useAlert, useAuth } from 'src/Hooks';
 import { GetProjects } from 'src/Lib';
 import { Project } from 'src/Models';
 import {
@@ -13,6 +15,9 @@ import {
 } from 'src/Sections';
 
 export const DashboardPage = () => {
+  const { alert } = useAlert();
+  const navigate = useNavigate();
+  const { signOut } = useAuth();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isJoinOpen, setIsJoinOpen] = useState<boolean>(false);
   const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
@@ -22,7 +27,15 @@ export const DashboardPage = () => {
   useEffect(() => {
     const getProjects = async () => {
       setIsLoading(true);
-      setProjects(await GetProjects());
+      setProjects(
+        await GetProjects(({ status }) => {
+          if (status === 401) {
+            alert('Session expired, please login.', 'error', 5);
+            signOut();
+            navigate('/auth/login', { replace: true });
+          }
+        }),
+      );
       setIsLoading(false);
     };
     getProjects();

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAlert, useAuth, useProject } from 'src/Hooks';
 import {
   DeleteTask,
@@ -19,9 +20,11 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
   const [status, setStatus] = useState<TaskState>(task.state);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
   const { project, setProject } = useProject();
   const { user } = useAuth();
   const { alert } = useAlert();
+  const { signOut } = useAuth();
 
   const text = {
     pending: '',
@@ -45,6 +48,12 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
           updateTaskInProject('state', state);
           return;
         }
+        if (status === 401) {
+          alert('Session expired, please login.', 'error', 5);
+          signOut();
+          navigate('/auth/login', { replace: true });
+          return;
+        }
         alert(message, 'error', 2.5);
       },
     );
@@ -57,6 +66,12 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
         if (status === 204) {
           updateProjectWithoutDeletedTask();
           alert(message, 'success', 2.5);
+          return;
+        }
+        if (status === 401) {
+          alert('Session expired, please login.', 'error', 5);
+          signOut();
+          navigate('/auth/login', { replace: true });
           return;
         }
         alert(message, 'error', 2.5);
@@ -86,6 +101,12 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
           alert(message, 'success', 2.5);
           updateTaskInProject('description', data.description);
           setEditMode(false);
+          return;
+        }
+        if (status === 401) {
+          alert('Session expired, please login.', 'error', 5);
+          signOut();
+          navigate('/auth/login', { replace: true });
           return;
         }
         alert(message, 'error', 2.5);

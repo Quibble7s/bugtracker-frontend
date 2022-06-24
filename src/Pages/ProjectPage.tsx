@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { IssueCardLoadingAnimation } from 'src/Components/Animations';
 import { Button } from 'src/Components/Buttons';
 import { IssueCard } from 'src/Components/Cards';
 import { Container } from 'src/Components/Layout';
 import { H3, PXS } from 'src/Components/Typography';
-import { useAuth } from 'src/Hooks';
+import { useAlert, useAuth } from 'src/Hooks';
 import { GetProject, userIsProjectAdmin } from 'src/Lib';
 import { Project } from 'src/Models';
 import { ProjectProvider } from 'src/Providers';
@@ -15,11 +15,21 @@ export const ProjectPage = () => {
   const [createIssueOpen, setCreateIssueOpen] = useState<boolean>(false);
   const [project, setProject] = useState<Project>(null!);
   const params = useParams();
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
+  const { alert } = useAlert();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getProject = async () => {
-      setProject(await GetProject(params.id!));
+      setProject(
+        await GetProject(params.id!, ({ status }) => {
+          if (status === 401) {
+            alert('Session expired, please login.', 'error', 5);
+            signOut();
+            navigate('/auth/login', { replace: true });
+          }
+        }),
+      );
     };
     getProject();
   }, [params.id]);

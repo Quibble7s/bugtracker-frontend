@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Button, LoadingButton } from 'src/Components/Buttons';
+import { useNavigate } from 'react-router-dom';
+import { LoadingButton } from 'src/Components/Buttons';
 import { Form, Input } from 'src/Components/Form';
 import { Image } from 'src/Components/Image';
 import { Modal } from 'src/Components/Layout';
 import { H3, PXS } from 'src/Components/Typography';
-import { useAlert } from 'src/Hooks';
+import { useAlert, useAuth } from 'src/Hooks';
 import { GetProject, JoinProject } from 'src/Lib';
 import { Project } from 'src/Models';
 
@@ -23,6 +24,8 @@ export const JoinProjectModal = ({
 }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { alert } = useAlert();
+  const { signOut } = useAuth();
+  const navigate = useNavigate();
 
   //Handles the submit event of the form
   const onSubmitHandler = async (data: any) => {
@@ -33,8 +36,23 @@ export const JoinProjectModal = ({
       //If the operation is successful send a success alert and update the project list with the project added.
       if (status === 204) {
         alert(message, 'success', 2.5);
-        setProjects([...projects, await GetProject(projectID)]);
+        setProjects([
+          ...projects,
+          await GetProject(projectID, ({ status }) => {
+            if (status === 401) {
+              alert('Session expired, please login.', 'error', 5);
+              signOut();
+              navigate('/auth/login', { replace: true });
+            }
+          }),
+        ]);
         setIsJoinOpen(false);
+        return;
+      }
+      if (status === 401) {
+        alert('Session expired, please login.', 'error', 5);
+        signOut();
+        navigate('/auth/login', { replace: true });
         return;
       }
       alert(message, 'error', 2.5);

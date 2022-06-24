@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { BASE_URL } from 'src/Constants';
 import { useAlert } from 'src/Hooks';
@@ -44,6 +45,7 @@ AuthContext.displayName = 'Auth';
 //Provider
 const Auth = ({ children }: { children: ReactNode }) => {
   const { alert } = useAlert();
+  const navigate = useNavigate();
   const [user, setUser] = useState<User>(null!);
 
   const token: string | null = localStorage.getItem('token');
@@ -111,6 +113,8 @@ const Auth = ({ children }: { children: ReactNode }) => {
         //Set auth to false and remove the token if the user is unauthorized or doesn't exist
         localStorage.setItem('authenticated', 'false');
         localStorage.setItem('token', '');
+        navigate('/auth/login', { replace: true });
+        alert('Session expired, please login.', 'error', 5);
         setUser(data.user);
       }
     };
@@ -171,7 +175,6 @@ const Auth = ({ children }: { children: ReactNode }) => {
   const signOut = () => {
     localStorage.setItem('authenticated', 'false');
     localStorage.setItem('token', '');
-    alert('Log out successful.', 'error', 2.5);
     setUser(null!);
   };
 

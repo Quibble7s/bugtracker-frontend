@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAlert, useAuth, useProject } from 'src/Hooks';
 import { DeleteIssue, InverseLerp, Lerp, userIsProjectAdmin } from 'src/Lib';
 import { Bug, Task, TaskState } from 'src/Models';
@@ -12,7 +13,9 @@ import './Styles/issuecard.css';
 export const IssueCard = ({ bug }: { bug: Bug }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
   const { alert } = useAlert();
+  const { signOut } = useAuth();
   const { user } = useAuth();
   const { project, setProject } = useProject();
 
@@ -77,6 +80,12 @@ export const IssueCard = ({ bug }: { bug: Bug }) => {
           ...project,
           bugs: project.bugs.filter((b) => b.id !== bug.id),
         });
+        return;
+      }
+      if (status === 401) {
+        alert('Session expired, please login.', 'error', 5);
+        signOut();
+        navigate('/auth/login', { replace: true });
         return;
       }
       alert(message, 'error', 2.5);

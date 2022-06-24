@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, LoadingButton } from 'src/Components/Buttons';
 import { Form, Input, TextArea } from 'src/Components/Form';
 import { Image } from 'src/Components/Image';
 import { Modal } from 'src/Components/Layout';
 import { H3 } from 'src/Components/Typography';
-import { useAlert } from 'src/Hooks';
+import { useAlert, useAuth } from 'src/Hooks';
 import { CreateProject } from 'src/Lib';
 import { Project } from 'src/Models';
 
@@ -28,6 +29,8 @@ export const CreateProjectModal = ({
 }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { alert } = useAlert();
+  const navigate = useNavigate();
+  const { signOut } = useAuth();
 
   const onSubmitHandler = async (data: FromData) => {
     setIsLoading(true);
@@ -37,6 +40,13 @@ export const CreateProjectModal = ({
       alert(result.message, 'success', 2.5);
       setIsLoading(false);
       onClose();
+      return;
+    }
+    if (result.status === 401) {
+      signOut();
+      alert('Session expired, please login.', 'error', 5);
+      navigate('/auth/login', { replace: true });
+      setIsLoading(false);
       return;
     }
     alert(result.message, 'error', 2.5);

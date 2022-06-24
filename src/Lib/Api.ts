@@ -31,12 +31,20 @@ export const CreateProject = async (params: {
       };
     }
     //User not found
-    if (response.status === 204) {
+    if (response.status === 404) {
       const errorData: ErrorResponse = await response.json();
       return {
         project: null,
         message: errorData.message,
         status: errorData.status,
+      };
+    }
+    //Unauthorized
+    if (response.status === 401) {
+      return {
+        project: null,
+        message: 'Session expired, please login.',
+        status: 401,
       };
     }
     //Any other error
@@ -54,7 +62,9 @@ export const CreateProject = async (params: {
   }
 };
 
-export const GetProjects = async (): Promise<Project[]> => {
+export const GetProjects = async (
+  callBack: ({ message, status }: { message: string; status: number }) => void,
+): Promise<Project[]> => {
   const token = GetToken();
   try {
     const response = await fetch(`${BASE_URL}/api/v1/project/all`, {
@@ -63,27 +73,71 @@ export const GetProjects = async (): Promise<Project[]> => {
         authorization: `Bearer ${token}`,
       },
     });
+    //Success
     if (response.status === 200) {
+      callBack({ message: 'Ok', status: 200 });
       return await response.json();
     }
+    //Unauthorized
+    if (response.status === 401) {
+      callBack({ message: 'Unauthorized', status: 401 });
+      return null!;
+    }
+    //User not found
+    if (response.status === 404) {
+      const error: ErrorResponse = await response.json();
+      callBack({ message: error.message, status: error.status });
+      return null!;
+    }
+    //Any other error
+    callBack({
+      message: (await response.json()).title,
+      status: response.status,
+    });
     return null!;
   } catch {
+    callBack({ message: "Cound't reach the server.", status: 500 });
     return null!;
   }
 };
 
-export const GetProject = async (projectID: string): Promise<Project> => {
+export const GetProject = async (
+  projectID: string,
+  callBack: ({ message, status }: { message: string; status: number }) => void,
+): Promise<Project> => {
   const token = GetToken();
-  const response = await fetch(`${BASE_URL}/api/v1/project/${projectID}`, {
-    method: 'GET',
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
-  });
-  if (response.status === 200) {
-    return await response.json();
+  try {
+    const response = await fetch(`${BASE_URL}/api/v1/project/${projectID}`, {
+      method: 'GET',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    //Success
+    if (response.status === 200) {
+      callBack({ message: 'Ok', status: 200 });
+      return await response.json();
+    }
+    //Unauthorized
+    if (response.status === 401) {
+      callBack({ message: 'Unauthorized', status: 401 });
+      return null!;
+    }
+    //User not found
+    if (response.status === 404) {
+      const error: ErrorResponse = await response.json();
+      callBack({ message: error.message, status: error.status });
+      return null!;
+    }
+    //Any other error
+    callBack({
+      message: (await response.json()).title,
+      status: response.status,
+    });
+    return null!;
+  } catch {
+    return null!;
   }
-  return null!;
 };
 
 export const JoinProject = async (
@@ -101,16 +155,23 @@ export const JoinProject = async (
         },
       },
     );
+    //Ok
     if (response.status === 204) {
       callBack({ message: 'Successfuly joined project.', status: 204 });
       return;
     }
+    //Not found
     if (response.status === 404) {
-      const responseData = await response.json();
-      callBack({ message: responseData.message, status: 404 });
+      const error: ErrorResponse = await response.json();
+      callBack({ message: error.message, status: error.status });
       return;
     }
-    //If there is a server error or unauthorized
+    //Unauthorized
+    if (response.status === 401) {
+      callBack({ message: 'Unauthorized', status: 401 });
+      return;
+    }
+    //Any other error
     const responseData = await response.json();
     callBack({ message: responseData.title, status: response.status });
   } catch {
@@ -142,6 +203,11 @@ export const LeaveProject = async (
     if (response.status === 404) {
       const error: ErrorResponse = await response.json();
       callBack({ message: error.message, status: error.status });
+    }
+    //Unauthorized
+    if (response.status === 401) {
+      callBack({ message: 'Unauthorized', status: 401 });
+      return;
     }
     //Any other error
     callBack({
@@ -197,6 +263,11 @@ export const CreateIssue = async (
       const error: ErrorResponse = await response.json();
       callBack({ message: error.message, status: error.status, issue: null! });
     }
+    //Unauthorized
+    if (response.status === 401) {
+      callBack({ message: 'Unauthorized', status: 401, issue: null! });
+      return null!;
+    }
     //Any other error.
     callBack({
       message: (await response.json()).title,
@@ -233,6 +304,11 @@ export const DeleteIssue = async (
       const error: ErrorResponse = await response.json();
       callBack({ message: error.message, status: error.status });
       return;
+    }
+    //Unauthorized
+    if (response.status === 401) {
+      callBack({ message: 'Unauthorized', status: 401 });
+      return null!;
     }
     //Any other error
     callBack({
@@ -280,6 +356,11 @@ export const CreateTask = async (
         task: createdTask,
       });
       return;
+    }
+    //Unauthorized
+    if (response.status === 401) {
+      callBack({ message: 'Unauthorized', status: 401, task: null! });
+      return null!;
     }
     //Any 404 error
     if (response.status === 404) {
@@ -336,6 +417,11 @@ export const UpdateTaskState = async (
       callBack({ message: error.message, status: error.status });
       return;
     }
+    //Unauthorized
+    if (response.status === 401) {
+      callBack({ message: 'Unauthorized', status: 401 });
+      return null!;
+    }
     //any other error
     callBack({
       message: (await response.json()).title,
@@ -378,10 +464,16 @@ export const UpdateTaskDescription = async (
       callBack({ message: 'Updated task.', status: 204 });
       return;
     }
+    //Any not found
     if (response.status === 404) {
       const error: ErrorResponse = await response.json();
       callBack({ message: error.message, status: error.status });
       return;
+    }
+    //Unauthorized
+    if (response.status === 401) {
+      callBack({ message: 'Unauthorized', status: 401 });
+      return null!;
     }
     //any other error
     callBack({
@@ -421,6 +513,11 @@ export const DeleteTask = async (
       const error: ErrorResponse = await response.json();
       callBack({ message: error.message, status: error.status });
       return;
+    }
+    //Unauthorized
+    if (response.status === 401) {
+      callBack({ message: 'Unauthorized', status: 401 });
+      return null!;
     }
     //Any other error
     const error = await response.json();

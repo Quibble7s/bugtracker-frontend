@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Button, LoadingButton } from 'src/Components/Buttons';
+import { useNavigate } from 'react-router-dom';
+import { LoadingButton } from 'src/Components/Buttons';
 import { Form, Input, Option, Select, TextArea } from 'src/Components/Form';
 import { Image } from 'src/Components/Image';
 import { Modal } from 'src/Components/Layout';
 import { H3 } from 'src/Components/Typography';
-import { useAlert, useProject } from 'src/Hooks';
+import { useAlert, useAuth, useProject } from 'src/Hooks';
 import { CreateIssue } from 'src/Lib';
 
 interface Props {
@@ -15,6 +16,8 @@ interface Props {
 export const CreateIssueModal = ({ isOpen, onClose }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { alert } = useAlert();
+  const { signOut } = useAuth();
+  const navigate = useNavigate();
   const { project, setProject } = useProject();
   const defaultPriorityValue = 'select';
 
@@ -34,6 +37,12 @@ export const CreateIssueModal = ({ isOpen, onClose }: Props) => {
         setProject({ ...project, bugs: [...project.bugs, issue] });
         onClose();
         setIsLoading(false);
+        return;
+      }
+      if (status === 401) {
+        alert('Session expired, please login.', 'error', 5);
+        signOut();
+        navigate('/auth/login', { replace: true });
         return;
       }
       setIsLoading(false);

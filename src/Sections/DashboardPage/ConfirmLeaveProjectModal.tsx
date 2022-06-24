@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, LoadingButton } from 'src/Components/Buttons';
 import { Image } from 'src/Components/Image';
 import { Modal } from 'src/Components/Layout';
 import { H3, PS } from 'src/Components/Typography';
-import { useAlert } from 'src/Hooks';
+import { useAlert, useAuth } from 'src/Hooks';
 import { LeaveProject } from 'src/Lib';
 import { Project } from 'src/Models';
 
@@ -24,6 +25,8 @@ export const ConfirmLeaveProjectModal = ({
 }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { alert } = useAlert();
+  const { signOut } = useAuth();
+  const navigate = useNavigate();
 
   const handleOnLeave = async () => {
     setIsLoading(true);
@@ -32,6 +35,12 @@ export const ConfirmLeaveProjectModal = ({
         alert(message, 'success', 2.5);
         setProjects(projects.filter((project) => project.id !== projectID));
         onClose();
+        return;
+      }
+      if (status === 401) {
+        alert('Session expired, please login.', 'error', 5);
+        signOut();
+        navigate('/auth/login', { replace: true });
         return;
       }
       alert(message, 'error', 2.5);
