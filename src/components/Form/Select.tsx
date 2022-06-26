@@ -7,6 +7,7 @@ interface Props {
   children: ReactNode;
   requiered?: boolean;
   className?: string;
+  disabled?: boolean;
 }
 
 export const Select = ({
@@ -15,14 +16,16 @@ export const Select = ({
   className,
   children,
   requiered = false,
+  disabled = false,
 }: Props) => {
   const { onSelectChangeHandler } = useForm();
   return (
     <select
+      disabled={disabled}
       required={requiered}
       onChange={onSelectChangeHandler}
       className={`bg-light-blue border text-themeGray/70 font-open border-secondary/30 hover:border-secondary/50
-     focus:border-secondary outline-none rounded-md p-4 ${className}`}
+     focus:border-secondary outline-none rounded-md p-4 disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
       name={name}
       id={id}>
       {children}

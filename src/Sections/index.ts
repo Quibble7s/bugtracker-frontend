@@ -18,3 +18,7 @@ export { ConfirmLeaveProjectModal } from './DashboardPage/ConfirmLeaveProjectMod
 export { IssueModal } from './ProjectPage/IssueModal';
 export { CreateIssueModal } from './ProjectPage/CreateIssueModal';
 export { NoProjectsSection } from './DashboardPage/NoProjectsSection';
+export { ProjectConfigModal } from './ProjectPage/ProjectConfigModal';
+export { ProjectMembers } from './ProjectPage/ProjectMembers';
+export { ProjectConfigModalDangerZone } from './ProjectPage/ProjectConfigModalDangerZone';
+export { EditProjectForm } from './ProjectPage/EditProjectForm';

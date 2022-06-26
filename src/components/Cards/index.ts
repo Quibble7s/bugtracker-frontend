@@ -3,3 +3,4 @@ export { PricingCard } from './PricingCard';
 export { ProjectCard } from './ProjectCard';
 export { IssueCard } from './IssueCard';
 export { TaskCard } from './TaskCard';
+export { MemberCard } from './MemberCard';

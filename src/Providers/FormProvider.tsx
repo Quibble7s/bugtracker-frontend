@@ -13,6 +13,7 @@ interface Props {
   onSubmit: ({ ...data }: any) => void;
   onInvalid?: ({ id, value }: { id: string; value: string | boolean }) => void;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onDataChange?: (data: any) => void;
   onSelectChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
   onTextAreaChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
@@ -20,7 +21,8 @@ interface Props {
 interface FromContextType {
   onChangeHandler: (e: ChangeEvent<HTMLInputElement>) => void;
   onSelectChangeHandler: (e: ChangeEvent<HTMLSelectElement>) => void;
-  onTextAreaChangeHandler?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  onTextAreaChangeHandler: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  onDataChange: (data: any) => void;
   onInvalidHandler: (e: InvalidEvent<HTMLInputElement>) => void;
 }
 
@@ -33,6 +35,7 @@ export const FormProvider = ({
   onSubmit,
   onInvalid,
   onChange,
+  onDataChange = () => {},
   onSelectChange,
   onTextAreaChange,
 }: Props) => {
@@ -48,21 +51,27 @@ export const FormProvider = ({
       type === 'checkbox' || type === 'radio'
         ? e.target.checked
         : e.target.value;
-    setData({ ...data, [id]: value });
+    const updatedData = { ...data, [id]: value };
+    onDataChange(updatedData);
+    setData(updatedData);
   };
 
   const onSelectChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     if (onSelectChange !== undefined) onSelectChange(e);
     const id = e.target.id;
     const value = e.target.value;
-    setData({ ...data, [id]: value });
+    const updatedData = { ...data, [id]: value };
+    onDataChange(updatedData);
+    setData(updatedData);
   };
 
   const onTextAreaChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
     if (onTextAreaChange !== undefined) onTextAreaChange(e);
     const id = e.target.id;
     const value = e.target.value.replace('\n', '');
-    setData({ ...data, [id]: value });
+    const updatedData = { ...data, [id]: value };
+    onDataChange(updatedData);
+    setData(updatedData);
   };
 
   const onInvalidHandler = (e: InvalidEvent<HTMLInputElement>) => {
@@ -84,6 +93,7 @@ export const FormProvider = ({
 
   const values = {
     onChangeHandler,
+    onDataChange,
     onInvalidHandler,
     onSelectChangeHandler,
     onTextAreaChangeHandler,

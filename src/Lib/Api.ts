@@ -43,7 +43,7 @@ export const CreateProject = async (params: {
     if (response.status === 401) {
       return {
         project: null,
-        message: 'Session expired, please login.',
+        message: 'Unauthorized.',
         status: 401,
       };
     }
@@ -59,6 +59,45 @@ export const CreateProject = async (params: {
       message: "Couldn't connect with the server.",
       status: 500,
     };
+  }
+};
+
+export const UpdateProject = async (
+  data: { name: string; description: string },
+  projectID: string,
+  callBack: ({ message, status }: { message: string; status: number }) => void,
+) => {
+  const token = GetToken();
+  try {
+    const response = await fetch(`${BASE_URL}/api/v1/project/${projectID}`, {
+      method: 'PUT',
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    //Success
+    if (response.status === 204) {
+      callBack({ message: 'Project updated successfuly.', status: 204 });
+    }
+    //Unauthorized.
+    if (response.status === 401) {
+      callBack({ message: 'Unauthorized.', status: 401 });
+    }
+    //User not found
+    if (response.status === 404) {
+      const error: ErrorResponse = await response.json();
+      callBack({ message: error.message, status: error.status });
+    }
+    //Any other error
+    callBack({
+      message: (await response.json()).title,
+      status: response.status,
+    });
+  } catch {
+    callBack({ message: "Cound't reach the server.", status: 500 });
   }
 };
 
@@ -80,7 +119,7 @@ export const GetProjects = async (
     }
     //Unauthorized
     if (response.status === 401) {
-      callBack({ message: 'Unauthorized', status: 401 });
+      callBack({ message: 'Unauthorized.', status: 401 });
       return null!;
     }
     //User not found
@@ -120,7 +159,7 @@ export const GetProject = async (
     }
     //Unauthorized
     if (response.status === 401) {
-      callBack({ message: 'Unauthorized', status: 401 });
+      callBack({ message: 'Unauthorized.', status: 401 });
       return null!;
     }
     //User not found
@@ -168,7 +207,7 @@ export const JoinProject = async (
     }
     //Unauthorized
     if (response.status === 401) {
-      callBack({ message: 'Unauthorized', status: 401 });
+      callBack({ message: 'Unauthorized.', status: 401 });
       return;
     }
     //Any other error
@@ -206,7 +245,7 @@ export const LeaveProject = async (
     }
     //Unauthorized
     if (response.status === 401) {
-      callBack({ message: 'Unauthorized', status: 401 });
+      callBack({ message: 'Unauthorized.', status: 401 });
       return;
     }
     //Any other error
@@ -265,7 +304,7 @@ export const CreateIssue = async (
     }
     //Unauthorized
     if (response.status === 401) {
-      callBack({ message: 'Unauthorized', status: 401, issue: null! });
+      callBack({ message: 'Unauthorized.', status: 401, issue: null! });
       return null!;
     }
     //Any other error.
@@ -307,7 +346,7 @@ export const DeleteIssue = async (
     }
     //Unauthorized
     if (response.status === 401) {
-      callBack({ message: 'Unauthorized', status: 401 });
+      callBack({ message: 'Unauthorized.', status: 401 });
       return null!;
     }
     //Any other error
@@ -359,7 +398,7 @@ export const CreateTask = async (
     }
     //Unauthorized
     if (response.status === 401) {
-      callBack({ message: 'Unauthorized', status: 401, task: null! });
+      callBack({ message: 'Unauthorized.', status: 401, task: null! });
       return null!;
     }
     //Any 404 error
@@ -419,7 +458,7 @@ export const UpdateTaskState = async (
     }
     //Unauthorized
     if (response.status === 401) {
-      callBack({ message: 'Unauthorized', status: 401 });
+      callBack({ message: 'Unauthorized.', status: 401 });
       return null!;
     }
     //any other error
@@ -472,7 +511,7 @@ export const UpdateTaskDescription = async (
     }
     //Unauthorized
     if (response.status === 401) {
-      callBack({ message: 'Unauthorized', status: 401 });
+      callBack({ message: 'Unauthorized.', status: 401 });
       return null!;
     }
     //any other error
@@ -516,7 +555,7 @@ export const DeleteTask = async (
     }
     //Unauthorized
     if (response.status === 401) {
-      callBack({ message: 'Unauthorized', status: 401 });
+      callBack({ message: 'Unauthorized.', status: 401 });
       return null!;
     }
     //Any other error

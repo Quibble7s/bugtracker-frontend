@@ -9,10 +9,11 @@ import { useAlert, useAuth } from 'src/Hooks';
 import { GetProject, userIsProjectAdmin } from 'src/Lib';
 import { Project } from 'src/Models';
 import { ProjectProvider } from 'src/Providers';
-import { CreateIssueModal } from 'src/Sections';
+import { CreateIssueModal, ProjectConfigModal } from 'src/Sections';
 
 export const ProjectPage = () => {
   const [createIssueOpen, setCreateIssueOpen] = useState<boolean>(false);
+  const [projectConfigOpen, setProjectConfigOpen] = useState<boolean>(false);
   const [project, setProject] = useState<Project>(null!);
   const params = useParams();
   const { user, signOut } = useAuth();
@@ -45,6 +46,10 @@ export const ProjectPage = () => {
         isOpen={createIssueOpen}
         onClose={() => setCreateIssueOpen(false)}
       />
+      <ProjectConfigModal
+        isOpen={projectConfigOpen}
+        onClose={() => setProjectConfigOpen(false)}
+      />
       <main className='w-full min-h-screen'>
         <Container className='pt-20 relative min-h-screen'>
           {project !== null ? (
@@ -57,11 +62,17 @@ export const ProjectPage = () => {
                       {project.description}
                     </PXS>
                   </div>
-                  <div className='flex flex-row justify-end'>
+                  <div className='flex flex-col gap-8 justify-end md:flex-row'>
+                    <Button
+                      onClick={() => setProjectConfigOpen(true)}
+                      theme='light'
+                      className='w-full h-min mt-8 md:mt-0 md:w-max'>
+                      Settings
+                    </Button>
                     {userIsProjectAdmin(user, project) && (
                       <Button
                         onClick={() => setCreateIssueOpen(true)}
-                        className='w-full h-min mt-8 md:mt-0 md:w-max'
+                        className='w-full h-min md:w-max'
                         theme='success'>
                         + Add issue
                       </Button>

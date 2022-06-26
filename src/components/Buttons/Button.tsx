@@ -24,7 +24,7 @@ export const Button = ({
       disabled={disabled}
       type={type}
       onClick={onClick}
-      className={`p-4 rounded-md transition-colors duration-200 ${Themes[theme]} ${className}`}>
+      className={`p-4 rounded-md transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 ${Themes[theme]} ${className}`}>
       <PS className='!font-normal'>{children}</PS>
     </button>
   );
