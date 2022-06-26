@@ -258,6 +258,46 @@ export const LeaveProject = async (
   }
 };
 
+export const DeleteProject = async (
+  projectID: string,
+  callBack: ({ message, status }: { message: string; status: number }) => void,
+) => {
+  const token = GetToken();
+  try {
+    const response = await fetch(
+      `${BASE_URL}/api/v1/project/${projectID}/delete`,
+      {
+        method: 'DELETE',
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    //Left project successfuly
+    if (response.status === 204) {
+      callBack({ message: 'Project deleted successfuly.', status: 204 });
+      return;
+    }
+    //User project or member not found.
+    if (response.status === 404) {
+      const error: ErrorResponse = await response.json();
+      callBack({ message: error.message, status: error.status });
+    }
+    //Unauthorized
+    if (response.status === 401) {
+      callBack({ message: 'Unauthorized.', status: 401 });
+      return;
+    }
+    //Any other error
+    callBack({
+      message: (await response.json()).title,
+      status: response.status,
+    });
+  } catch {
+    callBack({ message: "Couldn't reach the server.", status: 500 });
+  }
+};
+
 export const CreateIssue = async (
   projectID: string,
   {

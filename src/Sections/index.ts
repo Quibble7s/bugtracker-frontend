@@ -22,3 +22,5 @@ export { ProjectConfigModal } from './ProjectPage/ProjectConfigModal';
 export { ProjectMembers } from './ProjectPage/ProjectMembers';
 export { ProjectConfigModalDangerZone } from './ProjectPage/ProjectConfigModalDangerZone';
 export { EditProjectForm } from './ProjectPage/EditProjectForm';
+export { ConfirmLeave } from './ProjectPage/ConfirmLeave';
+export { ConfirmDelete } from './ProjectPage/ConfirmDelete';

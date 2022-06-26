@@ -11,6 +11,7 @@ export {
   DeleteTask,
   DeleteIssue,
   UpdateProject,
+  DeleteProject,
 } from './Api';
 export { userIsProjectAdmin } from './Project';
 export { Lerp, InverseLerp, Clamp01, Clamp } from './Math';
