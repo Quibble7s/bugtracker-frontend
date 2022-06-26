@@ -80,7 +80,7 @@ export const EditProjectForm = ({ userIsAdmin }: { userIsAdmin: boolean }) => {
   return (
     <Form
       onDataChange={onDataChangeHandler}
-      className='flex flex-col justify-between gap-8'
+      className='flex flex-col gap-8'
       onSubmit={onSubmit}>
       <Input
         disabled={!userIsAdmin}
