@@ -208,30 +208,18 @@ export const TaskCard = ({ task, issue }: { task: Task; issue: Bug }) => {
           <div className='absolute right-[-8px] lg:right-0 top-[6px] opacity-0 buttons'>
             {userIsProjectAdmin(user, project) && (
               <ThreeDotsDropDown>
-                <button
-                  onClick={() => setEditMode(true)}
-                  className='p-2 bg-green-500/20 border border-green-500 rounded-md w-full'>
-                  <PXS className='text-left text-green-500 flex flex-row items-center gap-2'>
-                    <Image
-                      width={16}
-                      height={16}
-                      src='/static/images/edit.svg'
-                    />
-                    Edit
-                  </PXS>
-                </button>
-                <button
-                  onClick={handleOnDelete}
-                  className='p-2 bg-red-500/20 border border-red-500 rounded-md w-full'>
-                  <PXS className='text-left text-red-500 flex flex-row items-center gap-2'>
-                    <Image
-                      width={16}
-                      height={16}
-                      src='/static/images/trash.svg'
-                    />
-                    Delete
-                  </PXS>
-                </button>
+                <Button
+                  className='w-full'
+                  theme='success'
+                  onClick={() => setEditMode(true)}>
+                  Edit
+                </Button>
+                <Button
+                  className='w-full'
+                  theme='error'
+                  onClick={handleOnDelete}>
+                  Delete
+                </Button>
               </ThreeDotsDropDown>
             )}
           </div>

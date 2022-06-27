@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAlert, useAuth, useProject } from 'src/Hooks';
 import { DeleteIssue, InverseLerp, Lerp, userIsProjectAdmin } from 'src/Lib';
 import { Bug, Task, TaskState } from 'src/Models';
-import { IssueModal } from 'src/Sections';
+import { DeleteIssueModal, IssueModal } from 'src/Sections';
 import { Button } from '../Buttons';
 import { Image } from '../Image';
 import { Modal, ThreeDotsDropDown, Tooltip } from '../Layout';
@@ -100,26 +100,11 @@ export const IssueCard = ({ bug }: { bug: Bug }) => {
         onClose={() => setIsModalOpen(false)}
         bug={bug}
       />
-      <Modal
+      <DeleteIssueModal
         isOpen={isDeleteModalOpen}
-        onClose={() => setIsDeleteModalOpen(false)}>
-        {' '}
-        <H3 className='text-center'>
-          ¿Are you sure you want to delete this issue?
-        </H3>
-        <Image
-          className='mx-auto mt-8'
-          width={512}
-          height={512}
-          src='/static/images/delete.svg'
-        />
-        <div className='grid gird-cols-1 md:grid-cols-2 gap-8 mt-8'>
-          <Button theme='light'>Cancel</Button>
-          <Button onClick={handleOnDelete} theme='error'>
-            Delete
-          </Button>
-        </div>
-      </Modal>
+        onClose={() => setIsDeleteModalOpen(false)}
+        handleOnDelete={handleOnDelete}
+      />
       <div
         role='button'
         onClick={() => {
@@ -130,16 +115,14 @@ export const IssueCard = ({ bug }: { bug: Bug }) => {
           {userIsProjectAdmin(user, project) && (
             <div className='absolute right-[4px] top-[16px] opacity-0 transition-opacity duration-200 issue-drop'>
               <ThreeDotsDropDown className='min-w-[140px]'>
-                <button onClick={() => setIsDeleteModalOpen(true)}>
-                  <PXS className='p-2 border border-red-500 bg-red-500/20 text-red-500 rounded-md flex flex-row items-center gap-2'>
-                    <Image
-                      width={16}
-                      height={16}
-                      src='/static/images/trash.svg'
-                    />
-                    Delete issue
-                  </PXS>
-                </button>
+                <Button className='w-full' theme='light'>
+                  Settings
+                </Button>
+                <Button
+                  theme='error'
+                  onClick={() => setIsDeleteModalOpen(true)}>
+                  Delete issue
+                </Button>
               </ThreeDotsDropDown>
             </div>
           )}
