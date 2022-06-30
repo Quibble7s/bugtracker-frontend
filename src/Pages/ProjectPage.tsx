@@ -57,7 +57,9 @@ export const ProjectPage = () => {
               <div className='w-full'>
                 <header className='grid grid-cols-1 md:grid-cols-2'>
                   <div>
-                    <H3 className='text-center md:text-left'>{project.name}</H3>
+                    <H3 className='text-center text-themeGray md:text-left'>
+                      {project.name}
+                    </H3>
                     <PXS className='text-themeGray mt-4 min-h-[20px] max-h-[150px] overflow-y-auto'>
                       {project.description}
                     </PXS>
