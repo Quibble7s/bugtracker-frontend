@@ -12,7 +12,7 @@ import {
   JoinProjectPage,
   ProjectPage,
 } from './Pages';
-import { Alert } from './Components/Layout';
+import { Alert, Background } from './Components/Layout';
 
 function App() {
   const auth = useAuth();
@@ -25,6 +25,7 @@ function App() {
 
   return (
     <>
+      <Background />
       <Alert />
       <section>
         <header>
