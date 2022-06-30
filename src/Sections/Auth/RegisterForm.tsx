@@ -6,13 +6,27 @@ import { H4, PXS } from 'src/Components/Typography';
 import { useAlert, useAuth } from 'src/Hooks';
 import { AuthForm } from './AuthForm';
 
+type Data = {
+  username: string;
+  email: string;
+  password: string;
+  confirm: string;
+};
+
 export const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { alert } = useAlert();
   const navigate = useNavigate();
   const auth = useAuth();
 
-  const onSubmitHandler = async (data: any) => {
+  const onSubmitHandler = async (data: Data) => {
+    if (data.password !== data.confirm) {
+      const confirmField = document.getElementById('confirm');
+      confirmField?.focus();
+      alert('Passwords must match.', 'error', 5);
+      return;
+    }
+
     const params = {
       username: data.username,
       email: data.email,
