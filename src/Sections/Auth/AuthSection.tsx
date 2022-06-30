@@ -22,7 +22,7 @@ export const AuthSection = ({
             </H1>
             <PXS className='text-themeGray text-center mt-8'>{subtitle}</PXS>
             <Image
-              className='mx-auto mt-8'
+              className='mx-auto mt-8 fade-in'
               width={350}
               height={423.05}
               src='/static/images/authbg.svg'
