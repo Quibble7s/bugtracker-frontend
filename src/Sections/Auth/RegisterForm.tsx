@@ -48,7 +48,7 @@ export const RegisterForm = () => {
 
   return (
     <AuthForm onSubmitHandler={onSubmitHandler}>
-      <H4 className='text-center mb-4'>Create an account</H4>
+      <H4 className='text-center text-themeGray mb-4'>Create an account</H4>
       <Input id='username' name='name' placeholder='Username' requiered />
       <Input
         id='email'

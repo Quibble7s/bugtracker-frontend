@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Image } from 'src/Components/Image';
 import { Container } from 'src/Components/Layout';
-import { H1, H2 } from 'src/Components/Typography';
+import { H1, H2, PXS } from 'src/Components/Typography';
 
 export const AuthSection = ({
   title,
@@ -14,37 +14,21 @@ export const AuthSection = ({
 }) => {
   return (
     <main className='relative overflow-x-hidden h-fit overflow-y-hidden'>
-      <div className='absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/2 w-[300px] md:w-[500px] lg:w-[800px] h-auto z-[-1] opacity-[0.4]'>
-        <Image
-          src='/static/images/background.png'
-          width={800}
-          height={800}
-          onLoad={(e) => {
-            e.currentTarget.classList.add('fade-in');
-          }}
-        />
-      </div>
-      <div className='absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[500px] lg:w-[800px] h-auto z-[-1] opacity-[0.4]'>
-        <Image
-          src='/static/images/background.png'
-          width={800}
-          height={800}
-          onLoad={(e) => {
-            e.currentTarget.classList.add('fade-in');
-          }}
-        />
-      </div>
       <Container className='my-[40px] min-h-screen flex flex-col justify-center items-center lg:my-0'>
-        <div className='grid grid-cols-1 lg:grid-cols-2'>
+        <div className='w-full mt-8 grid grid-cols-1 lg:mt-0 lg:grid-cols-2'>
           <div>
-            <H1 className='text-center mt-16 md:mt-0 fade-in lg:text-left'>
+            <H1 className='text-themeGray text-center mt-16 md:mt-0 fade-in'>
               {title}
             </H1>
-            <H2 className='text-themeGray mix-blend-multiply font-normal mt-8 text-center fade-in lg:text-left'>
-              {subtitle}
-            </H2>
+            <PXS className='text-themeGray text-center mt-8'>{subtitle}</PXS>
+            <Image
+              className='mx-auto mt-8'
+              width={350}
+              height={423.05}
+              src='/static/images/authbg.svg'
+            />
           </div>
-          <div className='w-full'>{children}</div>
+          <div className='w-full flex flex-col justify-center'>{children}</div>
         </div>
       </Container>
     </main>

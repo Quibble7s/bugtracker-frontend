@@ -29,7 +29,7 @@ export const LoginForm = () => {
   };
   return (
     <AuthForm onSubmitHandler={onSubmitHandler}>
-      <H4 className='text-center mb-4'>Login</H4>
+      <H4 className='text-center text-themeGray mb-4'>Login</H4>
       <Input
         id='email'
         name='email'
