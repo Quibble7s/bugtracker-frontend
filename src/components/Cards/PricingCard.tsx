@@ -23,7 +23,7 @@ export const PricingCard = ({
   const navigate = useNavigate();
   return (
     <div
-      className={`p-8 text-center rounded-md ${PricingCardThemes.background[theme]}`}>
+      className={`p-8 text-center rounded-md shadow-md ${PricingCardThemes.background[theme]}`}>
       <PXS className={`${PricingCardThemes.title[theme]}`}>{title}</PXS>
       <H3 className={`${PricingCardThemes.text[theme]} relative`}>
         {price[selectedPricing]}
