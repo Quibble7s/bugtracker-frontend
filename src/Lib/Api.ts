@@ -362,6 +362,55 @@ export const CreateIssue = async (
   }
 };
 
+export const EditIssue = async (
+  issueID: string,
+  projectID: string,
+  data: {
+    name: string;
+    description: string;
+    priority: 'normal' | 'medium' | 'high';
+  },
+  callBack: ({ message, status }: { message: string; status: number }) => void,
+): Promise<void> => {
+  const token = GetToken();
+  try {
+    const response = await fetch(
+      `${BASE_URL}/api/v1/bug/${issueID}/project/${projectID}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      },
+    );
+    //Issue updated successfuly
+    if (response.status === 204) {
+      callBack({ message: 'Issue updated successfuly.', status: 204 });
+      return;
+    }
+    //Any 404
+    if (response.status === 404) {
+      const error: ErrorResponse = await response.json();
+      callBack({ message: error.message, status: error.status });
+      return;
+    }
+    //Unauthorized
+    if (response.status === 401) {
+      callBack({ message: 'Unauthorized.', status: 401 });
+      return null!;
+    }
+    //Any other error
+    callBack({
+      message: (await response.json()).title,
+      status: response.status,
+    });
+  } catch {
+    callBack({ message: "Coudn't reach the server.", status: 500 });
+  }
+};
+
 export const DeleteIssue = async (
   issueID: string,
   projectID: string,

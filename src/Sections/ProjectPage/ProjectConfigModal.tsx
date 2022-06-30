@@ -18,6 +18,7 @@ export const ProjectConfigModal = ({ isOpen, onClose }: Props) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <H3 className='text-themeGray'>Project settings</H3>
+      <span className='w-full h-[1px] block bg-themeGray' />
       <div className='grid mt-16 gap-8 grid-cols-1 md:grid-cols-2'>
         <EditProjectForm userIsAdmin={userIsAdmin} />
         <ProjectMembers />

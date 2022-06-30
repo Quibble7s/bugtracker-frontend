@@ -25,3 +25,5 @@ export { EditProjectForm } from './ProjectPage/EditProjectForm';
 export { ConfirmLeave } from './ProjectPage/ConfirmLeave';
 export { ConfirmDelete } from './ProjectPage/ConfirmDelete';
 export { DeleteIssueModal } from './ProjectPage/DeleteIssueModal';
+export { IssueSettingsModal } from './ProjectPage/IssueSettingsModal';
+export { EditIssueForm } from './ProjectPage/EditIssueForm';

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAlert, useAuth, useProject } from 'src/Hooks';
 import { DeleteIssue, InverseLerp, Lerp, userIsProjectAdmin } from 'src/Lib';
 import { Bug, Task, TaskState } from 'src/Models';
-import { DeleteIssueModal, IssueModal } from 'src/Sections';
+import { DeleteIssueModal, IssueModal, IssueSettingsModal } from 'src/Sections';
 import { Button } from '../Buttons';
 import { Image } from '../Image';
 import { Modal, ThreeDotsDropDown, Tooltip } from '../Layout';
@@ -12,6 +12,7 @@ import './Styles/issuecard.css';
 
 export const IssueCard = ({ bug }: { bug: Bug }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const navigate = useNavigate();
   const { alert } = useAlert();
@@ -105,6 +106,11 @@ export const IssueCard = ({ bug }: { bug: Bug }) => {
         onClose={() => setIsDeleteModalOpen(false)}
         handleOnDelete={handleOnDelete}
       />
+      <IssueSettingsModal
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+        issue={bug}
+      />
       <div
         role='button'
         onClick={() => {
@@ -115,7 +121,10 @@ export const IssueCard = ({ bug }: { bug: Bug }) => {
           {userIsProjectAdmin(user, project) && (
             <div className='absolute right-[4px] top-[16px] opacity-0 transition-opacity duration-200 issue-drop'>
               <ThreeDotsDropDown className='min-w-[140px]'>
-                <Button className='w-full' theme='light'>
+                <Button
+                  onClick={() => setIsSettingsOpen(true)}
+                  className='w-full'
+                  theme='light'>
                   Settings
                 </Button>
                 <Button
