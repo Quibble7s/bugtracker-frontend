@@ -7,6 +7,7 @@ interface Props {
   title: string;
   children: ReactNode;
   imageSrc: string;
+  imageHeight: number;
 }
 
 export const FeatureCard = ({
@@ -14,6 +15,7 @@ export const FeatureCard = ({
   title,
   children,
   imageSrc,
+  imageHeight,
 }: Props) => {
   const containerThemes = {
     left: 'flex-row',
@@ -40,7 +42,7 @@ export const FeatureCard = ({
           className={`mx-auto mt-8 md:mt-16 lg:mt-0 lg:mx-0 ${imageThemes[theme]}`}
           src={imageSrc}
           width={512}
-          height={512}
+          height={imageHeight}
           onLoad={(e) => {
             e.currentTarget.classList.add('fade-in');
           }}

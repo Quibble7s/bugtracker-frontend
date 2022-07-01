@@ -37,7 +37,7 @@ export const HeaderSection = () => {
             <Image
               className='mx-auto mt-8 lg:mt-0 lg:mx-0 lg:ml-auto'
               width={512}
-              height={512}
+              height={426.03}
               src='/static/images/hero.svg'
               alt=' '
             />

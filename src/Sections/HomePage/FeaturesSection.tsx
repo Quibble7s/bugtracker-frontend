@@ -8,7 +8,8 @@ export const FeaturesSection = () => {
         <FeatureCard
           title='Focus on teamwork'
           theme='left'
-          imageSrc='/static/images/teamwork.svg'>
+          imageSrc='/static/images/teamwork.svg'
+          imageHeight={340.67}>
           The tools we provide facilitate teamwork. The administrators and
           moderators of the team are responsible for adding the issues and tasks
           that individuals will work on.
@@ -16,7 +17,8 @@ export const FeaturesSection = () => {
         <FeatureCard
           title='Divide issues into smaller tasks'
           theme='right'
-          imageSrc='/static/images/task.svg'>
+          imageSrc='/static/images/task.svg'
+          imageHeight={302.56}>
           Solve complex issues by breaking them down into smaller tasks that you
           can accomplish over time.
         </FeatureCard>
