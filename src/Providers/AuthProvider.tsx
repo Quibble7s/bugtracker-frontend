@@ -121,7 +121,7 @@ const Auth = ({ children }: { children: ReactNode }) => {
     if (authenticated) {
       setUserAsync();
     }
-  }, [authenticated, fetchUser]);
+  }, [authenticated, fetchUser, alert, navigate]);
 
   const logIn = async (
     params: SignInParams,

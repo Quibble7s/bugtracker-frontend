@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Image } from 'src/Components/Image';
 import { Container } from 'src/Components/Layout';
-import { H1, H2, PXS } from 'src/Components/Typography';
+import { H1, PXS } from 'src/Components/Typography';
 
 export const AuthSection = ({
   title,

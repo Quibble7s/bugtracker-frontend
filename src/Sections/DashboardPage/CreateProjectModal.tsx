@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, LoadingButton } from 'src/Components/Buttons';
+import { LoadingButton } from 'src/Components/Buttons';
 import { Form, Input, TextArea } from 'src/Components/Form';
 import { Image } from 'src/Components/Image';
 import { Modal } from 'src/Components/Layout';

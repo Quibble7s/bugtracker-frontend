@@ -1,7 +1,7 @@
 import './Styles/modal.css';
 import { createPortal } from 'react-dom';
 import { Container } from '.';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode } from 'react';
 import { Button } from '../Buttons';
 import { Image } from '../Image';
 

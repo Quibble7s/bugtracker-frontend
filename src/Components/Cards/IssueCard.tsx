@@ -6,8 +6,8 @@ import { Bug, Task, TaskState } from 'src/Models';
 import { DeleteIssueModal, IssueModal, IssueSettingsModal } from 'src/Sections';
 import { Button } from '../Buttons';
 import { Image } from '../Image';
-import { Modal, ThreeDotsDropDown, Tooltip } from '../Layout';
-import { H3, PXS } from '../Typography';
+import { ThreeDotsDropDown, Tooltip } from '../Layout';
+import { PXS } from '../Typography';
 import './Styles/issuecard.css';
 
 export const IssueCard = ({ bug }: { bug: Bug }) => {

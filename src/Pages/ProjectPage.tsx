@@ -33,7 +33,7 @@ export const ProjectPage = () => {
       );
     };
     getProject();
-  }, [params.id]);
+  }, [params, alert, signOut, navigate]);
 
   const providerValues = {
     project,

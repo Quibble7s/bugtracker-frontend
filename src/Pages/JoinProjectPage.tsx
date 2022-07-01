@@ -31,7 +31,7 @@ export const JoinProjectPage = () => {
       setIsLoading(false);
     };
     join();
-  }, [params]);
+  }, [params, alert, navigate]);
 
   return (
     <Container className='min-h-screen flex flex-col items-center justify-center gap-8'>
