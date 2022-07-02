@@ -39,7 +39,7 @@ export const Notification = ({ duration, message, type }: Props) => {
             src={`/static/images/${type}-noti.svg`}
           />
         </div>
-        <div className='max-h-[120px]'>
+        <div>
           <PXS className='text-themeGray truncate'>{message}</PXS>
         </div>
       </div>

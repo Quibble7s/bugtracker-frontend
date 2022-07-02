@@ -13,12 +13,6 @@ AlertContext.displayName = 'Alert';
 export const AlertProvider = ({ children }: { children: ReactNode }) => {
   const [notifications, setNotifications] = useState<JSX.Element[]>([]);
 
-  const themes = {
-    error: 'bg-red-500',
-    success: 'bg-green-500',
-    warning: 'bg-yellow-300',
-  };
-
   /**
    *
    * @param message The message to display
