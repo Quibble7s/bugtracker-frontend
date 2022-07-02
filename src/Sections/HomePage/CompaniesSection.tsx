@@ -1,13 +1,13 @@
 import { Image } from 'src/Components/Image';
 import { Container } from 'src/Components/Layout';
-import { H4 } from 'src/Components/Typography';
+import { H4, PXS } from 'src/Components/Typography';
 import { CompanyImages } from 'src/Constants';
 
 export const CompaniesSection = () => {
   return (
     <section className='mt-64'>
       <Container id='companies'>
-        <H4 className='text-themeGray/20 text-center'>trusted by</H4>
+        <PXS className='text-themeGray text-center'>Trusted by</PXS>
         <div className='w-full flex flex-row gap-8 justify-between items-center lg:gap-0'>
           {CompanyImages.map((image) => (
             <div key={image.url} className='relative'>

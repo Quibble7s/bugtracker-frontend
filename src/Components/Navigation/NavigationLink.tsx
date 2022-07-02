@@ -21,10 +21,12 @@ export const NavigationLink = ({ to, children }: Props) => {
     window.scrollTo({ top: 0 });
   };
   return (
-    <Link onClick={onClickHandler} to={to}>
-      <PS className='text-themeGray hover:text-themeBlack transition-colors duration-500 relative navlink'>
-        {children}
-      </PS>
-    </Link>
+    <li className='list-none'>
+      <Link onClick={onClickHandler} to={to}>
+        <PS className='text-themeGray hover:text-themeBlack transition-colors duration-500 relative navlink'>
+          {children}
+        </PS>
+      </Link>
+    </li>
   );
 };

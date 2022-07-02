@@ -24,7 +24,7 @@ export const NavDropDown = () => {
           <img
             className='max-w-[16px] max-h-[16px]'
             src='/static/images/defaultProfilePicture.svg'
-            alt=' '
+            alt={user.userName}
           />
           <PS className='text-themeGray'>{user.userName}</PS>
           <DropDown state={dropDownState}>

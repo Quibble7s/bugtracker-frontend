@@ -25,6 +25,7 @@ export const Navbar = () => {
             width={200}
             height={40}
             className='py-[15px]'
+            alt='bugtracke'
           />
         </Link>
         <NavigationLinks className='hidden lg:flex' />

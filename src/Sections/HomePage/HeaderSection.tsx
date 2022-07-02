@@ -35,6 +35,7 @@ export const HeaderSection = () => {
           </div>
           <div>
             <Image
+              loading='eager'
               className='mx-auto mt-8 lg:mt-0 lg:mx-0 lg:ml-auto'
               width={512}
               height={426.03}
