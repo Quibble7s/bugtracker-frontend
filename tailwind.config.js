@@ -13,7 +13,7 @@ module.exports = {
         themeBlack: '#19191B',
         themeGray: '#696871',
         themeLightGray: '#f2f2f2',
-        'light-blue': 'rgb(248,254,255)',
+        'light-blue': '#f8feff',
       },
     },
   },

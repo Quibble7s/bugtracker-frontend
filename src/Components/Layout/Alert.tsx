@@ -1,20 +1,13 @@
-import { useAlert } from 'src/Hooks';
-import { PS } from '../Typography';
+import { ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 
-export const Alert = () => {
-  const { alertRef, alertTextRef } = useAlert();
-  return (
-    <div className='fixed w-full h-screen pointer-events-none z-[1000]'>
-      <div className='w-full h-screen relative'>
-        <div
-          ref={alertRef}
-          className={`absolute inline min-w-[300px] max-w-[800px] p-4 z-[100] shadow-lg 
-          top-[100px] -right-full scale-0 transition-all duration-500 ease-in-out opacity-0`}>
-          <PS
-            reference={alertTextRef}
-            className='text-light-blue text-center truncate'></PS>
-        </div>
-      </div>
-    </div>
+interface Props {
+  children: ReactNode;
+}
+
+export const Alert = ({ children }: Props) => {
+  return createPortal(
+    <div className='w-full h-screen relative mt-[150px]'>{children}</div>,
+    document.getElementById('notf')!,
   );
 };

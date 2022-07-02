@@ -1,28 +1,23 @@
-import { createContext, MutableRefObject, ReactNode, useRef } from 'react';
+import { createContext, ReactNode, useState } from 'react';
+import { Alert, Notification } from 'src/Components/Layout';
 
 type AlertType = 'error' | 'success' | 'warning';
 
 interface ContextType {
   alert: (message: string, type: AlertType, duration: number) => void;
-  alertRef: MutableRefObject<HTMLDivElement>;
-  alertTextRef: MutableRefObject<HTMLParagraphElement>;
 }
 
 export const AlertContext = createContext<ContextType>(null!);
 AlertContext.displayName = 'Alert';
 
 export const AlertProvider = ({ children }: { children: ReactNode }) => {
-  const alertRef: MutableRefObject<HTMLDivElement> = useRef(null!);
-  const alertTextRef: MutableRefObject<HTMLParagraphElement> = useRef(null!);
+  const [notifications, setNotifications] = useState<JSX.Element[]>([]);
 
   const themes = {
     error: 'bg-red-500',
     success: 'bg-green-500',
     warning: 'bg-yellow-300',
   };
-
-  let lastClass = '';
-  let playingAlert = false;
 
   /**
    *
@@ -31,29 +26,26 @@ export const AlertProvider = ({ children }: { children: ReactNode }) => {
    * @param duration The duration of the message in seconds
    */
   const alert = (message: string, type: AlertType, duration = 5) => {
-    //If an alert is already playing don't do anything.
-    if (playingAlert) return;
-    playingAlert = true;
-    //Removing last class and adding the new one.
-    if (lastClass !== '') alertRef.current.classList.remove(lastClass);
-    lastClass = themes[type];
-    //Adding corresponding styles
-    alertRef.current.classList.add(themes[type]);
-    alertRef.current.classList.toggle('!right-0');
-    alertRef.current.classList.toggle('!opacity-100');
-    alertRef.current.classList.toggle('!scale-100');
-    alertTextRef.current.innerText = message;
-    //Remove styles after n ammount of seconds
-    setTimeout(() => {
-      alertRef.current.classList.toggle('!right-0');
-      alertRef.current.classList.toggle('!opacity-100');
-      alertRef.current.classList.toggle('!scale-100');
-      playingAlert = false;
-    }, duration * 1000);
+    setNotifications([
+      ...notifications,
+      <Notification
+        key={`noti-${Date.now()}`}
+        message={message}
+        type={type}
+        duration={duration}
+      />,
+    ]);
   };
 
-  const values = { alert, alertRef, alertTextRef };
+  const values = { alert };
   return (
-    <AlertContext.Provider value={values}>{children}</AlertContext.Provider>
+    <>
+      <Alert>
+        <div className='w-full md:absolute md:w-[350px] h-[calc(100%-150px)] p-4 right-0 flex flex-col-reverse justify-start gap-2'>
+          {notifications.map((noti) => noti)}
+        </div>
+      </Alert>
+      <AlertContext.Provider value={values}>{children}</AlertContext.Provider>
+    </>
   );
 };
