@@ -22,17 +22,6 @@ export const DropDownMenu = ({ className }: { className?: string }) => {
               Dashboard
             </div>
           </NavigationLink>
-          <NavigationLink to='/profile'>
-            <div className='flex flex-row items-center gap-2'>
-              <Image
-                width={16}
-                height={16}
-                src='/static/images/defaultProfilePicture.svg'
-                alt='profile'
-              />
-              Profile
-            </div>
-          </NavigationLink>
           <li
             role='button'
             className='cursor-pointer flex flex-row items-center gap-2 list-none'
