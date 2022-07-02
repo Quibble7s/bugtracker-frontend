@@ -7,7 +7,7 @@
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
-  scrollbar-color: #19191b transparent;
+  scrollbar-color: rgb(208, 210, 211) transparent;
   scrollbar-width: thin;
 }
 
