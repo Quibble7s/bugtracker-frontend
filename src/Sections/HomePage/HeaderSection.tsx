@@ -40,7 +40,7 @@ export const HeaderSection = () => {
               width={512}
               height={426.03}
               src='/static/images/hero.svg'
-              alt=' '
+              alt='hero'
             />
           </div>
         </Container>

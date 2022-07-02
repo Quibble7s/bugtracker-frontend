@@ -1,6 +1,6 @@
 import { Image } from 'src/Components/Image';
 import { Container } from 'src/Components/Layout';
-import { H4, PXS } from 'src/Components/Typography';
+import { PXS } from 'src/Components/Typography';
 import { CompanyImages } from 'src/Constants';
 
 export const CompaniesSection = () => {
@@ -19,6 +19,7 @@ export const CompaniesSection = () => {
                 src={image.url}
                 width={125}
                 height={28}
+                alt={image.name}
               />
             </div>
           ))}
