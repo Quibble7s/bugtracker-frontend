@@ -17,6 +17,7 @@ export const DropDownMenu = ({ className }: { className?: string }) => {
                 width={16}
                 height={16}
                 src='/static/images/dashboard.svg'
+                alt='dashboard'
               />
               Dashboard
             </div>
@@ -27,6 +28,7 @@ export const DropDownMenu = ({ className }: { className?: string }) => {
                 width={16}
                 height={16}
                 src='/static/images/defaultProfilePicture.svg'
+                alt='profile'
               />
               Profile
             </div>
@@ -38,7 +40,12 @@ export const DropDownMenu = ({ className }: { className?: string }) => {
               await signOut();
               alert('Session closed.', 'error', 5);
             }}>
-            <Image width={16} height={16} src='/static/images/logout.svg' />
+            <Image
+              width={16}
+              height={16}
+              src='/static/images/logout.svg'
+              alt='logout'
+            />
             <PS className='text-red-500'>Logout</PS>
           </li>
         </ul>
