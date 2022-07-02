@@ -10,7 +10,7 @@ export const DropDownMenu = ({ className }: { className?: string }) => {
   return (
     <>
       {show && (
-        <div className={`${className}`}>
+        <ul className={`${className}`}>
           <NavigationLink to='/dashboard'>
             <div className='flex flex-row items-center gap-2'>
               <Image
@@ -31,17 +31,17 @@ export const DropDownMenu = ({ className }: { className?: string }) => {
               Profile
             </div>
           </NavigationLink>
-          <div
+          <li
             role='button'
-            className='cursor-pointer flex flex-row items-center gap-2'
+            className='cursor-pointer flex flex-row items-center gap-2 list-none'
             onClick={async () => {
               await signOut();
               alert('Session closed.', 'error', 5);
             }}>
             <Image width={16} height={16} src='/static/images/logout.svg' />
             <PS className='text-red-500'>Logout</PS>
-          </div>
-        </div>
+          </li>
+        </ul>
       )}
     </>
   );
