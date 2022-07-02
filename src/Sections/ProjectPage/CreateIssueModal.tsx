@@ -21,7 +21,10 @@ export const CreateIssueModal = ({ isOpen, onClose }: Props) => {
   const { project, setProject } = useProject();
   const defaultPriorityValue = 'select';
 
+  let called = 0;
+
   const onSubmitHandler = async (data: any) => {
+    called++;
     if (
       data.priority === undefined ||
       data.priority === null ||
@@ -35,8 +38,8 @@ export const CreateIssueModal = ({ isOpen, onClose }: Props) => {
       if (status === 201) {
         alert(message, 'success', 2.5);
         setProject({ ...project, bugs: [...project.bugs, issue] });
-        onClose();
         setIsLoading(false);
+        onClose();
         return;
       }
       if (status === 401) {
@@ -48,6 +51,7 @@ export const CreateIssueModal = ({ isOpen, onClose }: Props) => {
       setIsLoading(false);
       alert(message, 'error', 2.5);
     });
+    console.log(called);
   };
 
   return (

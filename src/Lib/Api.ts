@@ -336,16 +336,18 @@ export const CreateIssue = async (
         status: 201,
         issue: bug,
       });
+      return;
     }
     //Not found error.
     if (response.status === 404) {
       const error: ErrorResponse = await response.json();
       callBack({ message: error.message, status: error.status, issue: null! });
+      return;
     }
     //Unauthorized
     if (response.status === 401) {
       callBack({ message: 'Unauthorized.', status: 401, issue: null! });
-      return null!;
+      return;
     }
     //Any other error.
     callBack({
@@ -353,6 +355,7 @@ export const CreateIssue = async (
       status: response.status,
       issue: null!,
     });
+    return;
   } catch {
     callBack({
       message: "Couldn't reach the server.",
@@ -488,7 +491,7 @@ export const CreateTask = async (
     //Unauthorized
     if (response.status === 401) {
       callBack({ message: 'Unauthorized.', status: 401, task: null! });
-      return null!;
+      return;
     }
     //Any 404 error
     if (response.status === 404) {
@@ -548,7 +551,7 @@ export const UpdateTaskState = async (
     //Unauthorized
     if (response.status === 401) {
       callBack({ message: 'Unauthorized.', status: 401 });
-      return null!;
+      return;
     }
     //any other error
     callBack({
@@ -601,7 +604,7 @@ export const UpdateTaskDescription = async (
     //Unauthorized
     if (response.status === 401) {
       callBack({ message: 'Unauthorized.', status: 401 });
-      return null!;
+      return;
     }
     //any other error
     callBack({
