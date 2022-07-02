@@ -14,13 +14,13 @@ export const Footer = () => {
               <span className='block absolute top-0 right-0 bottom-0 left-0 bg-themeBlack mix-blend-color' />
               <Image src='/static/images/logo.svg' width={140} height={30} />
             </div>
-            <div className='flex flex-col items-center gap-4 lg:flex-row'>
+            <ul className='flex flex-col items-center gap-4 lg:flex-row'>
               {NavLinks.map((link) => (
                 <NavigationLink key={`footer-${link.label}`} to={link.to}>
                   {link.label}
                 </NavigationLink>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
         <div className='py-4 flex flex-row items-center justify-center'>
