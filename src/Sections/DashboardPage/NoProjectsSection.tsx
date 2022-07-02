@@ -13,7 +13,7 @@ export const NoProjectsSection = ({ onJoinOpen, onCreateOpen }: Props) => {
       <Image
         className='mt-8'
         width={512}
-        height={512}
+        height={408.16}
         src='/static/images/warning.svg'
       />
       <H3 className='mt-8'>Nothing to show here</H3>
