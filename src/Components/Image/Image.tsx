@@ -31,6 +31,11 @@ interface Props {
    * Fires when the image is done loading.
    */
   onLoad?: (e: SyntheticEvent<HTMLImageElement, Event>) => void;
+  /**
+   * How the image will load.
+   * @default 'lazy'
+   */
+  loading?: 'lazy' | 'eager';
 }
 
 export const Image = ({
@@ -40,11 +45,12 @@ export const Image = ({
   alt,
   className = '',
   objectFit = 'fill',
+  loading = 'lazy',
   onLoad,
 }: Props) => {
   return (
     <img
-      loading='lazy'
+      loading={loading}
       onLoad={onLoad}
       className={className}
       style={{ objectFit: objectFit }}
