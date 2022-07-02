@@ -68,8 +68,8 @@ export const JoinProjectModal = ({
         onLoad={(e) => {
           e.currentTarget.classList.add('fade-in');
         }}
-        width={512}
-        height={512}
+        width={400}
+        height={307.81}
         src='/static/images/join.svg'
       />
       <Form

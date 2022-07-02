@@ -62,8 +62,8 @@ export const CreateProjectModal = ({
           onLoad={(e) => {
             e.currentTarget.classList.add('fade-in');
           }}
-          width={512}
-          height={512}
+          width={400}
+          height={400}
           src='/static/images/create.svg'
         />
         <Form

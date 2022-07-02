@@ -57,8 +57,8 @@ export const CreateIssueModal = ({ isOpen, onClose }: Props) => {
         <div>
           <Image
             className='mb-8 mx-auto max-w-[200px] md:max-w-[350px] lg:max-w-[420px] lg:mb-0'
-            width={512}
-            height={512}
+            width={420}
+            height={261.41}
             src='/static/images/create-2.svg'
           />
         </div>

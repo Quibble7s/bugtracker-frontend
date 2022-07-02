@@ -56,7 +56,7 @@ export const ConfirmLeaveProjectModal = ({
         src='/static/images/delete.svg'
         className='mx-auto mb-16 md:max-w-[300px] lg:max-w-[400px]'
         width={512}
-        height={512}
+        height={303.45}
       />
       <PS className='bg-red-500/20 text-red-500 text-center p-4 mb-16 mx-auto rounded-md border border-red-500 lg:w-max'>
         ¡Warning: If you're the project administrator the project will be

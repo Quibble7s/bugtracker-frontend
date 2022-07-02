@@ -21,7 +21,7 @@ export const DeleteIssueModal = ({
       <Image
         className='mx-auto mt-8'
         width={512}
-        height={512}
+        height={388.41}
         src='/static/images/delete.svg'
       />
       <div className='grid gird-cols-1 md:grid-cols-2 gap-8 mt-8'>
