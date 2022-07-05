@@ -8,7 +8,7 @@ Build your team and track the progress of developing new features, solving issue
 
 To run this project locally you'll need to run an instance of the [bugtracker API](https://github.com/Quibble7s/bugtracker-server) aswell. Or you can check the docs of the bugtracker production API and use that.
 
-_Important note:_ if you plan on using a local hosted API instance you'll have to change the value of the constant `BASE_URL` under [/src/Constants/Server.ts](/src/Constants/Server.ts) to match the current port you're running the app in.
+**Important note:** if you plan on using a local hosted API instance you'll have to change the value of the constant `BASE_URL` under [/src/Constants/Server.ts](/src/Constants/Server.ts) to match the current port you're running the app in.
 
 In the project directory, you can run:
 
