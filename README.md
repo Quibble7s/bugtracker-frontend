@@ -1,8 +1,10 @@
-# Getting Started with Create React App
+# Bugtracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Build your team and track the progress of developing new features, solving issues, etc. [Live demo.](https://www.bugtracker.tk/).
 
-## Available Scripts
+![thumbnail](/public/static/images/thumbnail.jpg)
+
+## How to run locally
 
 In the project directory, you can run:
 
