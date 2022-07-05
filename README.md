@@ -24,3 +24,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ## Planed features
 
 - Real time project update.
+- User profile pictures using firebase storage.
