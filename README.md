@@ -19,3 +19,5 @@ This project was built using React, Typescript, and TailwindCSS.
 
 - Real time project update.
 - User profile pictures using firebase storage.
+- Issue searchbar.
+- Issue filter.
