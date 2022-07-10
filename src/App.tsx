@@ -12,7 +12,7 @@ import {
   JoinProjectPage,
   ProjectPage,
 } from './Pages';
-import { Alert, Background } from './Components/Layout';
+import { Background } from './Components/Layout';
 
 function App() {
   const auth = useAuth();

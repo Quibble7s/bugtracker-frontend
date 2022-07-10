@@ -1,5 +1,3 @@
-import './Styles/ProjectCardLoadingAnimation.css';
-
 export const ProjectCardLoadingAnimation = () => {
   return (
     <div className='w-full min-h-[250px] max-h-[250px] bg-themeLightGray rounded-md overflow-y-auto p-4 cursor-pointer issue-container overflow-x-hidden'>

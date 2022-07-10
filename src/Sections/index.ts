@@ -27,3 +27,4 @@ export { ConfirmDelete } from './ProjectPage/ConfirmDelete';
 export { DeleteIssueModal } from './ProjectPage/DeleteIssueModal';
 export { IssueSettingsModal } from './ProjectPage/IssueSettingsModal';
 export { EditIssueForm } from './ProjectPage/EditIssueForm';
+export { ProjectActivity } from './ProjectPage/ProjectActivity';

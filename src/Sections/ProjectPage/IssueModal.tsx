@@ -8,6 +8,7 @@ import { useAuth, useProject } from 'src/Hooks';
 import { userIsProjectAdmin } from 'src/Lib';
 import { Bug } from 'src/Models';
 import { AddTaskFrom } from './AddTaskFrom';
+import { ProjectActivity } from './ProjectActivity';
 
 interface Props {
   isOpen: boolean;
@@ -81,6 +82,11 @@ export const IssueModal = ({ isOpen, onClose, bug }: Props) => {
           </Button>
         )}
       </div>
+      <div className='flex flex-row gap-2 mt-16'>
+        <Image width={16} height={16} src='/static/images/activity.svg' />
+        <H4 className='text-themeGray'>Activity</H4>
+      </div>
+      <ProjectActivity logID={bug.id} dependency={bug} />
     </Modal>
   );
 };

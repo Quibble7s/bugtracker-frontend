@@ -24,7 +24,7 @@ export const Notification = ({ duration, message, type }: Props) => {
         notificationRef.current?.classList.add('hidden');
       }, 500);
     }, 1000 * duration);
-  }, []);
+  }, [duration]);
 
   return (
     <div
