@@ -4,7 +4,7 @@ Build your team and track the progress of developing new features, solving issue
 
 ![thumbnail](/public/static/images/thumbnail.jpg)
 
-This project was built using React, Typescript, and TailwindCSS.
+This project was built using React, Typescript, TailwindCSS, and the [bugtracker API](https://github.com/Quibble7s/bugtracker-server).
 
 ## Features
 
