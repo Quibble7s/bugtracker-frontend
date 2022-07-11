@@ -39,7 +39,7 @@ export const DashboardPage = () => {
       setIsLoading(false);
     };
     getProjects();
-  }, [alert, navigate, signOut]);
+  }, []);
 
   const getProjectCards = () => {
     const filteredProjects: Project[] = projects?.filter((project) => {
