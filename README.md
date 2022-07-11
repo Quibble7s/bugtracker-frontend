@@ -1,6 +1,6 @@
 # Bugtracker
 
-Build your team and track the progress of developing new features, solving issues, etc. [You can take a look at the live demo here.](https://www.bugtracker.tk/)
+This is a tool that helps teams organize projects and workflows by dividing "issues" into smaller tasks that can be accomplished over time keeping track of the overall progress. [You can take a look at the live demo here.](https://www.bugtracker.tk/)
 
 ![thumbnail](/public/static/images/thumbnail.jpg)
 
