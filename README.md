@@ -6,6 +6,16 @@ Build your team and track the progress of developing new features, solving issue
 
 This project was built using React, Typescript, and TailwindCSS.
 
+## Features
+
+- User authentication.
+- Role based user authorization.
+- Users can create or delete its own projects.
+- Users can join other user's project to collaborate.
+- Only project admins can add issues.
+- Only project admins can edit the project.
+- Project activity logs.
+
 ## How to run locally
 
 ### To run this project locally you'll need to run a local instance of the [bugtracker API](https://github.com/Quibble7s/bugtracker-server) aswell.
@@ -18,6 +28,5 @@ This project was built using React, Typescript, and TailwindCSS.
 ## Planed features
 
 - Real time project update.
+- Give project admins the hability to assign issues to members.
 - User profile pictures using firebase storage.
-- Issue searchbar.
-- Issue filter.
