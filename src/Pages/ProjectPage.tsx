@@ -3,11 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { IssueCardLoadingAnimation } from 'src/Components/Animations';
 import { Button } from 'src/Components/Buttons';
 import { IssueCard } from 'src/Components/Cards';
+import { Form, Input } from 'src/Components/Form';
 import { Container } from 'src/Components/Layout';
 import { H3, PXS } from 'src/Components/Typography';
 import { useAlert, useAuth } from 'src/Hooks';
 import { GetProject, userIsProjectAdmin } from 'src/Lib';
-import { Project } from 'src/Models';
+import { Bug, Project, TaskState } from 'src/Models';
 import { ProjectProvider } from 'src/Providers';
 import { CreateIssueModal, ProjectConfigModal } from 'src/Sections';
 
@@ -15,6 +16,7 @@ export const ProjectPage = () => {
   const [createIssueOpen, setCreateIssueOpen] = useState<boolean>(false);
   const [projectConfigOpen, setProjectConfigOpen] = useState<boolean>(false);
   const [project, setProject] = useState<Project>(null!);
+  const [search, setSearch] = useState<string | null>(null);
   const params = useParams();
   const { user, signOut } = useAuth();
   const { alert } = useAlert();
@@ -40,6 +42,31 @@ export const ProjectPage = () => {
     setProject,
   };
 
+  const getIssues = () => {
+    let issues: Bug[] = project.bugs;
+    if (search !== null && search.length > 0) {
+      issues = project.bugs.filter(
+        (bug) =>
+          bug.name.toLowerCase().includes(search.toLowerCase()) ||
+          bug.description.toLowerCase().includes(search.toLowerCase()),
+      );
+    }
+    issues.sort((a, b) => {
+      const aCompleted = a.tasks.every(
+        (task) => task.state === TaskState.completed,
+      );
+      const bCompleted = b.tasks.every(
+        (task) => task.state === TaskState.completed,
+      );
+      return !aCompleted && bCompleted ? -1 : aCompleted && bCompleted ? 0 : 1;
+    });
+    return issues;
+  };
+
+  const onSearch = (data: { search: string }) => {
+    setSearch(data.search);
+  };
+
   return (
     <ProjectProvider.Provider value={providerValues}>
       <CreateIssueModal
@@ -63,6 +90,16 @@ export const ProjectPage = () => {
                     <PXS className='text-themeGray mt-4 min-h-[20px] max-h-[150px] overflow-y-auto'>
                       {project.description}
                     </PXS>
+                    <Form
+                      className='w-full md:w-auto mt-4'
+                      onDataChange={onSearch}
+                      onSubmit={() => {}}>
+                      <Input
+                        className='w-full md:w-auto'
+                        id='search'
+                        name='search'
+                        placeholder='search issue...'></Input>
+                    </Form>
                   </div>
                   <div className='flex flex-col gap-8 justify-end md:flex-row'>
                     <Button
@@ -82,7 +119,7 @@ export const ProjectPage = () => {
                   </div>
                 </header>
                 <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8 gap-8'>
-                  {project.bugs.map((bug) => (
+                  {getIssues().map((bug) => (
                     <IssueCard key={bug.id} bug={bug} />
                   ))}
                 </div>
