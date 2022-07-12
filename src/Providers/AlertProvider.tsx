@@ -35,7 +35,7 @@ export const AlertProvider = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Alert>
-        <div className='w-full md:absolute md:w-[350px] h-[calc(100%-150px)] p-4 right-0 flex flex-col-reverse justify-start gap-2'>
+        <div className='w-full md:absolute md:w-[420px] h-[calc(100%-150px)] p-4 right-0 flex flex-col-reverse justify-start gap-2'>
           {notifications.map((noti) => noti)}
         </div>
       </Alert>
