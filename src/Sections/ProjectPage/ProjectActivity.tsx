@@ -55,7 +55,7 @@ export const ProjectActivity = ({
       {logMessages !== null ? (
         logMessages.map((log) => (
           <div className='flex flex-col gap-4 md:flex-row md:items-center'>
-            <PXS className='font-thin text-sm rounded-md p-[4px] bg-themeLightGray min-w-[210px] text-center'>
+            <PXS className='font-thin text-sm rounded-md p-[4px] bg-themeLightGray min-w-[210px] text-themeGray text-center'>
               {FormatDate(log.date)}
             </PXS>
             <PXS key={log.id} className='text-themeGray rounded-md'>
